@@ -8,7 +8,7 @@ public with sharing class RF_DivisionSearch_ResultApexHelper {
             }
         }
         if(!String.isEmpty(whereCondition)) {
-            query += whereCondition.substring(4);
+            query += whereCondition;
         }
         return query;
     }

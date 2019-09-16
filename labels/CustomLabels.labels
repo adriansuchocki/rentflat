@@ -50,13 +50,6 @@
         <value>Search</value>
     </labels>
     <labels>
-        <fullName>LABEL_HEADER_TITLE</fullName>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>LABEL_HEADER_TITLE</shortDescription>
-        <value>Search for division</value>
-    </labels>
-    <labels>
         <fullName>LABEL_CREATE_ACCOUNT</fullName>
         <language>en_US</language>
         <protected>true</protected>
@@ -76,6 +69,13 @@
         <protected>true</protected>
         <shortDescription>LABEL_ERROR_TITLE</shortDescription>
         <value>ERROR</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_HEADER_TITLE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_HEADER_TITLE</shortDescription>
+        <value>Search for division</value>
     </labels>
     <labels>
         <fullName>LABEL_NAME</fullName>
@@ -99,13 +99,6 @@
         <value>Error during processing. Please try again later.</value>
     </labels>
     <labels>
-        <fullName>MESSAGE_SUCCESS_SAVE</fullName>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>MESSAGE_SUCCESS_SAVE</shortDescription>
-        <value>Saved</value>
-    </labels>
-    <labels>
         <fullName>MESSAGE_SUCCESS_CREATE_ACCOUNT</fullName>
         <language>en_US</language>
         <protected>true</protected>
@@ -118,5 +111,12 @@
         <protected>true</protected>
         <shortDescription>MESSAGE_SUCCESS_DELETE_ACCOUNT</shortDescription>
         <value>Account deleted successful.</value>
+    </labels>
+    <labels>
+        <fullName>MESSAGE_SUCCESS_SAVE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>MESSAGE_SUCCESS_SAVE</shortDescription>
+        <value>Saved</value>
     </labels>
 </CustomLabels>

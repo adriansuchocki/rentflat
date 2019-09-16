@@ -1,5 +1,5 @@
-<aura:component implements="flexipage:availableForAllPageTypes" >
-    <aura:handler event="c:RF_DivisionSearch_RecordEditForm_Event" action="{! c.handleShowModal }"/>
+<aura:component implements="flexipage:availableForAllPageTypes, force:lightningQuickAction" access="global">
+    <aura:handler event="c:RF_DivisionSearch_RecordEditForm_Event" action="{! c.handleShowModal }" />
     <aura:attribute name="disabled" type="Boolean" default="false" />
     <aura:attribute name="saved" type="Boolean" default="true" />
     <aura:attribute name="showSpinner" type="Boolean" default="false" />
@@ -11,7 +11,7 @@
         </aura:if>
         <aura:if isTrue="{! !v.saved }">
             <div class="slds-m-around_xx-large">
-                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_medium" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
                     <div class="slds-modal__container">
                         <header class="slds-modal__header">
                             <lightning:buttonIcon iconName="utility:close"
@@ -37,21 +37,12 @@
                                         <lightning:inputField fieldName="Site" />
                                         <lightning:inputField fieldName="Type" />
                                         <lightning:inputField fieldName="Industry" />
-                                        <lightning:inputField fieldName="AnnualRevenue" />
-                                        <lightning:inputField fieldName="BillingAddress" />
-                                        <lightning:inputField fieldName="CustomerPriority__c" />
-                                        <lightning:inputField fieldName="SLAExpirationDate__c" />
                                     </lightning:layoutItem>
                                     <lightning:layoutItem padding="around-small" size="6">
                                         <lightning:inputField fieldName="Phone" />
                                         <lightning:inputField fieldName="Fax" />
                                         <lightning:inputField fieldName="Website" />
-                                        <lightning:inputField fieldName="TickerSymbol" />
-                                        <lightning:inputField fieldName="Ownership" />
-                                        <lightning:inputField fieldName="Employees" />
-                                        <lightning:inputField fieldName="Sic" />
-                                        <lightning:inputField fieldName="ShippingAddress" />
-                                        <lightning:inputField fieldName="SLA__c" />
+                                        <lightning:inputField fieldName="BillingAddress" />
                                     </lightning:layoutItem>
                                 </lightning:layout>
                             </div>

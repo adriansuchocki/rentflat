@@ -11,6 +11,14 @@
         <type>Region</type>
     </flexiPageRegions>
     <masterLabel>Division Search</masterLabel>
+    <quickActionList>
+        <quickActionListItems>
+            <quickActionName>NewAccount</quickActionName>
+        </quickActionListItems>
+        <quickActionListItems>
+            <quickActionName>LogACall</quickActionName>
+        </quickActionListItems>
+    </quickActionList>
     <template>
         <name>flexipage:defaultAppHomeTemplate</name>
     </template>

@@ -1,6 +1,7 @@
 ({
     init: function (component, event, helper) {
         component.set('v.idAccount', '');
+        component.set("v.Spinner", false);
     },
 
     searchAccount: function(component, event, helper) {
@@ -65,5 +66,13 @@
     clearComponent: function(component, event, helper) {
         component.set('v.idAccount', '');
         component.set("v.accounts", null);
+    },
+
+    showSpinner: function(component, event, helper) {
+        component.set("v.Spinner", true);
+    },
+
+    hideSpinner : function(component,event,helper){
+        component.set("v.Spinner", false);
     }
 })

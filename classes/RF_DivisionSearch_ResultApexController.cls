@@ -26,6 +26,7 @@ public with sharing class RF_DivisionSearch_ResultApexController {
     @AuraEnabled
     public static List<Account> getResultSearch(String name, String industry, String phone, String type){
         Map<String, String> parameters = new Map<String, String>();
+        System.debug(name);
         parameters.put('Name', name);
         parameters.put('Industry', industry);
         parameters.put('Phone', phone);

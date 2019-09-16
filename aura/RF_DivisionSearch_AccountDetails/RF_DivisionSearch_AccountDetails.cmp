@@ -31,26 +31,15 @@
             <lightning:layout multipleRows="true">
                 <lightning:layoutItem padding="around-small" size="6">
                     <lightning:outputField fieldName="Name" />
-                    <lightning:outputField fieldName="ParentId" />
-                    <lightning:outputField fieldName="AccountNumber" />
-                    <lightning:outputField fieldName="Site" />
                     <lightning:outputField fieldName="Type" />
+                    <lightning:outputField fieldName="Site" />
                     <lightning:outputField fieldName="Industry" />
-                    <lightning:outputField fieldName="AnnualRevenue" />
-                    <lightning:outputField fieldName="BillingAddress" />
-                    <lightning:outputField fieldName="CustomerPriority__c" />
-                    <lightning:outputField fieldName="SLAExpirationDate__c" />
                 </lightning:layoutItem>
                 <lightning:layoutItem padding="around-small" size="6">
                     <lightning:outputField fieldName="Phone" />
                     <lightning:outputField fieldName="Fax" />
                     <lightning:outputField fieldName="Website" />
-                    <lightning:outputField fieldName="TickerSymbol" />
-                    <lightning:outputField fieldName="Ownership" />
-                    <lightning:outputField fieldName="Employees" />
-                    <lightning:outputField fieldName="Sic" />
-                    <lightning:outputField fieldName="ShippingAddress" />
-                    <lightning:outputField fieldName="SLA__c" />
+                    <lightning:outputField fieldName="BillingAddress" />
                 </lightning:layoutItem>
             </lightning:layout>
         </lightning:recordViewForm>

@@ -1,5 +1,6 @@
 ({
     init: function (component, event, helper) {
+        component.set('v.zoomLevel', 2);
         component.set('v.showFooter', true);
     },
     methodSearch: function(component, event, helper) {
@@ -10,6 +11,12 @@
             let state = response.getState();
             let errors = response.getError();
             if (component.isValid() && state === $A.get("{! $Label.c.LABEL_SUCCESS_TITLE }")) {
+                let locations = response.getReturnValue();
+                if(locations.length == 1){
+                    component.set('v.zoomLevel', 16);
+                } else {
+                    component.set('v.zoomLevel', 3);
+                }
                 component.set('v.mapMarkers', response.getReturnValue());
             } else {
                  let toastEvent = $A.get("e.force:showToast");

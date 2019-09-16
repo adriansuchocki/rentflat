@@ -11,3 +11,8 @@
 .THIS .table_row {
     cursor: pointer;
 }
+
+.THIS.slds-spinner_container {
+  z-index: 10000;
+  position: fixed;
+}

@@ -1,9 +1,15 @@
 <aura:component implements="flexipage:availableForAllPageTypes" >
+    <aura:attribute name="Spinner" type="boolean" default="false"/>
     <aura:handler name="searchAccountList" event="c:RF_DivisionSearch_Results_Event" action="{! c.handleSearchAccount }"/>
     <aura:handler name="searchAccountListMap" event="c:RF_DivisionSearch_Map_Event" action="{! c.handleSearchAccountMap }"/>
     <aura:handler name="searchAccountDetails" event="c:RF_DivisionSearch_Details_Event" action="{! c.handleSearchAccountDetails }"/>
     <aura:handler name="searchAccountAction" event="c:RF_DivisionSearch_Search_Event" action="{! c.handleSearchAccountAgain }"/>
     <aura:handler name="clearAllComponents" event="c:RF_DivisionSearch_ClearComponents_Event" action="{! c.handleClearAllComponents }"/>
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+    <aura:if isTrue="{!v.Spinner}">
+        <c:RF_DivisionSearch_Spinner/>
+    </aura:if>
     <div class="c-container">
         <lightning:layout multipleRows="true">
             <lightning:layoutItem padding="around-small" size="12">
