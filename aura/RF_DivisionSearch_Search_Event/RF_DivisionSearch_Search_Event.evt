@@ -1,0 +1,2 @@
+<aura:event type="COMPONENT" description="RF_DivisionSearch_Search_Event">
+</aura:event>

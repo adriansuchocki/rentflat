@@ -1,0 +1,35 @@
+<aura:component >
+    <aura:registerEvent name="searchAccountList" type="c:RF_DivisionSearch_Results_Event"/>
+    <aura:registerEvent name="clearAllComponents" type="c:RF_DivisionSearch_ClearComponents_Event"/>
+    <aura:method name="searchAccountAgain" action="{! c.searchAccount }" access="PUBLIC"></aura:method>
+    <aura:method name="clearSearchComponent" action="{! c.clearComponent }" access="PUBLIC"/>
+    <div class="c-container">
+        <form class="slds-form--stacked">
+            <lightning:recordEditForm  objectApiName="Account">
+                <lightning:layout multipleRows="true">
+                    <lightning:layoutItem padding="around-small" size="12">
+                        <lightning:messages />
+                    </lightning:layoutItem>
+                    <lightning:layoutItem padding="around-small" size="6">
+                        <lightning:input label="Account name" aura:id="searchAccountName" />
+                    </lightning:layoutItem>
+                    <lightning:layoutItem padding="around-small" size="6">
+                        <lightning:inputField fieldName="Industry" aura:id="searchAccountIndustry" />
+                    </lightning:layoutItem>
+                    <lightning:layoutItem padding="around-small" size="6">
+                        <lightning:input label="Phone" aura:id="searchAccountPhone" />
+                    </lightning:layoutItem>
+                    <lightning:layoutItem padding="around-small" size="6">
+                        <lightning:inputField fieldName="Type" aura:id="searchAccountType" />
+                    </lightning:layoutItem>
+                    <lightning:layoutItem padding="around-small" size="12">
+                        <div align="center">
+                            <lightning:button variant="brand" label="{! $Label.c.BTN_SEARCH }" title="{! $Label.c.BTN_SEARCH }" onclick="{! c.searchAccount }"/>
+                            <lightning:button variant="neutral" label="{! $Label.c.BTN_CLEAR }" title="{! $Label.c.BTN_CLEAR }" onclick="{! c.clearAllComponent }"/>
+                        </div>
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </lightning:recordEditForm>
+        </form>
+    </div>
+</aura:component>

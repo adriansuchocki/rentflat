@@ -1,0 +1,6 @@
+<!--
+ - Created by BRITENET on 16.09.2019.
+ -->
+
+<aura:event type="COMPONENT" description="RF_DivisionSearch_ClearComponents_Event">
+</aura:event>
