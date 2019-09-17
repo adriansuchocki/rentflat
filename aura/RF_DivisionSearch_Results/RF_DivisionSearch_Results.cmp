@@ -15,7 +15,6 @@
     <aura:handler name="init" value="{! this }" action="{! c.init }"/>
     <aura:registerEvent name="searchAccountListMap" type="c:RF_DivisionSearch_Map_Event"/>
     <aura:registerEvent name="searchAccountDetails" type="c:RF_DivisionSearch_Details_Event"/>
-    <aura:registerEvent name="searchAccountList" type="c:RF_DivisionSearch_Results_Event"/>
     <aura:if isTrue="{!v.Spinner}">
         <c:RF_DivisionSearch_Spinner/>
     </aura:if>

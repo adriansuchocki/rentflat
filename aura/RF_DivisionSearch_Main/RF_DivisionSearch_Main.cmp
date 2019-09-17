@@ -7,6 +7,7 @@
     <aura:handler name="clearAllComponents" event="c:RF_DivisionSearch_ClearComponents_Event" action="{! c.handleClearAllComponents }"/>
     <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
     <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+    <ltng:require styles="{!$Resource.NoHeader}"/>
     <aura:if isTrue="{!v.Spinner}">
         <c:RF_DivisionSearch_Spinner/>
     </aura:if>
