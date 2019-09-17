@@ -31,6 +31,7 @@
                     });
                     toastEvent.fire();
                 }
+
             });
             $A.enqueueAction(action);
         }
