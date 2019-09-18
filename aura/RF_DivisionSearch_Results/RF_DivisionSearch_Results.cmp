@@ -12,6 +12,7 @@
     <aura:attribute name="typeValue" type="String"  />
     <aura:attribute name="idAccount" type="Id" />
     <aura:attribute name="accounts" type="List" />
+    <aura:attribute name="Spinner" type="boolean" default="false"/>
     <aura:handler name="init" value="{! this }" action="{! c.init }"/>
     <aura:registerEvent name="searchAccountListMap" type="c:RF_DivisionSearch_Map_Event"/>
     <aura:registerEvent name="searchAccountDetails" type="c:RF_DivisionSearch_Details_Event"/>

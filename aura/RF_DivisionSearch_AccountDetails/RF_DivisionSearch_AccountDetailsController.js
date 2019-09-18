@@ -6,6 +6,7 @@
 
     deleteAccount: function(component, event, helper) {
         if(confirm('Are you sure?')){
+            component.set("v.Spinner", true);
             let idValue =  component.get("v.idAccount");
             let action = component.get("c.deleteSelectedAccount");
             action.setParams({"id": idValue});
@@ -31,7 +32,7 @@
                     });
                     toastEvent.fire();
                 }
-
+                component.set("v.Spinner", false);
             });
             $A.enqueueAction(action);
         }

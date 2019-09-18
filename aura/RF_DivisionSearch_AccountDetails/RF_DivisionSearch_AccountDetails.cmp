@@ -5,6 +5,10 @@
     </aura:method>
     <aura:method name="clearDetailsComponent" action="{! c.clearComponent }" access="PUBLIC"/>
     <aura:attribute name="idAccount" type="Id" default=""/>
+    <aura:attribute name="Spinner" type="boolean" default="false"/>
+    <aura:if isTrue="{!v.Spinner}">
+        <c:RF_DivisionSearch_Spinner/>
+    </aura:if>
     <aura:if isTrue="{! not(empty(v.idAccount)) }">
         <lightning:layout>
             <lightning:layoutItem padding="around-small" size="3"></lightning:layoutItem>
