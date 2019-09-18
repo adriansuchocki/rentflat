@@ -11,7 +11,9 @@
         component.set("v.industryValue", params.industryValue);
         component.set("v.phoneValue", params.phoneValue);
         component.set("v.typeValue", params.typeValue);
-        component.set("v.Spinner", true);
+        //component.set("v.Spinner", true);
+        let spinnerAction = component.find("spinnerComponentResult");
+        spinnerAction.showHideSpinner(true);
         action.setParams({"name": params.nameValue, "industry": params.industryValue, "phone": params.phoneValue, "type": params.typeValue});
         action.setCallback(this, function(response){
             let state = response.getState();
@@ -33,7 +35,8 @@
                 });
                 toastEvent.fire();
             }
-            component.set("v.Spinner", false);
+            spinnerAction.showHideSpinner(false);
+//            component.set("v.Spinner", false);
         });
         $A.enqueueAction(action);
     },
@@ -68,13 +71,5 @@
     clearComponent: function(component, event, helper) {
         component.set('v.idAccount', '');
         component.set("v.accounts", null);
-    },
-
-    showSpinner: function(component, event, helper) {
-        component.set("v.Spinner", true);
-    },
-
-    hideSpinner : function(component,event,helper){
-        component.set("v.Spinner", false);
     }
 })
