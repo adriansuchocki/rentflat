@@ -1,0 +1,97 @@
+<apex:page >
+  <apex:stylesheet value="{!URLFOR($Resource.CustomForm,'/ContactFrom_v1/vendor/bootstrap/css/bootstrap.min.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.CustomForm,'/ContactFrom_v1/fonts/font-awesome-4.7.0/css/font-awesome.min.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.CustomForm,'/ContactFrom_v1/vendor/animate/animate.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.CustomForm,'/ContactFrom_v1/vendor/css-hamburgers/hamburgers.min.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.CustomForm,'/ContactFrom_v1/vendor/select2/select2.min.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.CustomForm,'/ContactFrom_v1/css/util.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.CustomForm,'/ContactFrom_v1/css/main.css')}"/>
+  <apex:includeScript value="{! URLFOR($Resource.CustomForm,'/ContactFrom_v1/vendor/jquery/jquery-3.2.1.min.js') }"/>
+  <apex:includeScript value="{! URLFOR($Resource.CustomForm,'/ContactFrom_v1/vendor/bootstrap/js/popper.js') }"/>
+  <apex:includeScript value="{! URLFOR($Resource.CustomForm,'/ContactFrom_v1/vendor/bootstrap/js/bootstrap.min.js') }"/>
+  <apex:includeScript value="{! URLFOR($Resource.CustomForm,'/ContactFrom_v1/vendor/select2/select2.min.js') }"/>
+  <apex:includeScript value="{! URLFOR($Resource.CustomForm,'/ContactFrom_v1/vendor/tilt/tilt.jquery.min.js') }"/>
+  <apex:includeScript value="{! URLFOR($Resource.CustomForm,'/ContactFrom_v1/js/main.js') }"/>
+
+  <div id="option1Page" style="display:none;">
+    <apex:include pageName="TakeSurvey"/>
+  </div>
+
+  <div id="option2Page" style="display:none;">
+    <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8"/>
+    <div class="contact1">
+      <div class="container-contact1">
+        <div class="contact1-pic js-tilt">
+          <img src="{!URLFOR($Resource.CustomForm, '/ContactFrom_v1/images/img-01.png')}" alt="IMG"/>
+        </div>
+
+        <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" class="contact1-form validate-form">
+          <input type="hidden" name="oid" value="00D2o000000b5hf"/>
+          <input type="hidden" name="retURL" value="https://rentflat-developer-edition.eu25.force.com/RFContact"/>
+				<span class="contact1-form-title">
+					Get in touch
+				</span>
+                <span class="contact1-form-title">
+                  <h6 style="font-size: 10px;">Complete all fields to send the message</h6>
+				</span>
+
+          <div class="wrap-input1 validate-input">
+            <label for="first_name">First Name</label><input class="input1" id="first_name" maxlength="40" name="first_name" size="20" type="text" required="true"/>
+          </div>
+
+          <div class="wrap-input1 validate-input">
+            <label for="last_name">Last Name</label><input class="input1" id="last_name" maxlength="80" name="last_name" size="20" type="text" required="true"/>
+          </div>
+
+          <div class="wrap-input1 validate-input">
+            <label for="email">Email</label><input class="input1" id="email" maxlength="80" name="email" size="20" type="text" required="true"/>
+          </div>
+
+          <div class="wrap-input1 validate-input">
+            <label for="country">Country</label><input class="input1" id="country" maxlength="40" name="country" size="20" type="text" required="true"/>
+          </div>
+
+          <div class="wrap-input1 validate-input">
+            <label for="phone">Phone</label><input class="input1" id="phone" maxlength="40" name="phone" size="20" type="text" required="true"/>
+          </div>
+
+          <div class="wrap-input1 validate-input">
+            <label for="company">Company</label><input class="input1" id="company" maxlength="40" name="company" size="20" type="text" required="true"/>
+          </div>
+
+          <div class="wrap-input1 validate-input">
+            <label for="description">Description</label><textarea class="input1" name="description" required="true"></textarea>
+          </div>
+
+          <div class="container-contact1-form-btn">
+            <button class="contact1-form-btn" type="submit">
+						<span>
+							Send Message
+							<i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+						</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script>
+    window.onload = function(e){
+        let url = window.location.href;
+        if(url.includes("type=questionnaire")) {
+            document.getElementById('option1Page').style.display = 'block';
+        } else {
+            document.getElementById('option2Page').style.display = 'block';
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-23581568-13');
+            $('.js-tilt').tilt({
+                scale: 1.1
+            });
+        }
+    };
+
+  </script>
+</apex:page>
