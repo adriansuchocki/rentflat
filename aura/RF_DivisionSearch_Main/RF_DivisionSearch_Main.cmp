@@ -8,7 +8,9 @@
     <div class="c-container">
         <lightning:layout multipleRows="true">
             <lightning:layoutItem padding="around-small" size="12">
-                <div class="page-section"><c:RF_DivisionSearch_Header /></div>
+                <div class="page-section">
+                    <c:RF_DivisionSearch_Header />
+                </div>
             </lightning:layoutItem>
             <lightning:layoutItem padding="around-small" size="6">
                 <c:RF_DivisionSearch_SearchForm aura:id="searchForm"/>

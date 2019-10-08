@@ -9,9 +9,7 @@
     <aura:method name="clearMapComponent" action="{! c.clearComponent }" access="PUBLIC"/>
     <aura:handler name="init" value="{! this }" action="{! c.init }"/>
     <aura:attribute name="mapMarkers" type="Object"/>
-    <aura:attribute name="showFooter" type="Boolean" />
     <aura:attribute name="zoomLevel" type="Integer" />
-    <aura:attribute name="Spinner" type="boolean" default="false"/>
     <c:RF_DivisionSearch_Spinner aura:id="spinnerComponentMap"/>
     <div class="c-container">
         <lightning:layout multipleRows="true">
@@ -20,14 +18,12 @@
                     <lightning:map
                             mapMarkers="{! v.mapMarkers }"
                             zoomLevel="{! v.zoomLevel }"
-                            markersTitle="{! v.markersTitle }"
                             listView="hidden" >
                     </lightning:map>
                 </aura:if>
                 <aura:if isTrue="{! v.mapMarkers == null }">
                     <lightning:map
                             zoomLevel="{! v.zoomLevel }"
-                            markersTitle="{! v.markersTitle }"
                             listView="hidden" >
                     </lightning:map>
                 </aura:if>

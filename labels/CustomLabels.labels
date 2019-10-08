@@ -78,6 +78,13 @@
         <value>Search for division</value>
     </labels>
     <labels>
+        <fullName>LABEL_LOADING</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_LOADING</shortDescription>
+        <value>Loading</value>
+    </labels>
+    <labels>
         <fullName>LABEL_NAME</fullName>
         <language>en_US</language>
         <protected>true</protected>
@@ -90,6 +97,13 @@
         <protected>true</protected>
         <shortDescription>LABEL_SUCCESS_TITLE</shortDescription>
         <value>SUCCESS</value>
+    </labels>
+    <labels>
+        <fullName>MESSAGE_CONFIRM_MESSAGE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>MESSAGE_CONFIRM_MESSAGE</shortDescription>
+        <value>Are you sure?</value>
     </labels>
     <labels>
         <fullName>MESSAGE_ERROR_CREATE_ACCOUNT</fullName>

@@ -1,6 +1,6 @@
 ({
     init: function (component, event, helper) {
-        component.set('v.idAccount', '');
+        component.set('v.idAccount', "");
         component.set("v.Spinner", false);
     },
 
@@ -11,7 +11,6 @@
         component.set("v.industryValue", params.industryValue);
         component.set("v.phoneValue", params.phoneValue);
         component.set("v.typeValue", params.typeValue);
-        //component.set("v.Spinner", true);
         let spinnerAction = component.find("spinnerComponentResult");
         spinnerAction.showHideSpinner(true);
         action.setParams({"name": params.nameValue, "industry": params.industryValue, "phone": params.phoneValue, "type": params.typeValue});
@@ -24,7 +23,7 @@
                 mapEvent.setParams({"idAccount": "", "nameAccount": params.nameValue, "industryAccount": params.industryValue, "phoneAccount": params.phoneValue, "typeAccount": params.typeValue})
                 mapEvent.fire();
                 let detailsEvent = component.getEvent("searchAccountDetails");
-                detailsEvent.setParams({"idAccount": ''})
+                detailsEvent.setParams({"idAccount": ""})
                 detailsEvent.fire();
             } else {
                 let toastEvent = $A.get("e.force:showToast");
@@ -36,7 +35,6 @@
                 toastEvent.fire();
             }
             spinnerAction.showHideSpinner(false);
-//            component.set("v.Spinner", false);
         });
         $A.enqueueAction(action);
     },
@@ -53,7 +51,7 @@
             idValue = event.currentTarget.dataset.record;
             $A.util.addClass(Elements[event.currentTarget.dataset.id], "highlight");
         } else {
-            idValue = ''
+            idValue = "";
         }
         component.set('v.idAccount', idValue)
         let nameValue = component.get("v.nameValue");
@@ -69,7 +67,7 @@
     },
 
     clearComponent: function(component, event, helper) {
-        component.set('v.idAccount', '');
+        component.set('v.idAccount', "");
         component.set("v.accounts", null);
     }
 })

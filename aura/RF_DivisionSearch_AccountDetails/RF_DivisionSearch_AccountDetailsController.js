@@ -5,8 +5,7 @@
     },
 
     deleteAccount: function(component, event, helper) {
-        if(confirm('Are you sure?')){
-//            component.set("v.Spinner", true);
+        if(confirm($A.get("{! $Label.c.MESSAGE_CONFIRM_MESSAGE }"))){
             let spinnerAction = component.find("spinnerComponentDetails");
             spinnerAction.showHideSpinner(true);
             let idValue =  component.get("v.idAccount");
@@ -35,7 +34,6 @@
                     toastEvent.fire();
                 }
                 spinnerAction.showHideSpinner(false);
-//                component.set("v.Spinner", false);
             });
             $A.enqueueAction(action);
         }

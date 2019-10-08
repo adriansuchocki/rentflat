@@ -7,7 +7,6 @@
         let params = event.getParam('arguments');
         let action = component.get("c.getResultLocations");
         let spinnerAction = component.find("spinnerComponentMap");
-//        component.set("v.Spinner", true);
         spinnerAction.showHideSpinner(true);
         action.setParams({"id": params.idValue, "name": params.nameValue, "industry": params.industryValue, "phone": params.phoneValue, "type": params.typeValue});
         action.setCallback(this, function(response){
@@ -31,7 +30,6 @@
                  toastEvent.fire();
             }
             spinnerAction.showHideSpinner(false);
-//            component.set("v.Spinner", false);
         });
         $A.enqueueAction(action);
     },
