@@ -50,6 +50,76 @@
         <value>Search</value>
     </labels>
     <labels>
+        <fullName>LABEL_CONTACT_COMPANY</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_CONTACT_COMPANY</shortDescription>
+        <value>Company</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_CONTACT_COUNTRY</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_CONTACT_COUNTRY</shortDescription>
+        <value>Country</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_CONTACT_DESCRIPTION</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_CONTACT_DESCRIPTION</shortDescription>
+        <value>Description</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_CONTACT_EMAIL</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_CONTACT_EMAIL</shortDescription>
+        <value>Email</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_CONTACT_FIRST_NAME</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_CONTACT_FIRST_NAME</shortDescription>
+        <value>First Name</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_CONTACT_LAST_NAME</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_CONTACT_LAST_NAME</shortDescription>
+        <value>Last Name</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_CONTACT_MESSAGE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_CONTACT_MESSAGE</shortDescription>
+        <value>Complete all fields to send the message</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_CONTACT_MESSAGE_TITLE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_CONTACT_MESSAGE_TITLE</shortDescription>
+        <value>Get in touch</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_CONTACT_PHONE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_CONTACT_PHONE</shortDescription>
+        <value>Phone</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_CONTACT_SEND_MESSAGE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_CONTACT_SEND_MESSAGE</shortDescription>
+        <value>Send Message</value>
+    </labels>
+    <labels>
         <fullName>LABEL_CREATE_ACCOUNT</fullName>
         <language>en_US</language>
         <protected>true</protected>
@@ -155,11 +225,32 @@
         <value>Search for division</value>
     </labels>
     <labels>
+        <fullName>LABEL_LOADING</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_LOADING</shortDescription>
+        <value>Loading</value>
+    </labels>
+    <labels>
         <fullName>LABEL_NAME</fullName>
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>LABEL_NAME</shortDescription>
         <value>Name</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_NEWLEAD_TEXT_END</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_NEWLEAD_TEXT_END</shortDescription>
+        <value>)</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_NEWLEAD_TEXT_START</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_NEWLEAD_TEXT_START</shortDescription>
+        <value>has created new Lead (</value>
     </labels>
     <labels>
         <fullName>LABEL_SUCCESS_TITLE</fullName>
@@ -524,6 +615,13 @@
         <protected>true</protected>
         <shortDescription>please visit</shortDescription>
         <value>please visit</value>
+    </labels>
+    <labels>
+        <fullName>MESSAGE_CONFIRM_MESSAGE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>MESSAGE_CONFIRM_MESSAGE</shortDescription>
+        <value>Are you sure?</value>
     </labels>
     <labels>
         <fullName>MESSAGE_ERROR_CREATE_ACCOUNT</fullName>
