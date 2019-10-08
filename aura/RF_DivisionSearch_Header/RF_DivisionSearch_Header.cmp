@@ -1,0 +1,13 @@
+<aura:component>
+    <aura:registerEvent name="showModal" type="c:RF_DivisionSearch_RecordEditForm_Event"/>
+    <lightning:layout multipleRows="true">
+        <lightning:layoutItem padding="around-small" size="9">
+            <H1>{! $Label.c.LABEL_HEADER_TITLE }</H1>
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="around-small" size="3">
+            <div align="right">
+                <lightning:button label="{! $Label.c.LABEL_CREATE_ACCOUNT }" title="{! $Label.c.LABEL_CREATE_ACCOUNT }" onclick="{! c.showAccountModal }"/>
+            </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>

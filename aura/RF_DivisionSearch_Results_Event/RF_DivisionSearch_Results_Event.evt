@@ -1,0 +1,6 @@
+<aura:event type="COMPONENT" description="RF_DivisionSearch_Results_Event">
+    <aura:attribute name="nameAccount" type="String"/>
+    <aura:attribute name="industryAccount" type="String"/>
+    <aura:attribute name="phoneAccount" type="String"/>
+    <aura:attribute name="typeAccount" type="String"/>
+</aura:event>

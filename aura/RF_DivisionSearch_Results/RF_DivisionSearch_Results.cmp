@@ -1,0 +1,40 @@
+<aura:component controller="RF_DivisionSearch_ResultApexController">
+    <aura:method name="getSearchAccount" action="{! c.searchAccount }" access="PUBLIC">
+        <aura:attribute name="nameValue" type="String" />
+        <aura:attribute name="industryValue" type="String"  />
+        <aura:attribute name="phoneValue" type="String"  />
+        <aura:attribute name="typeValue" type="String"  />
+    </aura:method>
+    <aura:method name="clearResultComponent" action="{! c.clearComponent }" access="PUBLIC"/>
+    <aura:attribute name="nameValue" type="String" />
+    <aura:attribute name="industryValue" type="String"  />
+    <aura:attribute name="phoneValue" type="String"  />
+    <aura:attribute name="typeValue" type="String"  />
+    <aura:attribute name="idAccount" type="Id" />
+    <aura:attribute name="accounts" type="List" />
+    <aura:attribute name="Spinner" type="boolean" default="false"/>
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    <aura:registerEvent name="searchAccountListMap" type="c:RF_DivisionSearch_Map_Event"/>
+    <aura:registerEvent name="searchAccountDetails" type="c:RF_DivisionSearch_Details_Event"/>
+    <c:RF_DivisionSearch_Spinner aura:id="spinnerComponentResult"/>
+    <div class="c-container">
+        <lightning:layout multipleRows="true">
+            <lightning:layoutItem padding="around-small" size="12">
+                <table class="slds-table slds-table_bordered slds-table_fixed-layout ">
+                    <thead>
+                    <tr class="slds-text-heading_label">
+                        <th scope="col" style="width:70%;"><div class="slds-truncate" title="Name">{! $Label.c.LABEL_NAME }</div></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <aura:iteration items="{! v.accounts }" var="account" indexVar="index">
+                        <tr aura:id="row" data-record="{! account.Id }" data-id="{! index }" onclick="{! c.showDetails }" class="table_row">
+                            <td><div class="slds-truncate" title="{!account.Name}">{! account.Name }</div></td>
+                        </tr>
+                    </aura:iteration>
+                    </tbody>
+                </table>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+</aura:component>
