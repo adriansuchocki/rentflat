@@ -99,6 +99,13 @@
         <value>Complete all fields to send the message</value>
     </labels>
     <labels>
+        <fullName>LABEL_CONTACT_MESSAGE_TITLE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_CONTACT_MESSAGE_TITLE</shortDescription>
+        <value>Get in touch</value>
+    </labels>
+    <labels>
         <fullName>LABEL_CONTACT_PHONE</fullName>
         <language>en_US</language>
         <protected>true</protected>
