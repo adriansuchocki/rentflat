@@ -239,18 +239,18 @@
         <value>Name</value>
     </labels>
     <labels>
-        <fullName>LABEL_NEWLEAD_TEXT_START</fullName>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>LABEL_NEWLEAD_TEXT_START</shortDescription>
-        <value> has created new Lead (</value>
-    </labels>
-    <labels>
         <fullName>LABEL_NEWLEAD_TEXT_END</fullName>
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>LABEL_NEWLEAD_TEXT_END</shortDescription>
         <value>)</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_NEWLEAD_TEXT_START</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_NEWLEAD_TEXT_START</shortDescription>
+        <value>has created new Lead (</value>
     </labels>
     <labels>
         <fullName>LABEL_SUCCESS_TITLE</fullName>

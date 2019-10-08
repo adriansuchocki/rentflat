@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Profile xmlns="http://soap.sforce.com/2006/04/metadata">
+    <classAccesses>
+        <apexClass>RF_Chatter_NewLead_Controller</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <custom>true</custom>
+    <pageAccesses>
+        <apexPage>RFContact</apexPage>
+        <enabled>false</enabled>
+    </pageAccesses>
     <custom>true</custom>
     <fieldPermissions>
         <editable>true</editable>
