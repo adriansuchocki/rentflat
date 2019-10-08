@@ -1,0 +1,25 @@
+<aura:component implements="flexipage:availableForAllPageTypes" >
+    <aura:handler name="searchAccountList" event="c:RF_DivisionSearch_Results_Event" action="{! c.handleSearchAccount }"/>
+    <aura:handler name="searchAccountListMap" event="c:RF_DivisionSearch_Map_Event" action="{! c.handleSearchAccountMap }"/>
+    <aura:handler name="searchAccountDetails" event="c:RF_DivisionSearch_Details_Event" action="{! c.handleSearchAccountDetails }"/>
+    <aura:handler name="searchAccountAction" event="c:RF_DivisionSearch_Search_Event" action="{! c.handleSearchAccountAgain }"/>
+    <aura:handler name="clearAllComponents" event="c:RF_DivisionSearch_ClearComponents_Event" action="{! c.handleClearAllComponents }"/>
+    <ltng:require styles="{!$Resource.NoHeader}"/>
+    <div class="c-container">
+        <lightning:layout multipleRows="true">
+            <lightning:layoutItem padding="around-small" size="12">
+                <div class="page-section">
+                    <c:RF_DivisionSearch_Header />
+                </div>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:RF_DivisionSearch_SearchForm aura:id="searchForm"/>
+                <c:RF_DivisionSearch_Results aura:id="searchResult"/>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:RF_DivisionSearch_Map  aura:id="resultMap"/>
+                <c:RF_DivisionSearch_AccountDetails aura:id="accountDetails"/>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+</aura:component>
