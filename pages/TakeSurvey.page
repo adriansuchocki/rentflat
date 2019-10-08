@@ -1,6 +1,5 @@
 <apex:page standardcontroller="Survey__c" extensions="ViewSurveyController" cache="false" sidebar="false" showheader="false">
     <apex:includeScript value="{! $Resource.SurveyForce_jquery}"/>
-    <!-- convertCheckBoxToLDS() is in surveyforce.js -->
     <apex:includeScript value="{! $Resource.SurveyForce + '/surveyforce.js'}"/>
     <apex:stylesheet value="{! $Resource.SurveyForce + '/surveyforce.css'}"/>
     <apex:stylesheet value="{! $Resource.SurveyForce + '/surveyforce_pagemessage_override.css'}"/>
@@ -11,12 +10,9 @@
 
     <script>
         $(document).ready(function(){
-            //Convert any elements with "convertToLDS" style to SLDS styles
-            //Used in certain places where it's not easy to use SLDS for those elements like "apex:selectCheckboxes"
             convertCheckBoxToLDS();
         });
     </script>
-    <!-- Custom CSS added by survey admin -->
     <style>
         <apex:outputText value="{!HTMLENCODE(surveyContainerCss)}" escape="false"/>
     </style>

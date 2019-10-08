@@ -14,7 +14,7 @@ public class RF_Chatter_NewLead_Controller {
             messageBodyInput.messageSegments.add(entityLinkSegmentLeadOwner);
 
             ConnectApi.TextSegmentInput textSegmentInput1 = new ConnectApi.TextSegmentInput();
-            textSegmentInput1.text = ' has created new Lead (';
+            textSegmentInput1.text = Label.LABEL_NEWLEAD_TEXT_START;
             messageBodyInput.messageSegments.add(textSegmentInput1);
 
             ConnectApi.EntityLinkSegmentInput entityLinkSegmentLead = new ConnectApi.EntityLinkSegmentInput();
@@ -22,7 +22,7 @@ public class RF_Chatter_NewLead_Controller {
             messageBodyInput.messageSegments.add(entityLinkSegmentLead);
 
             ConnectApi.TextSegmentInput textSegmentInput2 = new ConnectApi.TextSegmentInput();
-            textSegmentInput2.text = ')';
+            textSegmentInput2.text = Label.LABEL_NEWLEAD_TEXT_END;
             messageBodyInput.messageSegments.add(textSegmentInput2);
 
             feedItemInput.body = messageBodyInput;
