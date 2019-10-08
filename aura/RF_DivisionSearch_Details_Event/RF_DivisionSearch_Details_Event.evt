@@ -1,0 +1,3 @@
+<aura:event type="COMPONENT" description="RF_DivisionSearch_Deatils_Event">
+    <aura:attribute name="idAccount" type="String"/>
+</aura:event>

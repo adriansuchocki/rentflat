@@ -1,0 +1,18 @@
+.THIS.c-container {
+    border: 1px solid #d8dde6;
+    margin: 10px 0 20px 0;
+    background: white;
+}
+
+.THIS .highlight {
+    background-color: #D3D3D3 !important;
+}
+
+.THIS .table_row {
+    cursor: pointer;
+}
+
+.THIS.slds-spinner_container {
+  z-index: 10000;
+  position: fixed;
+}

@@ -1,0 +1,49 @@
+<aura:component controller="RF_DivisionSearch_ResultApexController">
+    <aura:registerEvent name="searchAccountAction" type="c:RF_DivisionSearch_Search_Event"/>
+    <aura:method name="getAccountDetails" action="{! c.detailsSearch }" access="global">
+        <aura:attribute name="idValue" type="String" access="global" />
+    </aura:method>
+    <aura:method name="clearDetailsComponent" action="{! c.clearComponent }" access="PUBLIC"/>
+    <aura:attribute name="idAccount" type="Id" default=""/>
+    <aura:attribute name="Spinner" type="boolean" default="false"/>
+    <c:RF_DivisionSearch_Spinner aura:id="spinnerComponentDetails"/>
+    <aura:if isTrue="{! not(empty(v.idAccount)) }">
+        <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="3"></lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="3">
+                <lightning:button
+                        label="{! $Label.c.BTN_EDIT }"
+                        iconName="utility:edit"
+                        iconPosition="left"
+                        variant="neutral"
+                        onclick="{! c.editAccount }"
+                />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <lightning:button
+                        label="{! $Label.c.BTN_DELETE }"
+                        iconName="utility:delete"
+                        iconPosition="left"
+                        variant="destructive"
+                        onclick="{! c.deleteAccount }"
+                />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:recordViewForm recordId="{! v.idAccount }" objectApiName="Account">
+            <lightning:layout multipleRows="true">
+                <lightning:layoutItem padding="around-small" size="6">
+                    <lightning:outputField fieldName="Name" />
+                    <lightning:outputField fieldName="Type" />
+                    <lightning:outputField fieldName="Site" />
+                    <lightning:outputField fieldName="Industry" />
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small" size="6">
+                    <lightning:outputField fieldName="Phone" />
+                    <lightning:outputField fieldName="Fax" />
+                    <lightning:outputField fieldName="Website" />
+                    <lightning:outputField fieldName="BillingAddress" />
+                </lightning:layoutItem>
+            </lightning:layout>
+        </lightning:recordViewForm>
+    </aura:if>
+</aura:component>
