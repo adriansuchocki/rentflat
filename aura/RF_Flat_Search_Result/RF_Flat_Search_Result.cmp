@@ -2,7 +2,7 @@
  - Created by BRITENET on 10.10.2019.
  -->
 
-<aura:component description="RF_Flat_Search_Result" controller="RF_Flat_Details">
+<aura:component description="RF_Flat_Search_Result" controller="RF_Flat_Details" implements="forceCommunity:availableForAllPageTypes">
     <aura:attribute name="resultList" type="Object[]"/>
     <aura:handler name="init" value="{! this }" action="{! c.init }"/>
     <aura:method name="search" action="{! c.handleSearch }" access="PUBLIC">

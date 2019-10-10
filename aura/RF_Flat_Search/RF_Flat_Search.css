@@ -7,3 +7,6 @@
     background-color: #ffffff;
     padding: 10px;
 }
+.THIS .button-position-end{
+    align-self: flex-end;
+}

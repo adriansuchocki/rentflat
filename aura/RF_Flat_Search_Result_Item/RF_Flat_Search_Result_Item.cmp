@@ -7,7 +7,7 @@
 
     <div class="c-container">
         <lightning:layout horizontalAlign="center">
-            <lightning:layoutItem size="4" padding="around-small">
+            <lightning:layoutItem size="2" padding="around-small">
                 <aura:if isTrue="{! empty(v.flat.link) }" >
                     <img src="{! $Resource.NoPhoto }"/>
                     <aura:set attribute="else">
@@ -15,8 +15,10 @@
                     </aura:set>
                 </aura:if>
             </lightning:layoutItem>
-            <lightning:layoutItem size="8" padding="around-large">
-                {! v.flat.title }
+            <lightning:layoutItem size="6" padding="around-large">
+                <p class="slds-text-heading--label" ><h3 class="slds-text-heading_medium">{! v.flat.title }</h3></p>
+            </lightning:layoutItem>
+            <lightning:layoutItem >
             </lightning:layoutItem>
         </lightning:layout>
     </div>

@@ -3,8 +3,7 @@
  */
 ({
     handleSearchFlat: function (component, event, helper) {
-        let resultComponent = component.find("resultComponent");
-        let title = event.getParam('title');
-        resultComponent.search(title);
+        let fieldText = component.get('v.searchText');
+        helper.getResultList(component, fieldText);
     }
 })
