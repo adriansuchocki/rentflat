@@ -1,0 +1,18 @@
+<!--
+ - Created by BRITENET on 10.10.2019.
+ -->
+
+<aura:component description="RF_Flat_Search_Result" controller="RF_Flat_Details">
+    <aura:attribute name="resultList" type="Object[]"/>
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    <aura:method name="search" action="{! c.handleSearch }" access="PUBLIC">
+        <aura:attribute name="title" type="String" />
+    </aura:method>
+    <c:RF_DivisionSearch_Spinner aura:id="spinnerResult"/>
+
+    <div class="c-container">
+        <aura:iteration items="{! v.resultList }" var="item" indexVar="index">
+            <c:RF_Flat_Search_Result_Item flat="{! item }"/>
+        </aura:iteration>
+    </div>
+</aura:component>
