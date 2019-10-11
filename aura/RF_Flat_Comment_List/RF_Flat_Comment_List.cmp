@@ -1,0 +1,53 @@
+<!--
+ - Created by BRITENET on 11.10.2019.
+ -->
+
+<aura:component description="RF_Flat_Comment_List">
+    <aura:attribute name="comments" type="RF_Comments__c[]"/>
+    <lightning:layout multipleRows="true">
+        <lightning:layoutItem size="12" class="slds-align_absolute-center" flexibility="auto" padding="around-small" >
+            <aura:if isTrue="{! v.comments.length==0}">
+                <ui:outputText value="No comments" />
+            </aura:if>
+        </lightning:layoutItem>
+        <lightning:layoutItem size="12">
+            <aura:iteration items="{! v.comments }" var="comment">
+                <div class="{! v.index != 0 ? 'iterableRow slds-feed': 'slds-feed' }">
+                    <ul class="slds-feed__list">
+                        <li class="slds-feed__item">
+                            <article class="slds-post">
+                                <header class="slds-post__header slds-media">
+                                    <div class="slds-media__figure slds-box--border">
+                                        <a href="javascript:void(0);" class="slds-avatar slds-avatar_circle slds-avatar_large">
+                                            <img alt="{! comment.CreatedBy.Name }" src="{! $Resource.NoPhoto }" title="{!comment.CreatedBy.Name}"  />
+                                        </a>
+                                    </div>
+                                    <div class="slds-media__body">
+                                        <div class="slds-grid slds-grid_align-spread slds-has-flexi-truncate">
+                                            <p>
+                                                <a href="javascript:void(0);" title="Jason Rodgers">{! comment.CreatedBy.Name }</a> —
+                                            </p>
+                                        </div>
+                                        <p class="slds-text-body_small">
+                                            <lightning:formattedDateTime value="{!comment.LastModifiedDate}" year="numeric" month="short" day="numeric"  hour="2-digit" minute="2-digit" second="2-digit" />
+                                        </p>
+                                    </div>
+                                </header>
+                                <div class="slds-post__content slds-text-longform">
+                                    <p><lightning:formattedRichText value="{!comment.Comment__c}"/></p>
+                                </div>
+                                <footer class="slds-post__footer">
+                                    <ul class="slds-post__footer-actions-list slds-list_horizontal">
+                                        <li class="slds-col slds-item slds-m-right_medium">
+                                            <c:RF_Flat_Rating aura:id="FiveStarRating"  value="{!comment.Rating__c}" readonly="true"/>
+                                        </li>
+                                    </ul>
+                                </footer>
+                            </article>
+                        </li>
+                    </ul>
+                </div>
+            </aura:iteration>
+        </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>
