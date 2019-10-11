@@ -36,6 +36,13 @@
         <value>Edit</value>
     </labels>
     <labels>
+        <fullName>BTN_RESERVE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>BTN_RESERVE</shortDescription>
+        <value>Reserve</value>
+    </labels>
+    <labels>
         <fullName>BTN_SAVE</fullName>
         <language>en_US</language>
         <protected>true</protected>
