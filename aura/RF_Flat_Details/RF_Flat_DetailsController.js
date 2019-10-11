@@ -5,6 +5,7 @@
     init: function (component, event, helper) {
         let recordId = component.get("v.recordId");
         helper.getPriceValue(component, recordId);
+        helper.getReservedDate(component, recordId);
     },
 
     handleUploadFinished : function(component, event, helper) {

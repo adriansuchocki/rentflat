@@ -18,7 +18,11 @@ public with sharing class RF_TriggerFactory {
         // Make sure we have a handler registered, new handlers must be registered in the getHandler method.
         if (handler == null)
         {
-            throw new RF_ContentDocument_Exception ('No Trigger Handler registered for Object Type: ' + soType);
+            if(soType == ContentDocumentLink.sObjectType) {
+                throw new RF_ContentDocument_Exception ('No Trigger Handler registered for Object Type: ' + soType);
+            } else if(soType == RF_Flat_Reservation__c.sObjectType) {
+                throw new RF_Flat_Reservation_Exception ('No Trigger Handler registered for Object Type: ' + soType);
+            }
         }
         // Execute the handler to fulfil the trigger
         execute(handler);
@@ -84,6 +88,8 @@ public with sharing class RF_TriggerFactory {
     {
         if (soType == ContentDocumentLink.sObjectType){
             return new RF_ContentDocumentLink_Trigger_Handler();
+        } else if(soType == RF_Flat_Reservation__c.sObjectType) {
+            return new RF_Flat_Reservation_Trigger_Handler ();
         }
         return null;
     }

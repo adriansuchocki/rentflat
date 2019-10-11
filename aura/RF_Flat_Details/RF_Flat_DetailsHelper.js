@@ -16,5 +16,22 @@
             spinnerAction.showHideSpinner(false);
         });
         $A.enqueueAction(action);
+    },
+
+    getReservedDate: function (component, recordId) {
+        let spinnerAction = component.find("spinnerResult");
+        let action = component.get("c.getReservedDate");
+        spinnerAction.showHideSpinner(true);
+        action.setParams({"productId": recordId});
+        action.setCallback(this, function(response){
+            let state = response.getState();
+            let errors = response.getError();
+            if (component.isValid() && state === $A.get("{! $Label.c.LABEL_SUCCESS_TITLE }")) {
+                console.log(response.getReturnValue());
+                component.set("v.flatReservations", response.getReturnValue());
+            }
+            spinnerAction.showHideSpinner(false);
+        });
+        $A.enqueueAction(action);
     }
 })

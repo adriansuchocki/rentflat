@@ -36,6 +36,20 @@
         <value>Edit</value>
     </labels>
     <labels>
+        <fullName>BTN_RESERVE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>BTN_RESERVE</shortDescription>
+        <value>Reserve</value>
+    </labels>
+    <labels>
+        <fullName>BTN_BASKET</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>BTN_BASKET</shortDescription>
+        <value>Add to Cart</value>
+    </labels>
+    <labels>
         <fullName>BTN_SAVE</fullName>
         <language>en_US</language>
         <protected>true</protected>
