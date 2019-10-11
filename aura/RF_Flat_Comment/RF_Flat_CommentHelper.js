@@ -6,9 +6,7 @@
         let spinnerAction = component.find("spinnerResult");
         let action = component.get("c.getFlatComments");
         spinnerAction.showHideSpinner(true);
-        alert('Robie2');
         action.setParams({'recordId': recordId});
-        alert('Robie');
         action.setCallback(this, function(response){
             let state = response.getState();
             let errors = response.getError();

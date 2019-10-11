@@ -19,7 +19,7 @@ public with sharing class RF_TriggerFactory {
         if (handler == null)
         {
             if(soType == ContentDocumentLink.sObjectType) {
-                throw new RF_ContentDocument_Exception ('No Trigger Handler registered for Object Type: ' + soType);
+                throw new RF_ContentDocumentLink_Exception ('No Trigger Handler registered for Object Type: ' + soType);
             } else if(soType == RF_Flat_Reservation__c.sObjectType) {
                 throw new RF_Flat_Reservation_Exception ('No Trigger Handler registered for Object Type: ' + soType);
             }
