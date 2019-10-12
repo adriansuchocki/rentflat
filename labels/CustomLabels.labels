@@ -36,6 +36,20 @@
         <value>Edit</value>
     </labels>
     <labels>
+        <fullName>BTN_RESERVE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>BTN_RESERVE</shortDescription>
+        <value>Reserve</value>
+    </labels>
+    <labels>
+        <fullName>BTN_BASKET</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>BTN_BASKET</shortDescription>
+        <value>Add to Cart</value>
+    </labels>
+    <labels>
         <fullName>BTN_SAVE</fullName>
         <language>en_US</language>
         <protected>true</protected>
@@ -125,6 +139,13 @@
         <protected>true</protected>
         <shortDescription>LABEL_CREATE_ACCOUNT</shortDescription>
         <value>New Account</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_DESCRIPTION</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_DESCRIPTION</shortDescription>
+        <value>Description</value>
     </labels>
     <labels>
         <fullName>LABEL_EDIT_ACCOUNT</fullName>
@@ -251,6 +272,223 @@
         <protected>true</protected>
         <shortDescription>LABEL_NEWLEAD_TEXT_START</shortDescription>
         <value>has created new Lead (</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_BATHROOMS</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_BATHROOMS</shortDescription>
+        <value>Bathrooms</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_BEDROOMS</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_BEDROOMS</shortDescription>
+        <value>Bedrooms</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_BALCOLNY</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_BALCOLNY</shortDescription>
+        <value>Balcony</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_CAMERA_SECURITY_FENCED</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_CAMERA_SECURITY_FENCED</shortDescription>
+        <value>Camera/security/fenced</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_DESCRIPTION</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_DESCRIPTION</shortDescription>
+        <value>Description</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_CITY</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_CITY</shortDescription>
+        <value>City</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_COUNTRY</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_COUNTRY</shortDescription>
+        <value>Country</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_FLOORS_NO</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_FLOORS_NO</shortDescription>
+        <value>Floors No</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_GARAGE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_GARAGE</shortDescription>
+        <value>Garages</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_GARDEN</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_GARDEN</shortDescription>
+        <value>Garden</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_GROUND_FLOOR</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_GROUND_FLOOR</shortDescription>
+        <value>Ground floor</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_GYM</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_GYM</shortDescription>
+        <value>Gym in the building</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_LAST_FLOOR</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_LAST_FLOOR</shortDescription>
+        <value>Last floor</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_LIFT</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_LIFT</shortDescription>
+        <value>Lift</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_MEZZANINE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_MEZZANINE</shortDescription>
+        <value>Mezzanine</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_NEAR_METRO</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_NEAR_METRO</shortDescription>
+        <value>Near metro</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_NEAR_PARK</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_NEAR_PARK</shortDescription>
+        <value>Near park</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_NEAR_PUBS</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_NEAR_PUBS</shortDescription>
+        <value>Near pubs/restaurants</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_NEAR_TRAM</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_NEAR_TRAM</shortDescription>
+        <value>Near tram/bus</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_PARK_VIEW</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_PARK_VIEW</shortDescription>
+        <value>Park view</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_PARKING_GARAGE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_PARKING_GARAGE</shortDescription>
+        <value>Parking/garage</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_PRICE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_PRICE</shortDescription>
+        <value>Price</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_RIVER_VIEW</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_RIVER_VIEW</shortDescription>
+        <value>River view</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_ROOMS</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_ROOMS</shortDescription>
+        <value>Rooms</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_SIZE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_SIZE</shortDescription>
+        <value>Size</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_STREET</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_STREET</shortDescription>
+        <value>Street</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_TERRACE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_TERRACE</shortDescription>
+        <value>Terrace</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_TYPE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_TYPE</shortDescription>
+        <value>Type</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_WC</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_WC</shortDescription>
+        <value>WC separated</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_WHEELCHAIR_ACCESS</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_WHEELCHAIR_ACCESS</shortDescription>
+        <value>Wheelchair Access</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_YEAR_BUILT</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_YEAR_BUILT</shortDescription>
+        <value>Year built</value>
     </labels>
     <labels>
         <fullName>LABEL_SUCCESS_TITLE</fullName>
