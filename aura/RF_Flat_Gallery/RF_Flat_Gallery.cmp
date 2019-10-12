@@ -1,0 +1,38 @@
+<aura:component description="RF_Flat_Gallery" controller="RF_Flat_Details">
+    <ltng:require styles="{! $Resource.Bootstrap + '/bootstrap-4.3.1-dist/css/bootstrap.css' }"
+                  scripts="{!join(',',
+        $Resource.jQuery + '/jquery-3.4.1.js' ,
+        $Resource.Bootstrap + '/bootstrap-4.3.1-dist/js/bootstrap.js')
+      }"/>
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="photos" type="Object[]" />
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    <c:RF_DivisionSearch_Spinner aura:id="spinnerResult"/>
+    <div id="carousel-example-2" class="carousel slide carousel-fade z-depth-1-half" data-ride="carousel" style="background-color: lightgray;">
+        <ol class="carousel-indicators">
+            <aura:iteration items="{! v.photos }" var="item" indexVar="index">
+                <li data-target="#carousel-example-2" data-slide-to="{! index }" class="{! index == 0 ? 'active': '' }"></li>
+            </aura:iteration>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <aura:iteration items="{! v.photos }" var="item" indexVar="index">
+                <div class="{! index == 0 ? 'carousel-item active': 'carousel-item' }">
+                    <div class="view">
+                        <center>
+                            <img class="d-block w-100" src="{! item.link }" style="height: auto; max-height: 450px; width: auto !important; max-width: 100%;"/>
+                            <div class="mask rgba-black-light"></div>
+                        </center>
+                    </div>
+                </div>
+            </aura:iteration>
+        </div>
+        <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</aura:component>
