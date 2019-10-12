@@ -16,7 +16,10 @@ public with sharing class RF_ContentDocumentLink_Trigger_Handler implements RF_I
     }
 
     public void beforeInsert(List<SObject> newlstObj) {
-
+        contentDocumentLinks = (List<ContentDocumentLink>) newlstObj;
+        for(ContentDocumentLink cdl: contentDocumentLinks) {
+            cdl.Visibility = 'AllUsers';
+        }
     }
     public void beforeUpdate(List<SObject> newlstObj,List<SObject> oldlstObj,Map<Id,SObject> newMapObj, Map<Id,SObject> oldMapObj) {
 
@@ -28,14 +31,10 @@ public with sharing class RF_ContentDocumentLink_Trigger_Handler implements RF_I
 
     public void afterInsert(List<SObject> newlstObj,Map<Id,SObject> newMapObj) {
         contentDocumentLinks = (List<ContentDocumentLink>) newlstObj;
-        System.debug(contentDocumentLinks.size());
         for(ContentDocumentLink cdl: contentDocumentLinks) {
             cdlIds.add(cdl.ContentDocumentId);
-            System.debug(cdl.ContentDocumentId);
         }
-        System.debug(cdlIds.size());
         contentVersionList = [SELECT Id, ContentDocument.Title FROM ContentVersion where ContentDocumentId IN :cdlIds];
-        System.debug(contentVersionList.size());
         for(ContentVersion cv: contentVersionList) {
             ContentDistribution cd = new ContentDistribution();
             cd.Name = cv.ContentDocument.Title;
@@ -46,7 +45,6 @@ public with sharing class RF_ContentDocumentLink_Trigger_Handler implements RF_I
             cd.PreferencesPasswordRequired=false;
             cd.PreferencesAllowOriginalDownload= true;
             insert cd;
-            System.debug('Dodalem ' + cd.Id);
         }
 
     }

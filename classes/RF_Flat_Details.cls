@@ -144,4 +144,28 @@ public with sharing class RF_Flat_Details {
         }
         return flatList;
     }
+
+    @AuraEnabled
+    public static List<RF_Comments__c> getFlatComments(String recordId){
+        List<RF_Comments__c> comments = [SELECT Id, Comment__c, Rating__c, CreatedBy.FirstName, CreatedBy.LastName, CreatedBy.Name, LastModifiedDate FROM RF_Comments__c WHERE Product__c = :recordId ORDER BY CreatedDate ASC];
+        return comments;
+    }
+
+    @AuraEnabled
+    public static String addCommentAndRating(String recordId, String description, String rating){
+        RF_Comments__c comment = new RF_Comments__c();
+        List<RF_Comments__c> comments = [SELECT Id FROM RF_Comments__c WHERE Product__c = :recordId AND OwnerId = :UserInfo.getUserId()];
+        if(!comments.isEmpty()){
+            comment = comments.get(0);
+        }
+        comment.Product__c = recordId;
+        comment.Comment__c = description;
+        comment.Rating__c = Integer.valueOf(rating);
+        try {
+            Database.upsert(comment);
+        } catch (Exception e) {
+            throw e;
+        }
+        return 'Comment added successful';
+    }
 }

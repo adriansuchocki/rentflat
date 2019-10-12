@@ -211,6 +211,7 @@
             </div>
         </lightning:tab>
         <lightning:tab label="Comments" id="two">
+            <c:RF_Flat_Comment recordId="{! v.recordId }"/>
         </lightning:tab>
         <lightning:tab label="Reservation" id="three">
             <c:RF_Flat_Reservation_List flatReservations="{! v.flatReservations }" recordId="{! v.recordId }"/>

@@ -1,0 +1,24 @@
+<!--
+ - Created by BRITENET on 11.10.2019.
+ -->
+
+<aura:component description="RF_Flat_Comment_Form" controller="RF_Flat_Details">
+    <aura:attribute name="recordId" type="String" access="public"/>
+    <aura:attribute name="comment" type="String" access="public"/>
+    <aura:attribute name="rating" type="String" access="public" default="0"/>
+    <aura:registerEvent name="refreshComments" type="c:RF_Flat_Comment_Event"/>
+
+    <c:MDB_Spinner aura:id="spinnerResult"/>
+    <lightning:layout multipleRows="true">
+        <lightning:layoutItem size="12" padding="around-small">
+            <lightning:textarea name="comment" label="Comment" value="{! v.comment }"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem size="12" padding="around-small">
+            <label class="slds-form-element__label" for="input-id-01">Rating</label>
+            <c:RF_Flat_Rating value="{! v.rating }"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem size="12" class="slds-align--absolute-center">
+            <lightning:button iconName="utility:save" label="Submit" onclick="{! c.onSave }"/>
+        </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>
