@@ -95,17 +95,17 @@ public with sharing class RF_Flat_Details {
     }
 
     @AuraEnabled
-    public static String reserveFlat(List<Reservation> reservationList){
+    public static String reserveFlat(List<Reservation> reservationList) {
         Savepoint sp = Database.setSavepoint();
         List<RF_Flat_Reservation__c> resList = new List<RF_Flat_Reservation__c>();
-        for(Reservation r: reservationList) {
+        for (Reservation r : reservationList) {
             RF_Flat_Reservation__c reservation = new RF_Flat_Reservation__c();
             reservation.Product__c = r.recordId;
             reservation.Reservation_from__c = r.reservationFrom;
             reservation.Reservation_to__c = r.reservationTo;
             resList.add(reservation);
         }
-        try{
+        try {
             Database.insert(resList);
         } catch (Exception e) {
             Database.rollback(sp);
@@ -114,7 +114,9 @@ public with sharing class RF_Flat_Details {
             throw new RF_Flat_Reservation_Exception (message);
         }
         return 'Flats reserved successful';
-      
+    }
+
+    @AuraEnabled
     public static List<FlatSearchItem> getResultList(String title){
         List<FlatSearchItem> flatList = new List<RF_Flat_Details.FlatSearchItem>();
         Map<String, String> parameters = new Map<String, String>();
