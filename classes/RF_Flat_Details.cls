@@ -114,5 +114,34 @@ public with sharing class RF_Flat_Details {
             throw new RF_Flat_Reservation_Exception (message);
         }
         return 'Flats reserved successful';
+      
+    public static List<FlatSearchItem> getResultList(String title){
+        List<FlatSearchItem> flatList = new List<RF_Flat_Details.FlatSearchItem>();
+        Map<String, String> parameters = new Map<String, String>();
+        System.debug(title);
+        if(!String.isEmpty(title)){
+            parameters.put('Name', title);
+
+        }
+        List<Product2> products = new List<Product2>();
+        String query = RF_Flat_Search_Handler.generateSearchQuery(parameters);
+        System.debug(query);
+        products = Database.query(query);
+        System.debug(products.size());
+        for(Product2 p: products) {
+            FlatSearchItem flat = new FlatSearchItem();
+            flat.title = p.Name;
+            flat.size = p.Size__c;
+            flat.rooms = p.Rooms__c;
+            flat.bedrooms = p.Bedrooms__c;
+            flat.bathrooms = p.Baths__c;
+            List<RF_Flat_Details.ContentDoc> contentList = getContentDocuments(p.Id);
+            flat.link = '';
+            if(!contentList.isEmpty()){
+                flat.link = contentList.get(0).link;
+            }
+            flatList.add(flat);
+        }
+        return flatList;
     }
 }
