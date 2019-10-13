@@ -5,7 +5,10 @@
 <aura:component description="RF_Flat_Search" implements="forceCommunity:searchInterface" controller="RF_Flat_Details">
     <aura:attribute name="searchText" type="String" default=""/>
     <aura:attribute name="cart" type="Boolean" default="false" />
+    <aura:attribute name="cartList" type="Object[]" />
+    <aura:handler event="c:RF_Flat_Search_Cart" action="{! c.init }"/>
     <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+
     <c:RF_DivisionSearch_Spinner aura:id="spinnerResult"/>
     <div class="slds-form-element slds-lookup" data-select="single">
         <div class="slds-form-element__control">
@@ -20,21 +23,32 @@
                     <lightning:layoutItem size="1" class="slds-m-horizontal--xxx-small button-position-end slds-is-relative">
                         <lightning:buttonIcon iconName="utility:cart"  alternativeText="Basket" variant="brand" onclick="{! c.handleShowCart }"/>
                         <aura:if isTrue="{! v.cart }">
-                            <section aria-describedby="dialog-body-id-15" aria-label="My Favourites" class="slds-popover slds-nubbin_top-left slds-dynamic-menu" role="dialog" style="position:absolute;left:-0.5rem;top:48px">
-                                <div class="slds-popover__body slds-p-horizontal_none" id="dialog-body-id-15">
-                                    <div class="slds-p-vertical_x-small slds-p-horizontal_small">
-                                        <p>You can favorite any page!</p>
+                            <section aria-describedby="dialog-body-id-15" aria-label="My Cart" class="slds-popover slds-nubbin_top-left slds-dynamic-menu" role="dialog" style="position:absolute;left:-0.5rem;top:48px;width:30vw;">
+                                <aura:if isTrue="{! not(empty(v.cartList))}">
+                                    <div class="slds-popover__body slds-p-horizontal_none" id="dialog-body-id-15" style="max-height: 70vh; overflow-y: scroll;">
+                                        <div class="slds-p-vertical_x-small slds-p-horizontal_small">
+                                            <aura:iteration items="{! v.cartList }" var="item" indexVar="index">
+                                                <c:RF_Flat_Search_Basket_Item flat="{! item }" index="{! index }"/>
+                                            </aura:iteration>
+                                        </div>
                                     </div>
-                                </div>
-                                <footer class="slds-popover__footer">
-                                    <ul>
-                                        <li>
+                                    <footer class="slds-popover__footer">
+                                        <ul>
+                                            <li>
+                                                <center>
+                                                    <lightning:button name="{! $Label.c.BTN_RESERVE }" label="{! $Label.c.BTN_RESERVE }" variant="brand" onclick=""/>
+                                                </center>
+                                            </li>
+                                        </ul>
+                                    </footer>
+                                    <aura:set attribute="else" >
+                                        <div class="slds-p-around--medium">
                                             <center>
-                                                <lightning:button name="{! $Label.c.BTN_RESERVE }" label="{! $Label.c.BTN_RESERVE }" variant="brand" onclick=""/>
+                                                <p>Cart is empty.</p>
                                             </center>
-                                        </li>
-                                    </ul>
-                                </footer>
+                                        </div>
+                                    </aura:set>
+                                </aura:if>
                             </section>
                         </aura:if>
                     </lightning:layoutItem>

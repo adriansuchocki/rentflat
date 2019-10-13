@@ -6,7 +6,7 @@
         let spinnerAction = component.find("spinnerResult");
         let action = component.get("c.reserveFlat");
         spinnerAction.showHideSpinner(true);
-        let reservationList = [{"recordId": recordId, "reservationFrom": reservationFrom, "reservationTo": reservationTo}];
+        let reservationList = [{"recordId": recordId, "title": "", "link": "", "reservationFrom": reservationFrom, "reservationTo": reservationTo}];
         let JSONlist = JSON.stringify(reservationList);
         action.setParams({"reservationList": JSONlist});
         action.setCallback(this, function(response){

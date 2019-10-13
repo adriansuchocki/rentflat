@@ -19,6 +19,10 @@ public with sharing class RF_Flat_Details {
         @AuraEnabled
         public String recordId { get; set; }
         @AuraEnabled
+        public String title { get; set; }
+        @AuraEnabled
+        public String link { get; set; }
+        @AuraEnabled
         public Date reservationFrom { get; set; }
         @AuraEnabled
         public Date reservationTo { get; set; }
@@ -95,18 +99,38 @@ public with sharing class RF_Flat_Details {
     }
 
     @AuraEnabled
-    public static String reserveFlat(List<Reservation> reservationList){
+    public static String reserveFlat(List<Reservation> reservationList) {
         Savepoint sp = Database.setSavepoint();
+        List<Order> orders = new List<Order>();
         List<RF_Flat_Reservation__c> resList = new List<RF_Flat_Reservation__c>();
-        for(Reservation r: reservationList) {
-            RF_Flat_Reservation__c reservation = new RF_Flat_Reservation__c();
-            reservation.Product__c = r.recordId;
-            reservation.Reservation_from__c = r.reservationFrom;
-            reservation.Reservation_to__c = r.reservationTo;
-            resList.add(reservation);
+        List<PricebookEntry> priceBooks = [SELECT Id, UnitPrice, Pricebook2.IsStandard FROM PricebookEntry];
+        List<Account> accounts = [SELECT Id FROM Account WHERE Name = 'Customers'];
+        System.debug(accounts.size());
+        for (Reservation r : reservationList) {
+//            Contract contract = new Contract();
+//            contract.AccountId = accounts.get(0).Id;
+//            contract.StartDate = r.reservationFrom;
+//            contract.Status = 'Draft';
+//            contract.ContractTerm = r.reservationTo.monthsBetween(r.reservationFrom) + 1;
+//            contracts.add(contract);
+//            OrderItem orderItem = new OrderItem();
+//            orderItem.Product2.Id = r.recordId;
+//            orderItem.
+            Order order = new Order();
+            order.AccountId = accounts.get(0).Id;
+            order.EffectiveDate = r.reservationFrom;
+            order.EndDate = r.reservationTo;
+            order.Status = 'Draft';
+            orders.add(order);
+//            RF_Flat_Reservation__c reservation = new RF_Flat_Reservation__c();
+//            reservation.Product__c = r.recordId;
+//            reservation.Reservation_from__c = r.reservationFrom;
+//            reservation.Reservation_to__c = r.reservationTo;
+//            resList.add(reservation);
         }
-        try{
-            Database.insert(resList);
+        try {
+            Database.insert(orders);
+//            Database.insert(resList);
         } catch (Exception e) {
             Database.rollback(sp);
             String message = e.getMessage().split('ERRORMESSAGE').get(1).substring(0, 55);
@@ -114,7 +138,9 @@ public with sharing class RF_Flat_Details {
             throw new RF_Flat_Reservation_Exception (message);
         }
         return 'Flats reserved successful';
-      
+    }
+
+    @AuraEnabled
     public static List<FlatSearchItem> getResultList(String title){
         List<FlatSearchItem> flatList = new List<RF_Flat_Details.FlatSearchItem>();
         Map<String, String> parameters = new Map<String, String>();

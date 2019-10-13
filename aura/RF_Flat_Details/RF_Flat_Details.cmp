@@ -4,6 +4,7 @@
     <aura:attribute name="recordError" type="String"/>
     <aura:attribute name="pricebookValue" type="Object"/>
     <aura:attribute name="flatReservations" type="Object[]"/>
+    <aura:attribute name="photos" type="Object[]" />
 
     <aura:attribute name="accept" type="List" default="['.jpg', '.jpeg']"/>
     <aura:attribute name="multiple" type="Boolean" default="true"/>
@@ -44,7 +45,7 @@
 <!--    <lightning:fileUpload label="Add attachment" multiple="{!v.multiple}"-->
 <!--                          accept="{!v.accept}" recordId="{!v.recordId}"-->
 <!--                          onuploadfinished="{!c.handleUploadFinished}" />-->
-    <c:RF_Flat_Gallery recordId="{! v.recordId }"/>
+    <c:RF_Flat_Gallery photos="{! v.photos }"/>
     <lightning:tabset selectedTabId="one">
         <lightning:tab label="Details" id="one">
             <div class="c-container">
@@ -214,7 +215,7 @@
             <c:RF_Flat_Comment recordId="{! v.recordId }"/>
         </lightning:tab>
         <lightning:tab label="Reservation" id="three">
-            <c:RF_Flat_Reservation_List flatReservations="{! v.flatReservations }" recordId="{! v.recordId }"/>
+            <c:RF_Flat_Reservation_List flatReservations="{! v.flatReservations }" flatRecord="{! v.flatRecord }" photos="{! v.photos }"/>
         </lightning:tab>
     </lightning:tabset>
 </aura:component>
