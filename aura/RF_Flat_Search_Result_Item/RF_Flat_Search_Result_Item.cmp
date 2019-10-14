@@ -9,38 +9,12 @@
         <lightning:layout horizontalAlign="center"  multipleRows="true">
             <aura:iteration items="{! v.flats }" var="flat" indexVar="index">
                 <aura:if isTrue="{! v.layout }">
-                    <lightning:layoutItem size="3" padding="around-small">
-                        <aura:if isTrue="{! empty(flat.link) }" >
-                            <img src="{! $Resource.NoPhoto }" style="height: 200px;"/>
-                            <aura:set attribute="else">
-                                <img  src="{! v.flat.link }" style="height: 200px;"/>
-                            </aura:set>
-                        </aura:if>
-                    </lightning:layoutItem>
-                    <lightning:layoutItem size="7" padding="around-large" class="offert-box">
-                        <p class="slds-text-heading--label" ><h3 class="slds-text-heading_medium">{! flat.title }</h3></p>
-                    </lightning:layoutItem>
-                    <lightning:layoutItem size="2" class="custom-box">
-                        <aura:if isTrue="{! flat.price.value == flat.price.standardValue }">
-                            <h2><lightning:formattedNumber value="{! flat.price.value }" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/></h2>
-                            <aura:set attribute="else">
-                                <h2><lightning:formattedNumber value="{! flat.price.value }" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/></h2>
-                                <b style="text-decoration: line-through;"><h4><lightning:formattedNumber value="{! flat.price.standardValue }" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/></h4></b>
-                            </aura:set>
-                        </aura:if>
+                    <lightning:layoutItem size="4" padding="around-small">
+                        <c:RF_Flat_Search_Result_Item_Card flat="{! flat }" />
                     </lightning:layoutItem>
                     <aura:set attribute="else">
-                        <lightning:layoutItem size="4" padding="around-small">
-                            <lightning:layout multipleRows="true" horizontalAlign="center">
-                                <lightning:layoutItem size="12" padding="around-small">
-                                    <aura:if isTrue="{! empty(flat.link) }" >
-                                        <img src="{! $Resource.NoPhoto }" style="height: 200px;"/>
-                                        <aura:set attribute="else">
-                                            <img  src="{! v.flat.link }" style="height: 200px;"/>
-                                        </aura:set>
-                                    </aura:if>
-                                </lightning:layoutItem>
-                            </lightning:layout>
+                        <lightning:layoutItem size="12" padding="around-small">
+                            <c:RF_Flat_Search_Result_Item_List flat="{! flat }" />
                         </lightning:layoutItem>
                     </aura:set>
                 </aura:if>

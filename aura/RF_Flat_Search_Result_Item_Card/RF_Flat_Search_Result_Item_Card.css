@@ -1,0 +1,33 @@
+/**
+ * Created by BRITENET on 14.10.2019.
+ */
+.THIS {
+}
+
+.THIS .c-container-card {
+    border: 1px solid #d8dde6;
+    margin: 10px 0 20px 0;
+    background-color: #ffffff;
+    padding: 0;
+}
+
+.THIS .custom-box {
+    text-align: center;
+    background-color: #ff0d00;
+    padding: 1rem;
+    color: black;
+}
+
+.THIS h1 {
+    font-size: 2em;
+    color: black;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.THIS .offert-box {
+    background: rgba(255,255,255,1);
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 68%, rgba(242,242,242,1) 77%, rgba(249,193,189,1) 85%, rgba(249,100,93,1) 92%, rgba(255,4,0,1) 96%, rgba(255,13,0,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ff0d00', GradientType=1 );
+}
