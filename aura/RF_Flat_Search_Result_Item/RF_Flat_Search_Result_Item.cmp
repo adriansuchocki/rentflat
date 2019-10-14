@@ -5,7 +5,6 @@
 <aura:component description="RF_Flat_Search_Result_Item">
     <aura:attribute name="flats" type="Object[]" />
     <aura:attribute name="layout" type="Boolean" />
-    <div class="c-container">
         <lightning:layout horizontalAlign="center"  multipleRows="true">
             <aura:iteration items="{! v.flats }" var="flat" indexVar="index">
                 <aura:if isTrue="{! v.layout }">
@@ -20,5 +19,4 @@
                 </aura:if>
             </aura:iteration>
         </lightning:layout>
-    </div>
 </aura:component>
