@@ -3,23 +3,20 @@
  -->
 
 <aura:component description="RF_Flat_Search_Result_Item">
-    <aura:attribute name="flat" type="Object" />
-
-    <div class="c-container">
-        <lightning:layout horizontalAlign="center">
-            <lightning:layoutItem size="2" padding="around-small">
-                <aura:if isTrue="{! empty(v.flat.link) }" >
-                    <img src="{! $Resource.NoPhoto }"/>
+    <aura:attribute name="flats" type="Object[]" />
+    <aura:attribute name="layout" type="Boolean" />
+        <lightning:layout horizontalAlign="center"  multipleRows="true">
+            <aura:iteration items="{! v.flats }" var="flat" indexVar="index">
+                <aura:if isTrue="{! v.layout }">
+                    <lightning:layoutItem size="4" padding="around-small">
+                        <c:RF_Flat_Search_Result_Item_Card flat="{! flat }" />
+                    </lightning:layoutItem>
                     <aura:set attribute="else">
-                        <img  src="{! v.flat.link }"/>
+                        <lightning:layoutItem size="12" padding="around-small">
+                            <c:RF_Flat_Search_Result_Item_List flat="{! flat }" />
+                        </lightning:layoutItem>
                     </aura:set>
                 </aura:if>
-            </lightning:layoutItem>
-            <lightning:layoutItem size="6" padding="around-large">
-                <p class="slds-text-heading--label" ><h3 class="slds-text-heading_medium">{! v.flat.title }</h3></p>
-            </lightning:layoutItem>
-            <lightning:layoutItem >
-            </lightning:layoutItem>
+            </aura:iteration>
         </lightning:layout>
-    </div>
 </aura:component>

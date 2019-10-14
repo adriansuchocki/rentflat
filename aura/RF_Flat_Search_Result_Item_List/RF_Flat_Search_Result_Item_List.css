@@ -1,19 +1,20 @@
 /**
- * Created by BRITENET on 10.10.2019.
+ * Created by BRITENET on 14.10.2019.
  */
-.THIS .c-container {
+.THIS {
+}
+.THIS.c-container-list {
     border: 1px solid #d8dde6;
     margin: 10px 0 20px 0;
     background-color: #ffffff;
-    height: 226px;
+    height: auto;
     padding: 0;
 }
-.THIS .c-container-card {
-    border: 1px solid #d8dde6;
-    margin: 10px 0 20px 0;
-    background-color: #ffffff;
-    padding: 0;
+
+.THIS.c-container-list:hover {
+    cursor: pointer;
 }
+
 .THIS .custom-box {
     text-align: center;
     background-color: #ff0d00;
@@ -24,6 +25,9 @@
 .THIS h1 {
     font-size: 2em;
     color: black;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .THIS h2 {

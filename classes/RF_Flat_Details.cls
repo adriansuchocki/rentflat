@@ -30,11 +30,13 @@ public with sharing class RF_Flat_Details {
 
     public class FlatSearchItem{
         @AuraEnabled
+        public String id { get; set; }
+        @AuraEnabled
         public String title { get; set; }
         @AuraEnabled
         public String link { get; set; }
         @AuraEnabled
-        public Decimal price { get; set; }
+        public PriceBook price { get; set; }
         @AuraEnabled
         public Decimal size { get; set; }
         @AuraEnabled
@@ -139,6 +141,23 @@ public with sharing class RF_Flat_Details {
 //            message += '...';
 //            throw new RF_Flat_Reservation_Exception (message);
 //        }
+//         Savepoint sp = Database.setSavepoint();
+//         List<RF_Flat_Reservation__c> resList = new List<RF_Flat_Reservation__c>();
+//         for (Reservation r : reservationList) {
+//             RF_Flat_Reservation__c reservation = new RF_Flat_Reservation__c();
+//             reservation.Product__c = r.recordId;
+//             reservation.Reservation_from__c = r.reservationFrom;
+//             reservation.Reservation_to__c = r.reservationTo;
+//             resList.add(reservation);
+//         }
+//         try {
+//             Database.insert(resList);
+//         } catch (Exception e) {
+//             Database.rollback(sp);
+//             String message = e.getMessage().split('ERRORMESSAGE').get(1).substring(0, 55);
+//             message += '...';
+//             throw new RF_Flat_Reservation_Exception (message);
+//         }
         return 'Flats reserved successful';
     }
 
@@ -149,7 +168,6 @@ public with sharing class RF_Flat_Details {
         System.debug(title);
         if(!String.isEmpty(title)){
             parameters.put('Name', title);
-
         }
         List<Product2> products = new List<Product2>();
         String query = RF_Flat_Search_Handler.generateSearchQuery(parameters);
@@ -158,6 +176,7 @@ public with sharing class RF_Flat_Details {
         System.debug(products.size());
         for(Product2 p: products) {
             FlatSearchItem flat = new FlatSearchItem();
+            flat.id = p.Id;
             flat.title = p.Name;
             flat.size = p.Size__c;
             flat.rooms = p.Rooms__c;
@@ -168,6 +187,19 @@ public with sharing class RF_Flat_Details {
             if(!contentList.isEmpty()){
                 flat.link = contentList.get(0).link;
             }
+            System.debug(p.PricebookEntries.size());
+            for(PricebookEntry pe: p.PricebookEntries) {
+                if(pe.Pricebook2.IsStandard) {
+                    flat.price.standardValue = pe.UnitPrice;
+                }
+                if(flat.price.value == null) {
+                    flat.price.value = pe.UnitPrice;
+                } else if(flat.price.value > pe.UnitPrice) {
+                    flat.price.value = pe.UnitPrice;
+                }
+                System.debug(pe.UnitPrice);
+            }
+            System.debug(flat.price);
             flatList.add(flat);
         }
         return flatList;
