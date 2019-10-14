@@ -6,7 +6,7 @@ global class AutocreatedRegHandler1570529590699 implements Auth.RegistrationHand
 
 	private static final String ORG_SUFFIX = '';
 	private static final String DEFAULT_ACCOUNTNAME = 'Customers';
-	private static final String EXTERNAL_USER_PROFILE = 'Customers';
+	private static final String EXTERNAL_USER_PROFILE = 'Rent Flat Customer Community';
 	private static final String INTERNAL_USER_PROFILE = 'Standard User';
 
 /**

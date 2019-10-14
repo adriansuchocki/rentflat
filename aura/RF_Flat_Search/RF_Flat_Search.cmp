@@ -4,16 +4,39 @@
 
 <aura:component description="RF_Flat_Search" implements="forceCommunity:searchInterface" controller="RF_Flat_Details">
     <aura:attribute name="searchText" type="String" default=""/>
+    <aura:attribute name="cart" type="Boolean" default="false" />
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
     <c:RF_DivisionSearch_Spinner aura:id="spinnerResult"/>
     <div class="slds-form-element slds-lookup" data-select="single">
         <div class="slds-form-element__control">
             <div class="slds-input-has-icon slds-input-has-icon--right">
                 <lightning:layout verticalAlign="center" horizontalAlign="center">
-                    <lightning:layoutItem size="10" class="slds-m-horizontal--xxx-small">
+                    <lightning:layoutItem size="9" class="slds-m-horizontal--xxx-small">
                         <lightning:input class="slds-form" value="{! v.searchText }" name="searchQuery" placeholder="Enter text to search..." label="" />
                     </lightning:layoutItem>
                     <lightning:layoutItem size="2" class="slds-m-horizontal--xxx-small button-position-end">
                         <lightning:button name="{! $Label.c.BTN_SEARCH }" label="{! $Label.c.BTN_SEARCH }" variant="brand" onclick="{! c.handleSearchFlat }"/>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="1" class="slds-m-horizontal--xxx-small button-position-end slds-is-relative">
+                        <lightning:buttonIcon iconName="utility:cart"  alternativeText="Basket" variant="brand" onclick="{! c.handleShowCart }"/>
+                        <aura:if isTrue="{! v.cart }">
+                            <section aria-describedby="dialog-body-id-15" aria-label="My Favourites" class="slds-popover slds-nubbin_top-left slds-dynamic-menu" role="dialog" style="position:absolute;left:-0.5rem;top:48px">
+                                <div class="slds-popover__body slds-p-horizontal_none" id="dialog-body-id-15">
+                                    <div class="slds-p-vertical_x-small slds-p-horizontal_small">
+                                        <p>You can favorite any page!</p>
+                                    </div>
+                                </div>
+                                <footer class="slds-popover__footer">
+                                    <ul>
+                                        <li>
+                                            <center>
+                                                <lightning:button name="{! $Label.c.BTN_RESERVE }" label="{! $Label.c.BTN_RESERVE }" variant="brand" onclick=""/>
+                                            </center>
+                                        </li>
+                                    </ul>
+                                </footer>
+                            </section>
+                        </aura:if>
                     </lightning:layoutItem>
                 </lightning:layout>
             </div>

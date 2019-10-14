@@ -1,0 +1,47 @@
+<!--
+ - Created by BRITENET on 10.10.2019.
+ -->
+
+<aura:component description="RF_Flat_Reservation_List" controller="RF_Flat_Details">
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="today" type="Date"/>
+    <aura:attribute name="reservationFrom" type="Date"/>
+    <aura:attribute name="reservationTo" type="Date"/>
+    <aura:attribute name="flatReservations" type="Object[]"/>
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+
+    <c:RF_DivisionSearch_Spinner aura:id="spinnerResult"/>
+    <lightning:layout horizontalAlign="center">
+        <lightning:layoutItem size="2">
+        </lightning:layoutItem>
+        <lightning:layoutItem size="2">
+            <lightning:input type="date" name="reservationFrom" label="From" min="{! v.today }" value="{! v.reservationFrom }"/>
+<!--            <ui:inputDate aura:id="expdate" label="Today's Date" class="field" value="{!v.today}" displayDatePicker="true" />-->
+        </lightning:layoutItem>
+        <lightning:layoutItem size="1">
+        </lightning:layoutItem>
+        <lightning:layoutItem size="2">
+            <lightning:input type="date" name="reservationTo" label="To" min="{! v.reservationFrom }" value="{! v.reservationTo }"/>
+<!--            <ui:inputDate aura:id="expdate" label="Today's Date" class="field" value="{!v.today}" displayDatePicker="true" />-->
+        </lightning:layoutItem>
+        <lightning:layoutItem size="1">
+        </lightning:layoutItem>
+        <lightning:layoutItem size="1" class="button-position-end">
+            <lightning:button name="{! $Label.c.BTN_RESERVE }" label="{! $Label.c.BTN_RESERVE }" variant="brand" onclick="{! c.handleReserveFlat }"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem size="2" class="button-position-end">
+            <lightning:button name="{! $Label.c.BTN_BASKET }" label="{! $Label.c.BTN_BASKET }" variant="neutral" onclick="{! c.handleAddToCart }"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem size="1">
+        </lightning:layoutItem>
+    </lightning:layout>
+<!--    <aura:iteration items="{! v.flatReservations }" var="item" indexVar="index">-->
+<!--        {! item.reservationFrom } &nbsp; {! item.reservationTo }-->
+<!--        <aura:if isTrue="{! (item.reservationFrom <= v.today && indexVar == 0) }">-->
+<!--            {! v.today } &nbsp; {! item.reservationTo }-->
+<!--            <aura:set attribute="else">-->
+<!--            {! item.reservationFrom } &nbsp; {! item.reservationTo }-->
+<!--            </aura:set>-->
+<!--        </aura:if>-->
+<!--    </aura:iteration>-->
+</aura:component>
