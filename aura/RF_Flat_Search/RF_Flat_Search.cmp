@@ -10,8 +10,6 @@
             <div class="slds-input-has-icon slds-input-has-icon--right">
                 <lightning:layout verticalAlign="center" horizontalAlign="center">
                     <lightning:layoutItem size="10" class="slds-m-horizontal--xxx-small">
-<!--                <lightning:buttonIcon iconName="utility:search" variant="bare" onclick="{! c.handleClick }" alternativeText="Search" class="slds-input__icon" />-->
-<!--                <ui:inputText value="{!v.searchText}" class="slds-lookup__search-input slds-input" placeholder="Search" />-->
                         <lightning:input class="slds-form" value="{! v.searchText }" name="searchQuery" placeholder="Enter text to search..." label="" />
                     </lightning:layoutItem>
                     <lightning:layoutItem size="2" class="slds-m-horizontal--xxx-small button-position-end">
@@ -21,25 +19,4 @@
             </div>
         </div>
     </div>
-<!--    <aura:handler name="searchFlat" event="c:RF_Flat_Search_Event" action="{! c.handleSearchFlat }"/>-->
-
-<!--    <div class="c-container">-->
-<!--        <c:RF_Flat_Search_Form/>-->
-<!--    </div>-->
-<!--    <div class="c-container">-->
-<!--        <c:RF_Flat_Search_Result aura:id="resultComponent"/>-->
-<!--    </div>-->
-<!--    <div class="c-container">-->
-<!--        <form class="slds-form">-->
-<!--            <lightning:layout verticalAlign="center" horizontalAlign="center">-->
-<!--                <lightning:layoutItem size="4" class="slds-m-horizontal&#45;&#45;xxx-small">-->
-<!--                    <lightning:input class="slds-form" value="{! v.fieldText }" name="searchQuery" placeholder="Enter text to search..." label="" />-->
-<!--                </lightning:layoutItem>-->
-<!--                <lightning:layoutItem size="1" class="slds-m-horizontal&#45;&#45;xxx-small button-position-end" >-->
-<!--                    <lightning:button name="{! $Label.c.BTN_SEARCH }" label="{! $Label.c.BTN_SEARCH }" variant="brand" onclick="{! c.handleSearchFlat }"/>-->
-<!--                </lightning:layoutItem>-->
-<!--            </lightning:layout>-->
-<!--        </form>-->
-<!--        <br/>-->
-<!--    </div>-->
 </aura:component>
