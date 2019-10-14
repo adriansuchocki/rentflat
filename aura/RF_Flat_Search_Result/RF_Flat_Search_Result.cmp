@@ -4,6 +4,7 @@
 
 <aura:component description="RF_Flat_Search_Result" controller="RF_Flat_Details" implements="forceCommunity:availableForAllPageTypes">
     <aura:attribute name="resultList" type="Object[]"/>
+    <aura:attribute name="layout" type="Boolean" default="false"/>
     <aura:handler name="init" value="{! this }" action="{! c.init }"/>
     <aura:method name="search" action="{! c.handleSearch }" access="PUBLIC">
         <aura:attribute name="title" type="String" />
@@ -11,8 +12,18 @@
     <c:RF_DivisionSearch_Spinner aura:id="spinnerResult"/>
 
     <div class="c-container">
-        <aura:iteration items="{! v.resultList }" var="item" indexVar="index">
-            <c:RF_Flat_Search_Result_Item flat="{! item }"/>
-        </aura:iteration>
+        <lightning:layout horizontalAlign="center">
+            <lightning:layoutItem size="11">
+                <aura:if isTrue="{! v.layout }">
+                    <lightning:buttonIcon iconName="utility:tile_card_list" size="large" variant="bare" disabled="true" alternativeText="Card" class="slds-input__icon slds-float_right" />
+                    <lightning:buttonIcon iconName="utility:list" size="large" variant="bare" onclick="{! c.showCard }" alternativeText="List" class="slds-input__icon slds-float_right" />
+                    <aura:set attribute="else">
+                        <lightning:buttonIcon iconName="utility:tile_card_list" size="large" variant="bare" onclick="{! c.showList }" alternativeText="Card" class="slds-input__icon slds-float_right" />
+                        <lightning:buttonIcon iconName="utility:list" size="large" variant="bare" disabled="true" alternativeText="List" class="slds-input__icon slds-float_right" />
+                    </aura:set>
+                </aura:if>
+            </lightning:layoutItem>
+        </lightning:layout>
+        <c:RF_Flat_Search_Result_Item flats="{! v.resultList }" layout="{! v.layout }"/>
     </div>
 </aura:component>
