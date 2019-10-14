@@ -7,7 +7,7 @@
         if (!$A.util.isUndefinedOrNull(flatsJson)) {
             var flats = JSON.parse(flatsJson);
             component.set('v.resultList', flats);
-            sessionStorage.removeItem('RF_Flat_Search--flatList');
+//            sessionStorage.removeItem('RF_Flat_Search--flatList');
         }
     }
 })

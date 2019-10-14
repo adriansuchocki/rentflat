@@ -21,7 +21,7 @@ public with sharing class RF_Flat_Details {
         @AuraEnabled
         public String link { get; set; }
         @AuraEnabled
-        public Decimal price { get; set; }
+        public PriceBook price { get; set; }
         @AuraEnabled
         public Decimal size { get; set; }
         @AuraEnabled
@@ -78,7 +78,6 @@ public with sharing class RF_Flat_Details {
         System.debug(title);
         if(!String.isEmpty(title)){
             parameters.put('Name', title);
-
         }
         List<Product2> products = new List<Product2>();
         String query = RF_Flat_Search_Handler.generateSearchQuery(parameters);
@@ -97,6 +96,19 @@ public with sharing class RF_Flat_Details {
             if(!contentList.isEmpty()){
                 flat.link = contentList.get(0).link;
             }
+            System.debug(p.PricebookEntries.size());
+            for(PricebookEntry pe: p.PricebookEntries) {
+                if(pe.Pricebook2.IsStandard) {
+                    flat.price.standardValue = pe.UnitPrice;
+                }
+                if(flat.price.value == null) {
+                    flat.price.value = pe.UnitPrice;
+                } else if(flat.price.value > pe.UnitPrice) {
+                    flat.price.value = pe.UnitPrice;
+                }
+                System.debug(pe.UnitPrice);
+            }
+            System.debug(flat.price);
             flatList.add(flat);
         }
         return flatList;

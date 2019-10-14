@@ -5,5 +5,42 @@
     border: 1px solid #d8dde6;
     margin: 10px 0 20px 0;
     background-color: #ffffff;
-    padding: 10px;
+    height: 226px;
+    padding: 0;
+}
+.THIS .custom-box {
+    text-align: center;
+    background-color: #ff0d00;
+    padding: 1rem;
+    color: black;
+}
+
+.THIS h2 {
+    -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    font-size: 3em;
+    color: white;
+}
+
+.THIS h3 {
+    -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    font-size: 2em;
+    color: white;
+}
+
+.THIS h4 {
+    -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    font-size: 1em;
+    color: white;
+}
+
+.THIS .offert-box {
+    background: rgba(255,255,255,1);
+    background: linear-gradient(97deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 68%, rgba(242,242,242,1) 77%, rgba(249,193,189,1) 85%, rgba(249,100,93,1) 92%, rgba(255,4,0,1) 96%, rgba(255,13,0,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ff0d00', GradientType=1 );
 }

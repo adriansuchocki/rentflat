@@ -12,7 +12,6 @@
             let errors = response.getError();
             if (component.isValid() && state === $A.get("{! $Label.c.LABEL_SUCCESS_TITLE }")) {
                 var flats = response.getReturnValue();
-                console.log(flats);
                 sessionStorage.setItem('RF_Flat_Search--flatList', JSON.stringify(flats));
                 var navEvt = $A.get('e.force:navigateToURL');
                 navEvt.setParams({url: '/product-search'});
