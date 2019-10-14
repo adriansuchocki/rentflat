@@ -1,0 +1,50 @@
+<!--
+ - Created by BRITENET on 14.10.2019.
+ -->
+
+<aura:component description="RF_Flat_Search_Result_Item_Card">
+    <aura:attribute name="flat" type="Object" />
+    <div class="c-container-card" onclick="{! c.showFlat }">
+        <lightning:layout multipleRows="true" horizontalAlign="center" verticalAlign="center">
+            <lightning:layoutItem size="12" padding="around-small">
+                <center>
+                    <aura:if isTrue="{! empty(v.flat.link) }" >
+                        <img src="{! $Resource.NoPhoto }" style="height: 200px;"/>
+                        <aura:set attribute="else">
+                            <img  src="{! v.flat.link }" style="height: 200px;"/>
+                        </aura:set>
+                    </aura:if>
+                </center>
+            </lightning:layoutItem>
+            <lightning:layoutItem size="12" padding="around-small">
+                <p class="slds-text-heading--label" ><h1 class="slds-text-heading_medium">{! v.flat.title }</h1></p>
+            </lightning:layoutItem>
+            <lightning:layoutItem size="12" padding="around-small">
+                Szczegoly <br/>
+                test <br/>
+                test <br/>
+                test
+            </lightning:layoutItem>
+            <lightning:layoutItem size="12" padding="around-small" class="offert-box">
+                <br/>
+            </lightning:layoutItem>
+            <lightning:layoutItem size="12" padding="around-small" class="custom-box">
+                <aura:if isTrue="{! v.flat.price.value == v.flat.price.standardValue }">
+                    <h2><lightning:formattedNumber value="250" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/></h2>
+                    <b style="text-decoration: line-through; float: left;"><h3><lightning:formattedNumber value="300" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/></h3></b>
+                    <!--                    <h2><lightning:formattedNumber value="{! v.flat.price.value }" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/></h2>-->
+                    <aura:set attribute="else">
+                        <h2><lightning:formattedNumber value="{! flat.price.value }" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/></h2>
+                        <b style="text-decoration: line-through;"><h4><lightning:formattedNumber value="{! v.flat.price.standardValue }" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/></h4></b>
+                    </aura:set>
+                </aura:if>
+                <div style="background-color: white; height: 1px; width 100%; position: relative; transform: skewY(-10deg); margin-top: 5vh;">
+                    &nbsp;
+                </div>
+                <div style="float: right;" >
+                    <h3>per day</h3>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+</aura:component>
