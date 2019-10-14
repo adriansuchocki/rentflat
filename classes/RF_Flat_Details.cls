@@ -17,6 +17,8 @@ public with sharing class RF_Flat_Details {
 
     public class FlatSearchItem{
         @AuraEnabled
+        public String id { get; set; }
+        @AuraEnabled
         public String title { get; set; }
         @AuraEnabled
         public String link { get; set; }
@@ -86,6 +88,7 @@ public with sharing class RF_Flat_Details {
         System.debug(products.size());
         for(Product2 p: products) {
             FlatSearchItem flat = new FlatSearchItem();
+            flat.id = p.Id;
             flat.title = p.Name;
             flat.size = p.Size__c;
             flat.rooms = p.Rooms__c;

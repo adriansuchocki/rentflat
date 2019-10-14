@@ -10,6 +10,11 @@
     height: auto;
     padding: 0;
 }
+
+.THIS.c-container-list:hover {
+    cursor: pointer;
+}
+
 .THIS .custom-box {
     text-align: center;
     background-color: #ff0d00;
