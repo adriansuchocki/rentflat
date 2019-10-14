@@ -1,0 +1,11 @@
+/**
+ * Created by BRITENET on 11.10.2019.
+ */
+.THIS {
+}
+
+.THIS .iterableRow {
+    border-top: 1px solid #d8dde6;
+    padding-top: 10px;
+    margin-top: 5px;
+}
