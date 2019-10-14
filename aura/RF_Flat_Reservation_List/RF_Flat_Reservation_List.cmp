@@ -3,11 +3,13 @@
  -->
 
 <aura:component description="RF_Flat_Reservation_List" controller="RF_Flat_Details">
-    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="flatRecord" type="Object"/>
+    <aura:attribute name="photos" type="Object[]"/>
     <aura:attribute name="today" type="Date"/>
     <aura:attribute name="reservationFrom" type="Date"/>
     <aura:attribute name="reservationTo" type="Date"/>
     <aura:attribute name="flatReservations" type="Object[]"/>
+    <aura:registerEvent name="researchCart" type="c:RF_Flat_Search_Cart"/>
     <aura:handler name="init" value="{! this }" action="{! c.init }"/>
 
     <c:RF_DivisionSearch_Spinner aura:id="spinnerResult"/>

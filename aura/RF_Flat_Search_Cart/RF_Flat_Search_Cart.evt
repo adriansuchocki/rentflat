@@ -1,0 +1,6 @@
+<!--
+ - Created by BRITENET on 12.10.2019.
+ -->
+
+<aura:event type="APPLICATION" description="RF_Flat_Search_Cart">
+</aura:event>

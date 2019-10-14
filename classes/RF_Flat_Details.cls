@@ -19,6 +19,10 @@ public with sharing class RF_Flat_Details {
         @AuraEnabled
         public String recordId { get; set; }
         @AuraEnabled
+        public String title { get; set; }
+        @AuraEnabled
+        public String link { get; set; }
+        @AuraEnabled
         public Date reservationFrom { get; set; }
         @AuraEnabled
         public Date reservationTo { get; set; }
@@ -98,23 +102,62 @@ public with sharing class RF_Flat_Details {
 
     @AuraEnabled
     public static String reserveFlat(List<Reservation> reservationList) {
-        Savepoint sp = Database.setSavepoint();
-        List<RF_Flat_Reservation__c> resList = new List<RF_Flat_Reservation__c>();
-        for (Reservation r : reservationList) {
-            RF_Flat_Reservation__c reservation = new RF_Flat_Reservation__c();
-            reservation.Product__c = r.recordId;
-            reservation.Reservation_from__c = r.reservationFrom;
-            reservation.Reservation_to__c = r.reservationTo;
-            resList.add(reservation);
-        }
-        try {
-            Database.insert(resList);
-        } catch (Exception e) {
-            Database.rollback(sp);
-            String message = e.getMessage().split('ERRORMESSAGE').get(1).substring(0, 55);
-            message += '...';
-            throw new RF_Flat_Reservation_Exception (message);
-        }
+//        Savepoint sp = Database.setSavepoint();
+//        List<RF_Flat_Reservation__c> resList = new List<RF_Flat_Reservation__c>();
+//        List<OrderItem> orderItems = new List<OrderItem>();
+//        List<PricebookEntry> priceBooks = [SELECT Id, UnitPrice, Pricebook2.IsStandard FROM PricebookEntry];
+//        List<Account> accounts = [SELECT Id FROM Account WHERE Name = 'Customers'];
+//        Order order = new Order();
+//        System.debug(accounts.size());
+//        for (Reservation r : reservationList) {
+//            OrderItem oi = new OrderItem();
+//            for(PricebookEntry p: priceBooks) {
+//                if(oi.PricebookEntry == null) {
+//                    oi.PricebookEntry = p.PricebookEntry;
+//                    oi.UnitPrice = p.UnitPrice;
+//                    oi.Quantity = r.reservationTo.daysBetween(r.reservationFrom);
+//                } else if(priceBook.value > p.UnitPrice) {
+//                    priceBook.value = p.UnitPrice;
+//                }
+//            }
+//        }
+//        order.AccountId = accounts.get(0).Id;
+//        order.EffectiveDate = r.reservationFrom;
+//        order.EndDate = r.reservationTo;
+//        order.Status = 'Draft';
+//        Contract contract = new Contract();
+//        contract.AccountId = accounts.get(0).Id;
+//        contract.StartDate = r.reservationFrom;
+//        contract.Status = 'Draft';
+//        contract.ContractTerm =  + 1;
+//        contracts.add(contract);
+//        order;
+//        try {
+////            Database.insert(orders);
+////            Database.insert(resList);
+//        } catch (Exception e) {
+//            Database.rollback(sp);
+//            String message = e.getMessage().split('ERRORMESSAGE').get(1).substring(0, 55);
+//            message += '...';
+//            throw new RF_Flat_Reservation_Exception (message);
+//        }
+//         Savepoint sp = Database.setSavepoint();
+//         List<RF_Flat_Reservation__c> resList = new List<RF_Flat_Reservation__c>();
+//         for (Reservation r : reservationList) {
+//             RF_Flat_Reservation__c reservation = new RF_Flat_Reservation__c();
+//             reservation.Product__c = r.recordId;
+//             reservation.Reservation_from__c = r.reservationFrom;
+//             reservation.Reservation_to__c = r.reservationTo;
+//             resList.add(reservation);
+//         }
+//         try {
+//             Database.insert(resList);
+//         } catch (Exception e) {
+//             Database.rollback(sp);
+//             String message = e.getMessage().split('ERRORMESSAGE').get(1).substring(0, 55);
+//             message += '...';
+//             throw new RF_Flat_Reservation_Exception (message);
+//         }
         return 'Flats reserved successful';
     }
 

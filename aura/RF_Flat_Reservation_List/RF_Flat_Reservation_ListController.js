@@ -15,11 +15,19 @@
         if(flats == null) {
             flats = [];
         }
-        let recordId = component.get("v.recordId");
+        let flatRecord = component.get("v.flatRecord");
+        let photos = component.get("v.photos");
         let reservationFrom = component.get("v.reservationFrom");
         let reservationTo = component.get("v.reservationTo");
-        flats.push({'id': recordId, 'reservationFrom': reservationFrom, 'reservationTo': reservationTo});
+        console.log(flatRecord.Name);
+        let photo = '';
+        if(photos.length != 0) {
+            photo = photos[0].link;
+        }
+        flats.push({'recordId': flatRecord.Id, 'title': flatRecord.Name, 'link': photo, 'reservationFrom': reservationFrom, 'reservationTo': reservationTo});
         sessionStorage.setItem('RF_Flat_Search--cartList', JSON.stringify(flats));
+        let searchEvent = $A.get("e.c:RF_Flat_Search_Cart");
+        searchEvent.fire();
     },
 
     handleReserveFlat: function (component, event, helper) {

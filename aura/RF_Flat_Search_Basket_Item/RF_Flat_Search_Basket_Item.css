@@ -1,0 +1,21 @@
+/**
+ * Created by BRITENET on 12.10.2019.
+ */
+.THIS {
+}
+
+.THIS.iterableRow {
+    border-top: 1px solid #d8dde6;
+    padding-top: 10px;
+    margin-top: 5px;
+}
+
+.THIS.rowCart {
+    padding: 5px;
+}
+
+.THIS.rowCart:hover {
+    padding: 5px;
+    background-color: gray;
+    cursor: pointer;
+}

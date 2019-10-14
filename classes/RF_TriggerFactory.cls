@@ -22,6 +22,8 @@ public with sharing class RF_TriggerFactory {
                 throw new RF_ContentDocumentLink_Exception ('No Trigger Handler registered for Object Type: ' + soType);
             } else if(soType == RF_Flat_Reservation__c.sObjectType) {
                 throw new RF_Flat_Reservation_Exception ('No Trigger Handler registered for Object Type: ' + soType);
+            } else if(soType == Order.sObjectType) {
+                throw new RF_Flat_Reservation_Exception ('No Trigger Handler registered for Object Type: ' + soType);
             }
         }
         // Execute the handler to fulfil the trigger
@@ -89,7 +91,9 @@ public with sharing class RF_TriggerFactory {
         if (soType == ContentDocumentLink.sObjectType){
             return new RF_ContentDocumentLink_Trigger_Handler();
         } else if(soType == RF_Flat_Reservation__c.sObjectType) {
-            return new RF_Flat_Reservation_Trigger_Handler ();
+            return new RF_Flat_Reservation_Trigger_Handler();
+        } else if(soType == Order.sObjectType) {
+            return new RF_Order_Trigger_Handler();
         }
         return null;
     }

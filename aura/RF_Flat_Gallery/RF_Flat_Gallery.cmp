@@ -4,7 +4,6 @@
         $Resource.jQuery + '/jquery-3.4.1.js' ,
         $Resource.Bootstrap + '/bootstrap-4.3.1-dist/js/bootstrap.js')
       }"/>
-    <aura:attribute name="recordId" type="String" />
     <aura:attribute name="photos" type="Object[]" />
     <aura:handler name="init" value="{! this }" action="{! c.init }"/>
     <c:RF_DivisionSearch_Spinner aura:id="spinnerResult"/>

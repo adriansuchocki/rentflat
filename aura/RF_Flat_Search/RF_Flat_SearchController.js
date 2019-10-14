@@ -3,11 +3,10 @@
  */
 ({
     init: function(component, event, helper) {
-        var flatsJson = sessionStorage.getItem('RF_Flat_Search--flatList');
+        var flatsJson = sessionStorage.getItem('RF_Flat_Search--cartList');
         if (!$A.util.isUndefinedOrNull(flatsJson)) {
             var flats = JSON.parse(flatsJson);
             component.set('v.cartList', flats);
-            sessionStorage.removeItem('RF_Flat_Search--flatList');
         }
     },
 
