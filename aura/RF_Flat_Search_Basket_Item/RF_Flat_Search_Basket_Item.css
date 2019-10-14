@@ -12,6 +12,7 @@
 
 .THIS.rowCart {
     padding: 5px;
+    height: auto;
 }
 
 .THIS.rowCart:hover {
