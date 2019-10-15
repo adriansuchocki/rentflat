@@ -54,6 +54,15 @@
     color: white;
 }
 
+.THIS h5 {
+    font-size: 1em;
+    color: black;
+}
+
+.THIS .ratingStar{
+    background-color: yellow !important;
+}
+
 .THIS .offert-box {
     background: rgba(255,255,255,1);
     background: linear-gradient(97deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 68%, rgba(242,242,242,1) 77%, rgba(249,193,189,1) 85%, rgba(249,100,93,1) 92%, rgba(255,4,0,1) 96%, rgba(255,13,0,1) 100%);

@@ -4,9 +4,9 @@
 ({
     init: function (component, event, helper) {
         let recordId = component.get("v.recordId");
-        helper.getPriceValue(component, recordId);
-        helper.getReservedDate(component, recordId);
-        helper.getContentDocuments(component, recordId);
+        let flat = component.get("v.flatRecord");
+        let sum = 0;
+        helper.getFlatDetailsHelper(component, recordId);
     },
 
     handleUploadFinished : function(component, event, helper) {

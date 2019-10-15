@@ -5,10 +5,18 @@
 public with sharing class RF_Flat_Details {
     public class ContentDoc{
         @AuraEnabled
-        public String link{ get; set; }
+        public String link { get; set; }
+    }
+    public class Rating{
+        @AuraEnabled
+        public Decimal rating { get; set; }
+        @AuraEnabled
+        public Integer numberOfRating { get; set; }
     }
 
     public class PriceBook{
+        @AuraEnabled
+        public String id { get; set; }
         @AuraEnabled
         public Decimal standardValue { get; set; }
         @AuraEnabled
@@ -26,6 +34,13 @@ public with sharing class RF_Flat_Details {
         public Date reservationFrom { get; set; }
         @AuraEnabled
         public Date reservationTo { get; set; }
+        @AuraEnabled
+        public Integer reservationDays { get; set; }
+        @AuraEnabled
+        public String priceBookId { get; set; }
+        @AuraEnabled
+        public String priceBookValue { get; set; }
+
     }
 
     public class FlatSearchItem{
@@ -45,6 +60,69 @@ public with sharing class RF_Flat_Details {
         public String bathrooms { get; set; }
         @AuraEnabled
         public String bedrooms { get; set; }
+        @AuraEnabled
+        public String description { get; set; }
+        @AuraEnabled
+        public String floorNo { get; set; }
+        @AuraEnabled
+        public String family { get; set; }
+        @AuraEnabled
+        public String city { get; set; }
+        @AuraEnabled
+        public String country { get; set; }
+        @AuraEnabled
+        public Boolean garage { get; set; }
+        @AuraEnabled
+        public Boolean garden { get; set; }
+        @AuraEnabled
+        public Boolean groundFloor { get; set; }
+        @AuraEnabled
+        public Boolean gymInBuilding { get; set; }
+        @AuraEnabled
+        public Boolean lift { get; set; }
+        @AuraEnabled
+        public Boolean mezzanine { get; set; }
+        @AuraEnabled
+        public Boolean nearMetro { get; set; }
+        @AuraEnabled
+        public Boolean nearPark { get; set; }
+        @AuraEnabled
+        public Boolean nearPubsRestaurants { get; set; }
+        @AuraEnabled
+        public Boolean nearTramBus { get; set; }
+        @AuraEnabled
+        public Boolean parkView { get; set; }
+        @AuraEnabled
+        public Boolean parkingGarage { get; set; }
+        @AuraEnabled
+        public Boolean riverView { get; set; }
+        @AuraEnabled
+        public Boolean lastFloor { get; set; }
+        @AuraEnabled
+        public String streetName { get; set; }
+        @AuraEnabled
+        public Boolean terrace { get; set; }
+        @AuraEnabled
+        public Boolean wcSeparated { get; set; }
+        @AuraEnabled
+        public Boolean wheelchairAccess { get; set; }
+        @AuraEnabled
+        public String yearBuilding { get; set; }
+        @AuraEnabled
+        public Boolean balcony { get; set; }
+        @AuraEnabled
+        public Boolean cameraSecurityFenced { get; set; }
+        @AuraEnabled
+        public Decimal rating { get; set; }
+        @AuraEnabled
+        public Integer numberOfRating { get; set; }
+        @AuraEnabled
+        public List<ContentDoc> contents { get; set; }
+        @AuraEnabled
+        public PriceBook priceBook { get; set; }
+        @AuraEnabled
+        public List<RF_Comments__c> comments { get; set; }
+
     }
 
     @AuraEnabled
@@ -56,8 +134,10 @@ public with sharing class RF_Flat_Details {
                 priceBook.standardValue = p.UnitPrice;
             }
             if(priceBook.value == null) {
+                priceBook.id = p.Id;
                 priceBook.value = p.UnitPrice;
             } else if(priceBook.value > p.UnitPrice) {
+                priceBook.id = p.Id;
                 priceBook.value = p.UnitPrice;
             }
         }
@@ -69,7 +149,7 @@ public with sharing class RF_Flat_Details {
         List<ContentDoc> contentDocs = new List<RF_Flat_Details.ContentDoc>();
         Set<Id> idList = new Set<Id>();
         Set<Id> versionContentList = new Set<Id>();
-        List<ContentDocumentLink> contententDocumentLinks = [SELECT ContentDocumentId FROM ContentDocumentLink WHERE LinkedEntityId = :parentId order by Id desc];
+        List<ContentDocumentLink> contententDocumentLinks = [SELECT ContentDocumentId FROM ContentDocumentLink WHERE ContentDocumentId = :parentId order by Id desc];
         for(ContentDocumentLink c: contententDocumentLinks) {
             idList.add(c.ContentDocumentId);
         }
@@ -101,108 +181,139 @@ public with sharing class RF_Flat_Details {
     }
 
     @AuraEnabled
+    public static String reserveFlatFromCart() {
+        String message = '';
+        try{
+            List<Reservation> reservations = getCart();
+            message = reserveFlat(reservations);
+            clearCart();
+        } catch(Exception e) {
+            throw new RF_Flat_Reservation_Exception(e.getMessage());
+        }
+        return message;
+    }
+
+    @AuraEnabled
     public static String reserveFlat(List<Reservation> reservationList) {
-//        Savepoint sp = Database.setSavepoint();
-//        List<RF_Flat_Reservation__c> resList = new List<RF_Flat_Reservation__c>();
-//        List<OrderItem> orderItems = new List<OrderItem>();
-//        List<PricebookEntry> priceBooks = [SELECT Id, UnitPrice, Pricebook2.IsStandard FROM PricebookEntry];
-//        List<Account> accounts = [SELECT Id FROM Account WHERE Name = 'Customers'];
-//        Order order = new Order();
-//        System.debug(accounts.size());
-//        for (Reservation r : reservationList) {
-//            OrderItem oi = new OrderItem();
-//            for(PricebookEntry p: priceBooks) {
-//                if(oi.PricebookEntry == null) {
-//                    oi.PricebookEntry = p.PricebookEntry;
-//                    oi.UnitPrice = p.UnitPrice;
-//                    oi.Quantity = r.reservationTo.daysBetween(r.reservationFrom);
-//                } else if(priceBook.value > p.UnitPrice) {
-//                    priceBook.value = p.UnitPrice;
-//                }
-//            }
-//        }
-//        order.AccountId = accounts.get(0).Id;
-//        order.EffectiveDate = r.reservationFrom;
-//        order.EndDate = r.reservationTo;
-//        order.Status = 'Draft';
-//        Contract contract = new Contract();
-//        contract.AccountId = accounts.get(0).Id;
-//        contract.StartDate = r.reservationFrom;
-//        contract.Status = 'Draft';
-//        contract.ContractTerm =  + 1;
-//        contracts.add(contract);
-//        order;
-//        try {
-////            Database.insert(orders);
-////            Database.insert(resList);
-//        } catch (Exception e) {
-//            Database.rollback(sp);
-//            String message = e.getMessage().split('ERRORMESSAGE').get(1).substring(0, 55);
-//            message += '...';
-//            throw new RF_Flat_Reservation_Exception (message);
-//        }
-//         Savepoint sp = Database.setSavepoint();
-//         List<RF_Flat_Reservation__c> resList = new List<RF_Flat_Reservation__c>();
-//         for (Reservation r : reservationList) {
-//             RF_Flat_Reservation__c reservation = new RF_Flat_Reservation__c();
-//             reservation.Product__c = r.recordId;
-//             reservation.Reservation_from__c = r.reservationFrom;
-//             reservation.Reservation_to__c = r.reservationTo;
-//             resList.add(reservation);
-//         }
-//         try {
-//             Database.insert(resList);
-//         } catch (Exception e) {
-//             Database.rollback(sp);
-//             String message = e.getMessage().split('ERRORMESSAGE').get(1).substring(0, 55);
-//             message += '...';
-//             throw new RF_Flat_Reservation_Exception (message);
-//         }
+        Savepoint sp = Database.setSavepoint();
+        try {
+            List<String> productsId = new List<String>();
+            List<OrderItem> orderItems = new List<OrderItem>();
+            Order order = new Order();
+            Date startDate;
+            Date endDate;
+            for (Reservation r : reservationList) {
+                productsId.add(r.recordId);
+            }
+            List<Product2> products = [SELECT Id, (SELECT Id, UnitPrice, Pricebook2.IsStandard FROM PricebookEntries) FROM Product2 WHERE Id IN :productsId];
+            List<Account> accounts = [SELECT Id FROM Account WHERE Name = 'Customers'];
+            for(Product2 p: products) {
+                for (Reservation r : reservationList) {
+                    OrderItem oi = new OrderItem();
+                    oi.Product2 = p;
+                    if (r.recordId == p.Id) {
+                        oi.ServiceDate = r.reservationFrom;
+                        oi.EndDate = r.reservationTo;
+                        oi.Quantity = r.reservationFrom.daysBetween(r.reservationTo) + 1;
+                        if(startDate == null){
+                            startDate =  r.reservationFrom;
+                            endDate =  r.reservationTo;
+                        }
+                        if(startDate > r.reservationFrom){
+                            startDate =  r.reservationFrom;
+                        }
+                        if(endDate < r.reservationTo){
+                            endDate =  r.reservationTo;
+                        }
+                        for(PricebookEntry pe: p.PricebookEntries) {
+                            if(r.priceBookId == pe.Id) {
+                                oi.PricebookEntry = pe;
+                                oi.PricebookEntryId = pe.Id;
+                                oi.UnitPrice = pe.UnitPrice;
+                                order.Pricebook2Id = pe.Pricebook2Id;
+                                order.Pricebook2 = pe.Pricebook2;
+                            }
+                        }
+                    }
+                    orderItems.add(oi);
+                }
+            }
+            order.AccountId = accounts.get(0).Id;
+            order.EffectiveDate = startDate;
+            order.EndDate = endDate;
+            order.Status = 'Draft';
+            Contract contract = new Contract();
+            contract.AccountId = accounts.get(0).Id;
+            contract.StartDate = startDate;
+            contract.Status = 'Draft';
+            contract.ContractTerm =  startDate.monthsBetween(endDate) + 1;
+            Database.insert(contract);
+            order.ContractId = contract.Id;
+            Database.insert(order);
+            System.debug(orderItems.size());
+            for(OrderItem oi: orderItems){
+                oi.Order = order;
+                oi.OrderId = order.Id;
+            }
+//            order.OrderItems.addAll(orderItems);
+            Database.insert(orderItems);
+        } catch (Exception e) {
+            Database.rollback(sp);
+            throw new RF_Flat_Reservation_Exception (e.getMessage());
+        }
         return 'Flats reserved successful';
     }
 
     @AuraEnabled
-    public static List<FlatSearchItem> getResultList(String title){
+    public static List<Reservation> getCart(){
+        List<Reservation> resList = new List<Reservation>();
+        if (Cache.Session.contains('local.RentFlat.CartList')) {
+            resList = (List<Reservation>) Cache.Session.get('local.RentFlat.CartList');
+        }
+        for(Reservation r: resList){
+            if(r.reservationDays == null){
+                r.reservationDays = r.reservationFrom.daysBetween(r.reservationTo) + 1;
+            }
+        }
+        return resList;
+    }
+
+    @AuraEnabled
+    public static String addToCart(List<Reservation> reservationList){
+        if (Cache.Session.contains('local.RentFlat.CartList')) {
+            List<Reservation> resList = (List<Reservation>) Cache.Session.get('local.RentFlat.CartList');
+            resList.addAll(reservationList);
+            Cache.Session.put('local.RentFlat.CartList', resList);
+        } else {
+            Cache.Session.put('local.RentFlat.CartList', reservationList);
+        }
+        return 'Flat added to the Cart';
+    }
+
+    @AuraEnabled
+    public static void clearCart(){
+        List<Reservation> resList = new List<Reservation>();
+        Cache.Session.put('local.RentFlat.CartList', resList);
+    }
+
+    @AuraEnabled
+    public static String removeElementFromCartList(Integer index){
+        if (Cache.Session.contains('local.RentFlat.CartList')) {
+            List<Reservation> resList = (List<Reservation>) Cache.Session.get('local.RentFlat.CartList');
+            resList.remove(index);
+            Cache.Session.put('local.RentFlat.CartList', resList);
+        }
+        return 'Flat removed successful';
+    }
+
+    @AuraEnabled
+    public static List<FlatSearchItem> getResultList(Integer page, String title){
         List<FlatSearchItem> flatList = new List<RF_Flat_Details.FlatSearchItem>();
         Map<String, String> parameters = new Map<String, String>();
-        System.debug(title);
         if(!String.isEmpty(title)){
             parameters.put('Name', title);
         }
-        List<Product2> products = new List<Product2>();
-        String query = RF_Flat_Search_Handler.generateSearchQuery(parameters);
-        System.debug(query);
-        products = Database.query(query);
-        System.debug(products.size());
-        for(Product2 p: products) {
-            FlatSearchItem flat = new FlatSearchItem();
-            flat.id = p.Id;
-            flat.title = p.Name;
-            flat.size = p.Size__c;
-            flat.rooms = p.Rooms__c;
-            flat.bedrooms = p.Bedrooms__c;
-            flat.bathrooms = p.Baths__c;
-            List<RF_Flat_Details.ContentDoc> contentList = getContentDocuments(p.Id);
-            flat.link = '';
-            if(!contentList.isEmpty()){
-                flat.link = contentList.get(0).link;
-            }
-            System.debug(p.PricebookEntries.size());
-            for(PricebookEntry pe: p.PricebookEntries) {
-                if(pe.Pricebook2.IsStandard) {
-                    flat.price.standardValue = pe.UnitPrice;
-                }
-                if(flat.price.value == null) {
-                    flat.price.value = pe.UnitPrice;
-                } else if(flat.price.value > pe.UnitPrice) {
-                    flat.price.value = pe.UnitPrice;
-                }
-                System.debug(pe.UnitPrice);
-            }
-            System.debug(flat.price);
-            flatList.add(flat);
-        }
-        return flatList;
+        return RF_Flat_Search_Handler.getFlats(parameters, page);
     }
 
     @AuraEnabled
@@ -227,5 +338,26 @@ public with sharing class RF_Flat_Details {
             throw e;
         }
         return 'Comment added successful';
+    }
+
+    @AuraEnabled
+    public static Rating getRating(String productId){
+        List<AggregateResult> comments = [SELECT Product__c, SUM(Rating__c) sumRating, COUNT(Rating__c) numberOfRating FROM RF_Comments__c GROUP BY Product__c];
+        Rating r = new Rating();
+        r.rating = 0.00;
+        r.numberOfRating = 0;
+        for(AggregateResult a: comments){
+            if(a.get('Product__c').equals(productId)) {
+                Integer numberOfRating = (Integer) comments[0].get('numberOfRating');
+                r.rating = ((Decimal) comments[0].get('sumRating')) / numberOfRating ;
+                r.numberOfRating = numberOfRating;
+            }
+        }
+        return r;
+    }
+
+    @AuraEnabled
+    public static FlatSearchItem getFlat(String productId){
+        return RF_Flat_Search_Handler.getFlat(productId);
     }
 }

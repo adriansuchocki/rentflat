@@ -11,6 +11,15 @@
     padding: 0;
 }
 
+.THIS h5 {
+    font-size: 1em;
+    color: black;
+}
+
+.THIS .ratingStar{
+    background-color: yellow !important;
+}
+
 .THIS.c-container-card:hover {
     cursor: pointer;
 }
@@ -20,6 +29,7 @@
     background-color: #ff0d00;
     padding: 1rem;
     color: black;
+    height: 190px;
 }
 
 .THIS h1 {
@@ -28,6 +38,14 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+}
+
+.THIS h4 {
+    -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    font-size: 1em;
+    color: white;
 }
 
 .THIS .offert-box {

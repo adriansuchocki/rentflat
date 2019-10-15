@@ -64,6 +64,20 @@
         <value>Search</value>
     </labels>
     <labels>
+        <fullName>LABEL_COMMENTS_RATING</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_COMMENTS_RATING</shortDescription>
+        <value>Rating</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_COMMENTS_NUMBER_OF_RATING</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_COMMENTS_NUMBER_OF_RATING</shortDescription>
+        <value>Number of rating</value>
+    </labels>
+    <labels>
         <fullName>LABEL_CONTACT_COMPANY</fullName>
         <language>en_US</language>
         <protected>true</protected>
@@ -323,6 +337,13 @@
         <value>Country</value>
     </labels>
     <labels>
+        <fullName>LABEL_PRODUCT_DAYS</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_DAYS</shortDescription>
+        <value>Days</value>
+    </labels>
+    <labels>
         <fullName>LABEL_PRODUCT_FLOORS_NO</fullName>
         <language>en_US</language>
         <protected>true</protected>
@@ -426,6 +447,27 @@
         <protected>true</protected>
         <shortDescription>LABEL_PRODUCT_PRICE</shortDescription>
         <value>Price</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_PROPERTY_ADDRESS</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_PROPERTY_ADDRESS</shortDescription>
+        <value>Property Address</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_PROPERTY_DETAILS</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_PROPERTY_DETAILS</shortDescription>
+        <value>Property Details</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_PROPERTY_AMENITES_AND_FEATURES</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_PROPERTY_AMENITES_AND_FEATURES</shortDescription>
+        <value>Amenities and Features</value>
     </labels>
     <labels>
         <fullName>LABEL_PRODUCT_RIVER_VIEW</fullName>

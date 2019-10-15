@@ -7,6 +7,7 @@
     <aura:attribute name="index" type="Integer" />
     <aura:registerEvent name="researchCart" type="c:RF_Flat_Search_Cart"/>
 
+    <c:RF_DivisionSearch_Spinner aura:id="spinnerResult"/>
     <div class="{! v.index != 0 ? 'iterableRow rowCart slds-feed': 'rowCart slds-feed' }" onclick="{! c.showFlat }" >
         <lightning:layout horizontalAlign="center">
             <lightning:layoutItem size="3" padding="around-small">
@@ -18,10 +19,20 @@
                 </aura:if>
             </lightning:layoutItem>
             <lightning:layoutItem size="8" padding="around-small">
-                <p class="slds-text-heading--small" ><h3 class="slds-text-heading_small">{! v.flat.title }</h3></p>
+                <lightning:layout multipleRows="true">
+                    <lightning:layoutItem size="12">
+                        <p class="slds-text-heading--small" ><h3 class="slds-text-heading_small">{! v.flat.title }</h3></p>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="6">
+                        <p><h4 class="slds-text-heading_small">{! $Label.c.LABEL_PRODUCT_DAYS }: {! v.flat.reservationDays }</h4></p>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="6">
+                        <p><h4 class="slds-text-heading_small">{! $Label.c.LABEL_PRODUCT_PRICE }: <lightning:formattedNumber value="{! v.flat.reservationDays * v.flat.priceBookValue }" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/></h4></p>
+                    </lightning:layoutItem>
+                </lightning:layout>
             </lightning:layoutItem>
             <lightning:layoutItem size="1">
-                <lightning:buttonIcon iconName="utility:close" alternativeText="Remove" value="{! v.index }" onclick="{! c.removeFromList }"/>
+                <lightning:buttonIcon iconName="utility:close" alternativeText="Remove" value="{! v.index }" onclick="{! c.handleRemoveElementFromCartList }"/>
             </lightning:layoutItem>
         </lightning:layout>
     </div>

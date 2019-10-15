@@ -3,20 +3,38 @@
  */
 ({
     init: function(component, event, helper) {
-        var flatsJson = sessionStorage.getItem('RF_Flat_Search--cartList');
-        if (!$A.util.isUndefinedOrNull(flatsJson)) {
-            var flats = JSON.parse(flatsJson);
-            component.set('v.cartList', flats);
-        }
+        helper.getCartListHelper(component);
+//        document.addEventListener('click', function(e){
+//            let button = document.getElementById('dialogBtn');
+//            let divDialog = document.getElementById('dialog');
+//            let target = e?e.target:event.srcElement;
+//            if(button !== div && divDialog !== div){
+//            	alert('mam');
+//            }
+//            component.set("v.cart", false);
+//        });
     },
 
     handleSearchFlat: function (component, event, helper) {
         let fieldText = component.get("v.searchText");
-        helper.getResultList(component, fieldText);
+        component.set("v.page", 0);
+        let page = component.get("v.page");
+        helper.getResultList(component, fieldText, page);
+    },
+
+    handleNextSearchFlat: function (component, event, helper) {
+        let fieldText = component.get("v.searchText");
+        let page = component.get("v.page");
+        component.set("v.page", page + 1);
+        helper.getNextPageResultList(component, fieldText, page+1);
     },
 
     handleShowCart: function (component, event, helper) {
         let cartStatus = component.get("v.cart");
         component.set("v.cart", !cartStatus);
+    },
+
+    handleReserveFlat: function (component, event, helper) {
+        helper.reserveFlatHelper(component);
     }
 })
