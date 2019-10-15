@@ -5,7 +5,9 @@
 <aura:component description="RF_Flat_Search_Result" controller="RF_Flat_Details" implements="forceCommunity:availableForAllPageTypes">
     <aura:attribute name="resultList" type="Object[]"/>
     <aura:attribute name="layout" type="Boolean" default="false"/>
+    <aura:attribute name="previousNumberOfRecords" type="Boolean" default="false"/>
     <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    <aura:handler event="c:RF_Flat_Search_Show_More_Results_Event" action="{! c.init }"/>
     <aura:method name="search" action="{! c.handleSearch }" access="PUBLIC">
         <aura:attribute name="title" type="String" />
     </aura:method>
@@ -25,5 +27,10 @@
             </lightning:layoutItem>
         </lightning:layout>
         <c:RF_Flat_Search_Result_Item flats="{! v.resultList }" layout="{! v.layout }"/>
+        <aura:if isTrue="{! and(v.resultList.length != v.previousNumberOfRecords,  v.resultList.length%20 == 0) }">
+            <center>
+                <lightning:button label="Show more results" iconName="utility:jump_to_bottom" iconPosition="left" onclick="{! c.handleShowMoreResults }" />
+            </center>
+        </aura:if>
     </div>
 </aura:component>

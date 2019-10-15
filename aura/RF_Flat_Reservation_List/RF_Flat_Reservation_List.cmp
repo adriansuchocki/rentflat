@@ -3,12 +3,14 @@
  -->
 
 <aura:component description="RF_Flat_Reservation_List" controller="RF_Flat_Details">
-    <aura:attribute name="flatRecord" type="Object"/>
-    <aura:attribute name="photos" type="Object[]"/>
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="title" type="String"/>
+    <aura:attribute name="photo" type="Object[]"/>
+    <aura:attribute name="priceBookId" type="String"/>
+    <aura:attribute name="priceBookValue" type="String"/>
     <aura:attribute name="today" type="Date"/>
     <aura:attribute name="reservationFrom" type="Date"/>
     <aura:attribute name="reservationTo" type="Date"/>
-    <aura:attribute name="flatReservations" type="Object[]"/>
     <aura:registerEvent name="researchCart" type="c:RF_Flat_Search_Cart"/>
     <aura:handler name="init" value="{! this }" action="{! c.init }"/>
 
@@ -17,14 +19,12 @@
         <lightning:layoutItem size="2">
         </lightning:layoutItem>
         <lightning:layoutItem size="2">
-            <lightning:input type="date" name="reservationFrom" label="From" min="{! v.today }" value="{! v.reservationFrom }"/>
-<!--            <ui:inputDate aura:id="expdate" label="Today's Date" class="field" value="{!v.today}" displayDatePicker="true" />-->
+            <lightning:input type="date" name="reservationFrom" label="From" min="{! v.today }" value="{! v.reservationFrom }" onchange="{! c.handleMinReservationTo }"/>
         </lightning:layoutItem>
         <lightning:layoutItem size="1">
         </lightning:layoutItem>
         <lightning:layoutItem size="2">
-            <lightning:input type="date" name="reservationTo" label="To" min="{! v.reservationFrom }" value="{! v.reservationTo }"/>
-<!--            <ui:inputDate aura:id="expdate" label="Today's Date" class="field" value="{!v.today}" displayDatePicker="true" />-->
+            <lightning:input type="date" name="reservationTo" label="To" min="{! v.reservationFrom + 1 }" value="{! v.reservationTo }"/>
         </lightning:layoutItem>
         <lightning:layoutItem size="1">
         </lightning:layoutItem>
@@ -37,13 +37,4 @@
         <lightning:layoutItem size="1">
         </lightning:layoutItem>
     </lightning:layout>
-<!--    <aura:iteration items="{! v.flatReservations }" var="item" indexVar="index">-->
-<!--        {! item.reservationFrom } &nbsp; {! item.reservationTo }-->
-<!--        <aura:if isTrue="{! (item.reservationFrom <= v.today && indexVar == 0) }">-->
-<!--            {! v.today } &nbsp; {! item.reservationTo }-->
-<!--            <aura:set attribute="else">-->
-<!--            {! item.reservationFrom } &nbsp; {! item.reservationTo }-->
-<!--            </aura:set>-->
-<!--        </aura:if>-->
-<!--    </aura:iteration>-->
 </aura:component>

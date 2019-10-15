@@ -19,22 +19,40 @@
             <lightning:layoutItem size="12" padding="around-small">
                 <p class="slds-text-heading--label" ><h1 class="slds-text-heading_medium">{! v.flat.title }</h1></p>
             </lightning:layoutItem>
+            <lightning:layoutItem size="12" padding="horizontal-small">
+                <lightning:layout horizontalAlign="center" multipleRows="true">
+                    <lightning:layoutItem size="6">
+                        <p class="slds-text-heading--label" ><h5 class="slds-text-heading_medium">{! $Label.c.LABEL_COMMENTS_RATING }: {! v.flat.rating }&nbsp;<lightning:icon iconName="custom:custom11" variant="warning" size="small" alternativeText="star" class="ratingStar"/></h5></p>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="6">
+                        <p class="slds-text-heading--label" ><h5 class="slds-text-heading_medium">{! $Label.c.LABEL_COMMENTS_NUMBER_OF_RATING }: {! v.flat.numberOfRating }</h5></p>
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </lightning:layoutItem>
             <lightning:layoutItem size="12" padding="around-small">
-                Szczegoly <br/>
-                test <br/>
-                test <br/>
-                test
+                <lightning:layout horizontalAlign="center" multipleRows="true">
+                    <lightning:layoutItem size="6">
+                        <p class="slds-text-heading--label" ><h5 class="slds-text-heading_medium">{! $Label.c.LABEL_PRODUCT_SIZE }: {! v.flat.size }</h5></p>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="6">
+                        <p class="slds-text-heading--label" ><h5 class="slds-text-heading_medium">{! $Label.c.LABEL_PRODUCT_ROOMS }: {! v.flat.rooms }</h5></p>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="6">
+                        <p class="slds-text-heading--label" ><h5 class="slds-text-heading_medium">{! $Label.c.LABEL_PRODUCT_BEDROOMS }: {! v.flat.bedrooms }</h5></p>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="6">
+                        <p class="slds-text-heading--label" ><h5 class="slds-text-heading_medium">{! $Label.c.LABEL_PRODUCT_BATHROOMS }: {! v.flat.bathrooms }</h5></p>
+                    </lightning:layoutItem>
+                </lightning:layout>
             </lightning:layoutItem>
             <lightning:layoutItem size="12" padding="around-small" class="offert-box">
                 <br/>
             </lightning:layoutItem>
             <lightning:layoutItem size="12" padding="around-small" class="custom-box">
                 <aura:if isTrue="{! v.flat.price.value == v.flat.price.standardValue }">
-                    <h2><lightning:formattedNumber value="250" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/></h2>
-                    <b style="text-decoration: line-through; float: left;"><h3><lightning:formattedNumber value="300" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/></h3></b>
-                    <!--                    <h2><lightning:formattedNumber value="{! v.flat.price.value }" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/></h2>-->
+                                        <h2><lightning:formattedNumber value="{! v.flat.price.value }" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/></h2>
                     <aura:set attribute="else">
-                        <h2><lightning:formattedNumber value="{! flat.price.value }" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/></h2>
+                        <h2><lightning:formattedNumber value="{! v.flat.price.value }" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/></h2>
                         <b style="text-decoration: line-through;"><h4><lightning:formattedNumber value="{! v.flat.price.standardValue }" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/></h4></b>
                     </aura:set>
                 </aura:if>
