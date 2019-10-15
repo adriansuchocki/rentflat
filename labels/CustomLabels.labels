@@ -288,6 +288,83 @@
         <value>has created new Lead (</value>
     </labels>
     <labels>
+        <fullName>LABEL_ORDER_CONTRACT</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_ORDER_CONTRACT</shortDescription>
+        <value>Contract number</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_ORDER_END_DATE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_ORDER_END_DATE</shortDescription>
+        <value>End date</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_ORDER_NUMBER</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_ORDER_NUMBER</shortDescription>
+        <value>Order number</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_ORDER_START_DATE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_ORDER_START_DATE</shortDescription>
+        <value>Start date</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_ORDER_TABLE_TITLE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_ORDER_TABLE_TITLE</shortDescription>
+        <value>Title</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_ORDER_TABLE_START_DATE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_ORDER_TABLE_START_DATE</shortDescription>
+        <value>Start date</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_ORDER_TABLE_END_DATE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_ORDER_TABLE_END_DATE</shortDescription>
+        <value>End date</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_ORDER_TABLE_DAYS</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_ORDER_TABLE_DAYS</shortDescription>
+        <value>Reserved date</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_ORDER_TABLE_AMOUNT</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_ORDER_TABLE_AMOUNT</shortDescription>
+        <value>Amount</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_ORDER_TABLE_UNIT_PRICE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_ORDER_TABLE_UNIT_PRICE</shortDescription>
+        <value>Unit price</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_ORDER_TOTAL_AMOUNT</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_ORDER_TOTAL_AMOUNT</shortDescription>
+        <value>Total amount</value>
+    </labels>
+    <labels>
         <fullName>LABEL_PRODUCT_BATHROOMS</fullName>
         <language>en_US</language>
         <protected>true</protected>
