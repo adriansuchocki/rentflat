@@ -360,4 +360,10 @@ public with sharing class RF_Flat_Details {
     public static FlatSearchItem getFlat(String productId){
         return RF_Flat_Search_Handler.getFlat(productId);
     }
+
+    @AuraEnabled
+    public static List<Order> getUserOrders(){
+        List<Order> orders = [SELECT Id, EffectiveDate, EndDate, OrderNumber, TotalAmount, Contract.ContractNumber, (SELECT Id, Quantity, UnitPrice, ServiceDate, EndDate, TotalPrice, Product2.Name FROM OrderItems) FROM Order WHERE CreatedById = :UserInfo.getUserId() ORDER BY CreatedDate DESC];
+        return orders;
+    }
 }

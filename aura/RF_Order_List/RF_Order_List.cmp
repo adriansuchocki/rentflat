@@ -1,0 +1,80 @@
+<!--
+ - Created by BRITENET on 15.10.2019.
+ -->
+
+<aura:component description="RF_Order_List" implements="forceCommunity:availableForAllPageTypes" controller="RF_Flat_Details">
+    <aura:attribute name="orders" type="Object[]" />
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    <lightning:accordion aura:id="accordion" activeSectionName="0">
+        <aura:iteration items="{! v.orders }" var="item" indexVar="index">
+            <lightning:accordionSection name="{! index }" label="{! $Label.c.LABEL_ORDER_NUMBER + ': ' + item.OrderNumber }" >
+                <lightning:layout multipleRows="true" horizontalAlign="center">
+                    <lightning:layoutItem size="3">
+                        {! $Label.c.LABEL_ORDER_CONTRACT }:&nbsp;{! item.Contract.ContractNumber }
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="3">
+                        {! $Label.c.LABEL_ORDER_START_DATE }:&nbsp;{! item.EffectiveDate }
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="3">
+                        {! $Label.c.LABEL_ORDER_END_DATE }:&nbsp;{! item.EndDate }
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="3">
+                        {! $Label.c.LABEL_ORDER_TOTAL_AMOUNT }:&nbsp;<lightning:formattedNumber value="{! item.TotalAmount }" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="12">
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                            <thead>
+                                <tr class="slds-line-height_reset">
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_TABLE_TITLE }">{! $Label.c.LABEL_ORDER_TABLE_TITLE }</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_START_DATE }">{! $Label.c.LABEL_ORDER_START_DATE }</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_TABLE_END_DATE }">{! $Label.c.LABEL_ORDER_TABLE_END_DATE }</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_TABLE_DAYS}">{! $Label.c.LABEL_ORDER_TABLE_DAYS }</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_TABLE_UNIT_PRICE }">{! $Label.c.LABEL_ORDER_TABLE_UNIT_PRICE }</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_TABLE_AMOUNT }">{! $Label.c.LABEL_ORDER_TABLE_AMOUNT }</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <aura:iteration items="{! item.OrderItems}" var="row">
+                                    <tr class="slds-hint-parent">
+                                        <td data-label="{! $Label.c.LABEL_ORDER_TABLE_TITLE }">
+                                            <div class="slds-truncate" title="{! row.Product2.Name }">{! row.Product2.Name }</div>
+                                        </td>
+                                        <td data-label="{! $Label.c.LABEL_ORDER_START_DATE }">
+                                            <div class="slds-truncate" title="{! row.ServiceDate }">{! row.ServiceDate }</div>
+                                        </td>
+                                        <td data-label="{! $Label.c.LABEL_ORDER_TABLE_END_DATE }">
+                                            <div class="slds-truncate" title="{! row.EndDate }">{! row.EndDate }</div>
+                                        </td>
+                                        <td data-label="{! $Label.c.LABEL_ORDER_TABLE_DAYS }">
+                                            <div class="slds-truncate" title="{! row.Quantity }">{! row.Quantity }</div>
+                                        </td>
+                                        <td data-label="{! $Label.c.LABEL_ORDER_TABLE_UNIT_PRICE }">
+                                            <div class="slds-truncate" title="{! row.UnitPrice }">{! row.UnitPrice }</div>
+                                        </td>
+                                        <td data-label="{! $Label.c.LABEL_ORDER_TABLE_AMOUNT }">
+                                            <div class="slds-truncate" title="{! row.TotalPrice }">
+                                                <lightning:formattedNumber value="{! row.TotalPrice }" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </aura:iteration>
+                            </tbody>
+                        </table>
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </lightning:accordionSection>
+        </aura:iteration>
+    </lightning:accordion>
+</aura:component>
