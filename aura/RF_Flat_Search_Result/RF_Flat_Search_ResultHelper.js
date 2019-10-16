@@ -11,6 +11,7 @@
             let state = response.getState();
             let errors = response.getError();
             if (component.isValid() && state === $A.get("{! $Label.c.LABEL_SUCCESS_TITLE }")) {
+                console.log(response.getReturnValue());
                 component.set("v.resultList", response.getReturnValue());
             }
             spinnerAction.showHideSpinner(false);

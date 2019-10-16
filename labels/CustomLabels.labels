@@ -253,6 +253,20 @@
         <value>ERROR</value>
     </labels>
     <labels>
+        <fullName>LABEL_FOLLOW</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_FOLLOW</shortDescription>
+        <value>Follow list</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_FOLLOW_NO_FLATS</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_FOLLOW_NO_FLATS</shortDescription>
+        <value>No flats to display</value>
+    </labels>
+    <labels>
         <fullName>LABEL_HEADER_TITLE</fullName>
         <language>en_US</language>
         <protected>true</protected>

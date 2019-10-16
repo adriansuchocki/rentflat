@@ -9,11 +9,11 @@
         <aura:iteration items="{! v.flats }" var="flat" indexVar="index">
             <aura:if isTrue="{! v.layout }">
                 <lightning:layoutItem size="4" padding="around-small">
-                    <c:RF_Flat_Search_Result_Item_Card flat="{! flat }" />
+                    <c:RF_Flat_Search_Result_Item_Card flat="{! flat }" follow="{! flat.follow }" />
                 </lightning:layoutItem>
                 <aura:set attribute="else">
                     <lightning:layoutItem size="12" padding="around-small">
-                        <c:RF_Flat_Search_Result_Item_List flat="{! flat }" />
+                        <c:RF_Flat_Search_Result_Item_List flat="{! flat }" follow="{! flat.follow }" />
                     </lightning:layoutItem>
                 </aura:set>
             </aura:if>

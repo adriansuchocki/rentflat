@@ -1,6 +1,7 @@
 <aura:component implements="forceCommunity:availableForAllPageTypes,force:hasRecordId" description="RF_Flat_Details" controller="RF_Flat_Details">
     <aura:attribute name="flat" type="Object"/>
     <aura:attribute name="flatReservations" type="Object[]"/>
+    <aura:attribute name="follow" type="Boolean" default="false"/>
 
     <aura:attribute name="accept" type="List" default="['.jpg', '.jpeg']"/>
     <aura:attribute name="multiple" type="Boolean" default="true"/>
@@ -39,6 +40,13 @@
                 <p class="slds-text-heading--label" ><h5 class="slds-text-heading_medium">{! $Label.c.LABEL_COMMENTS_NUMBER_OF_RATING }: {! v.flat.numberOfRating }</h5></p>
             </lightning:layoutItem>
         </lightning:layout>
+
+        <aura:if isTrue="{! v.follow }">
+            <lightning:button label="Stop following" variant="brand" iconName="utility:preview" iconPosition="left" onclick="{! c.handleRemoveFollow }"/>
+            <aura:set attribute="else">
+                <lightning:button label="Follow" iconName="utility:preview" iconPosition="left" onclick="{! c.handleAddFollow }"/>
+            </aura:set>
+        </aura:if>
     </div>
 <!--    <lightning:fileUpload label="Add attachment" multiple="{!v.multiple}"-->
 <!--                          accept="{!v.accept}" recordId="{!v.recordId}"-->

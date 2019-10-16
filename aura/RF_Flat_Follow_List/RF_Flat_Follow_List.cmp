@@ -1,0 +1,53 @@
+<!--
+ - Created by BRITENET on 15.10.2019.
+ -->
+
+<aura:component description="RF_Flat_Follow_List" implements="forceCommunity:availableForAllPageTypes" controller="RF_Flat_Details">
+    <aura:attribute name="flats" type="Object[]" />
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    <aura:if isTrue="{! not(empty(v.flats)) }">
+        <div class="slds-page-header" role="banner">
+        <p class="slds-text-heading--label" ><h2 class="slds-text-heading_large">{! $Label.c.LABEL_FOLLOW }</h2></p>
+        </div>
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+            <thead>
+            <tr class="slds-line-height_reset">
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_TABLE_TITLE }">{! $Label.c.LABEL_ORDER_TABLE_TITLE }</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_TABLE_UNIT_PRICE }">{! $Label.c.LABEL_ORDER_TABLE_UNIT_PRICE }</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate">&nbsp;</div>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <aura:iteration items="{! v.flats }" var="row" indexVar="index">
+                <tr class="slds-hint-parent">
+                    <td data-label="{! $Label.c.LABEL_ORDER_TABLE_TITLE }">
+                        <div class="slds-truncate" title="{! row.title }">{! row.title }</div>
+                    </td>
+                    <td data-label="{! $Label.c.LABEL_ORDER_TABLE_UNIT_PRICE }">
+                        <div class="slds-truncate" title="{! row.price.value }">{! row.price.value }</div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">
+                            <lightning:button label="Stop following" variant="brand" iconName="utility:preview" iconPosition="left" value="{! index + '/' +row.id }" onclick="{! c.handleRemoveFollow }"/>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">
+                            <lightning:button label="Show flat" variant="neutral" iconPosition="left" value="{! row.id }" onclick="{! c.showFlat }"/>
+                        </div>
+                    </td>
+                </tr>
+            </aura:iteration>
+            </tbody>
+        </table>
+        <aura:set attribute="else">
+            <center><h2 class="slds-text-heading_large">{! $Label.c.LABEL_FOLLOW_NO_FLATS }</h2></center>
+        </aura:set>
+    </aura:if>
+</aura:component>

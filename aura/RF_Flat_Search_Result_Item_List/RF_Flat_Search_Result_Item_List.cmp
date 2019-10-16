@@ -2,8 +2,9 @@
  - Created by BRITENET on 14.10.2019.
  -->
 
-<aura:component description="RF_Flat_Search_Result_Item_List">
+<aura:component description="RF_Flat_Search_Result_Item_List" controller="RF_Flat_Details">
     <aura:attribute name="flat" type="Object" />
+    <aura:attribute name="follow" type="Boolean" default="false"/>
     <div class="c-container-list" onclick="{! c.showFlat }">
         <lightning:layout horizontalAlign="center">
             <lightning:layoutItem size="3" padding="around-small">
@@ -20,8 +21,19 @@
                 <p class="slds-text-heading--label" ><h5 class="slds-text-heading_medium">{! $Label.c.LABEL_PRODUCT_ROOMS }: {! v.flat.rooms }</h5></p>
                 <p class="slds-text-heading--label" ><h5 class="slds-text-heading_medium">{! $Label.c.LABEL_PRODUCT_BEDROOMS }: {! v.flat.bedrooms }</h5></p>
                 <p class="slds-text-heading--label" ><h5 class="slds-text-heading_medium">{! $Label.c.LABEL_PRODUCT_BATHROOMS }: {! v.flat.bathrooms }</h5></p>
-                <div style="padding-top: 10%;">
+                <div>
                     <lightning:layout horizontalAlign="center" multipleRows="true">
+                        <lightning:layoutItem size="6">&nbsp;</lightning:layoutItem>
+                        <lightning:layoutItem size="6">
+                            <div style="padding-top: 15px; padding-bottom: 15px">
+                                <aura:if isTrue="{! v.follow }">
+                                    <lightning:button label="Stop following" variant="brand" iconName="utility:preview" iconPosition="left" onclick="{! c.handleRemoveFollow }"/>
+                                    <aura:set attribute="else">
+                                        <lightning:button label="Follow" iconName="utility:preview" iconPosition="left" onclick="{! c.handleAddFollow }"/>
+                                    </aura:set>
+                                </aura:if>
+                            </div>
+                        </lightning:layoutItem>
                         <lightning:layoutItem size="6">
                             <p class="slds-text-heading--label" ><h5 class="slds-text-heading_medium">{! $Label.c.LABEL_COMMENTS_RATING }: {! v.flat.rating }&nbsp;<lightning:icon iconName="custom:custom11" variant="warning" size="small" alternativeText="star" class="ratingStar"/></h5></p>
                         </lightning:layoutItem>

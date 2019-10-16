@@ -8,5 +8,17 @@
         let link = '/product/' +  id;
         navEvt.setParams({url: link});
         navEvt.fire();
+    },
+
+    handleAddFollow: function (component, event, helper) {
+        event.stopImmediatePropagation();
+        let id = component.get('v.flat.id');
+        helper.addToFollowHelper(component, id);
+    },
+
+    handleRemoveFollow: function (component, event, helper) {
+        event.stopImmediatePropagation();
+        let id = component.get('v.flat.id');
+        helper.removeFromFollowHelper(component, id);
     }
 })
