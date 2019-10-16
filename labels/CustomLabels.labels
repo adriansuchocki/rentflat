@@ -75,7 +75,14 @@
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>LABEL_COMMENTS_NUMBER_OF_RATING</shortDescription>
-        <value>Number of rating</value>
+        <value>Based on </value>
+    </labels>
+    <labels>
+        <fullName>LABEL_COMMENTS_NUMBER_OF_RATING_END</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_COMMENTS_NUMBER_OF_RATING_END</shortDescription>
+        <value>reviews</value>
     </labels>
     <labels>
         <fullName>LABEL_CONTACT_COMPANY</fullName>

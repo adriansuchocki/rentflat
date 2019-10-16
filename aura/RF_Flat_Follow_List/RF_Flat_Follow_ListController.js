@@ -18,11 +18,13 @@
         event.stopImmediatePropagation();
         let value = event.getSource().get("v.value");
         let array = value.split("/");
-        alert(array[0]);
-        alert(array[1]);
         helper.removeFromFollowHelper(component, array[1]);
         let flats = component.get("v.flats");
-        flats = flats.splice(array[0], 1);
+        if(flats.length > 1){
+            flats.splice(array[0], 1);
+        } else {
+            flats = [];
+        }
         console.log(flats);
         component.set("v.flats", flats);
     }

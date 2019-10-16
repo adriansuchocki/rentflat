@@ -9,6 +9,9 @@
     <aura:handler name="init" value="{! this }" action="{! c.init }"/>
     <c:RF_DivisionSearch_Spinner aura:id="spinnerResult"/>
     <div class="slds-page-header" role="banner">
+        <p>
+            <h6 class="slds-text-heading_small">Number of views: {! v.flat.numberOfViews }</h6>
+        </p>
         <p class="slds-text-heading--label" ><h2 class="slds-text-heading_large">{! v.flat.title }</h2></p>
         <p class="slds-text-heading--label" >
             <h4 class="slds-text-heading_small">
@@ -33,20 +36,26 @@
             </h4>
         </p>
         <lightning:layout horizontalAlign="center" multipleRows="true">
-            <lightning:layoutItem size="6">
-                <p class="slds-text-heading--label" ><h5 class="slds-text-heading_medium">{! $Label.c.LABEL_COMMENTS_RATING }: {! v.flat.rating }&nbsp;<lightning:icon iconName="custom:custom11" variant="warning" size="small" alternativeText="star" class="ratingStar"/></h5></p>
+            <lightning:layoutItem size="9">
+                <p class="slds-text-heading--label" >
+                    <h5 class="slds-text-heading_medium">
+                        {! $Label.c.LABEL_COMMENTS_RATING }: {! v.flat.rating }&nbsp;<lightning:icon iconName="custom:custom11" variant="warning" size="small" alternativeText="star" class="ratingStar"/>
+                    </h5>
+                    <h6 class="slds-text-heading_small">
+                        {! $Label.c.LABEL_COMMENTS_NUMBER_OF_RATING }&nbsp;{! v.flat.numberOfRating }&nbsp;{! $Label.c.LABEL_COMMENTS_NUMBER_OF_RATING_END }
+                    </h6>
+                </p>
             </lightning:layoutItem>
-            <lightning:layoutItem size="6">
-                <p class="slds-text-heading--label" ><h5 class="slds-text-heading_medium">{! $Label.c.LABEL_COMMENTS_NUMBER_OF_RATING }: {! v.flat.numberOfRating }</h5></p>
+            <lightning:layoutItem size="3">
+                <aura:if isTrue="{! v.follow }">
+                    <lightning:button label="Stop following" variant="brand" iconName="utility:preview" iconPosition="left" onclick="{! c.handleRemoveFollow }"/>
+                    <aura:set attribute="else">
+                        <lightning:button label="Follow" iconName="utility:preview" iconPosition="left" onclick="{! c.handleAddFollow }"/>
+                    </aura:set>
+                </aura:if>
             </lightning:layoutItem>
-        </lightning:layout>
 
-        <aura:if isTrue="{! v.follow }">
-            <lightning:button label="Stop following" variant="brand" iconName="utility:preview" iconPosition="left" onclick="{! c.handleRemoveFollow }"/>
-            <aura:set attribute="else">
-                <lightning:button label="Follow" iconName="utility:preview" iconPosition="left" onclick="{! c.handleAddFollow }"/>
-            </aura:set>
-        </aura:if>
+        </lightning:layout>
     </div>
 <!--    <lightning:fileUpload label="Add attachment" multiple="{!v.multiple}"-->
 <!--                          accept="{!v.accept}" recordId="{!v.recordId}"-->

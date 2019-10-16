@@ -30,7 +30,7 @@
                         <div class="slds-truncate" title="{! row.title }">{! row.title }</div>
                     </td>
                     <td data-label="{! $Label.c.LABEL_ORDER_TABLE_UNIT_PRICE }">
-                        <div class="slds-truncate" title="{! row.price.value }">{! row.price.value }</div>
+                        <div class="slds-truncate" title="{! row.price.value }"><lightning:formattedNumber value="{! row.price.value }" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/></div>
                     </td>
                     <td>
                         <div class="slds-truncate">

@@ -24,7 +24,7 @@
         <lightning:layoutItem size="1">
         </lightning:layoutItem>
         <lightning:layoutItem size="2">
-            <lightning:input type="date" name="reservationTo" label="To" min="{! v.reservationFrom + 1 }" value="{! v.reservationTo }"/>
+            <lightning:input type="date" name="reservationTo" label="To" min="{! v.reservationFrom }" value="{! v.reservationTo }"/>
         </lightning:layoutItem>
         <lightning:layoutItem size="1">
         </lightning:layoutItem>

@@ -48,6 +48,11 @@
     color: white;
 }
 
+.THIS h6 {
+    font-size: 0.75em;
+    color: black;
+}
+
 .THIS .offert-box {
     background: rgba(255,255,255,1);
     background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 68%, rgba(242,242,242,1) 77%, rgba(249,193,189,1) 85%, rgba(249,100,93,1) 92%, rgba(255,4,0,1) 96%, rgba(255,13,0,1) 100%);
