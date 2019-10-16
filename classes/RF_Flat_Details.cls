@@ -122,6 +122,8 @@ public with sharing class RF_Flat_Details {
         public PriceBook priceBook { get; set; }
         @AuraEnabled
         public List<RF_Comments__c> comments { get; set; }
+        @AuraEnabled
+        public Boolean follow { get; set; }
 
     }
 
@@ -341,6 +343,29 @@ public with sharing class RF_Flat_Details {
     }
 
     @AuraEnabled
+    public static String addToFollow(String recordId){
+        try {
+            RF_Favourite__c favourite = new RF_Favourite__c();
+            favourite.Product__c = recordId;
+            Database.insert(favourite);
+        } catch(Exception e) {
+            throw new RF_Flat_Reservation_Exception(e.getMessage());
+        }
+        return 'Flat added to follow';
+    }
+
+    @AuraEnabled
+    public static String removeFromFollow(String recordId){
+        try {
+            RF_Favourite__c favourite = [SELECT Id FROM RF_Favourite__c WHERE Product__c = :recordId AND CreatedById = :UserInfo.getUserId()];
+            Database.delete(favourite);
+        } catch(Exception e) {
+            throw new RF_Flat_Reservation_Exception(e.getMessage());
+        }
+        return 'Flat removed from follow';
+    }
+
+    @AuraEnabled
     public static Rating getRating(String productId){
         List<AggregateResult> comments = [SELECT Product__c, SUM(Rating__c) sumRating, COUNT(Rating__c) numberOfRating FROM RF_Comments__c GROUP BY Product__c];
         Rating r = new Rating();
@@ -366,4 +391,10 @@ public with sharing class RF_Flat_Details {
         List<Order> orders = [SELECT Id, EffectiveDate, EndDate, OrderNumber, TotalAmount, Contract.ContractNumber, (SELECT Id, Quantity, UnitPrice, ServiceDate, EndDate, TotalPrice, Product2.Name FROM OrderItems) FROM Order WHERE CreatedById = :UserInfo.getUserId() ORDER BY CreatedDate DESC];
         return orders;
     }
+
+    @AuraEnabled
+    public static List<FlatSearchItem> getFollowFlat(){
+        return RF_Flat_Search_Handler.getFollowFlat();
+    }
+
 }

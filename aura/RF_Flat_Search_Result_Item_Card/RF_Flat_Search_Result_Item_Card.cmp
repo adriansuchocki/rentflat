@@ -2,8 +2,9 @@
  - Created by BRITENET on 14.10.2019.
  -->
 
-<aura:component description="RF_Flat_Search_Result_Item_Card">
+<aura:component description="RF_Flat_Search_Result_Item_Card" controller="RF_Flat_Details">
     <aura:attribute name="flat" type="Object" />
+    <aura:attribute name="follow" type="Boolean" default="false"/>
     <div class="c-container-card" onclick="{! c.showFlat }">
         <lightning:layout multipleRows="true" horizontalAlign="center" verticalAlign="center">
             <lightning:layoutItem size="12" padding="around-small">
@@ -45,8 +46,18 @@
                     </lightning:layoutItem>
                 </lightning:layout>
             </lightning:layoutItem>
-            <lightning:layoutItem size="12" padding="around-small" class="offert-box">
-                <br/>
+            <lightning:layoutItem size="6">&nbsp;</lightning:layoutItem>
+            <lightning:layoutItem size="6">
+                <div style="padding-top: 10px; padding-bottom: 10px">
+                    <aura:if isTrue="{! v.follow }">
+                        <lightning:button label="Stop following" variant="brand" iconName="utility:preview" iconPosition="left" onclick="{! c.handleRemoveFollow }"/>
+                        <aura:set attribute="else">
+                            <lightning:button label="Follow" iconName="utility:preview" iconPosition="left" onclick="{! c.handleAddFollow }"/>
+                        </aura:set>
+                    </aura:if>
+                </div>
+            </lightning:layoutItem>
+            <lightning:layoutItem size="12" padding="around-small">
             </lightning:layoutItem>
             <lightning:layoutItem size="12" padding="around-small" class="custom-box">
                 <aura:if isTrue="{! v.flat.price.value == v.flat.price.standardValue }">

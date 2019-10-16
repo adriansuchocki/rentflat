@@ -24,5 +24,15 @@
             recordIds: [documentId]
         });
 
+    },
+
+    handleAddFollow: function (component, event, helper) {
+        let id = component.get('v.flat.id');
+        helper.addToFollowHelper(component, id);
+    },
+
+    handleRemoveFollow: function (component, event, helper) {
+        let id = component.get('v.flat.id');
+        helper.removeFromFollowHelper(component, id);
     }
 })
