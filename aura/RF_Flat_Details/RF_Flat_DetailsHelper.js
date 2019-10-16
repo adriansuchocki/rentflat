@@ -95,5 +95,12 @@
             }
         });
         $A.enqueueAction(action);
+    },
+
+    addNumberOfViewHelper: function (component, id){
+        let spinnerAction = component.find("spinnerResult");
+        let action = component.get("c.increaseNumberOfViews");
+        action.setParams({'recordId': id});
+        $A.enqueueAction(action);
     }
 })

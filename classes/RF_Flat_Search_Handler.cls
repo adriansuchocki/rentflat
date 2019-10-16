@@ -93,7 +93,7 @@ public with sharing class RF_Flat_Search_Handler {
     public static RF_Flat_Details.FlatSearchItem getFlat(String productId) {
         Product2 p = [SELECT Balcony__c, Baths__c, Bedrooms__c, Cameras_security_fenced__c, City__c, Country__c, CreatedById, CreatedDate, Description,
                 Description__c, DisplayUrl, ExternalDataSourceId, ExternalId, Family, Floor_no__c, Garage__c, Garden__c, Ground_floor__c, Gym_in_the_building__c,
-                Id, Last_floor__c, Lift__c,  Mezzanine__c, Name, Near_metro__c, Near_park__c, Near_pubs_restaurants__c, Near_tram_bus__c, Park_view__c,
+                Id, Last_floor__c, Lift__c,  Mezzanine__c, Name, Near_metro__c, Near_park__c, Near_pubs_restaurants__c, Near_tram_bus__c, Number_of_view__c, Park_view__c,
                 Parking_garage__c, ProductCode, QuantityUnitOfMeasure, River_view__c, Rooms__c, Size__c, Street_name__c, Terrace__c, WC_separated__c,
                 Wheelchair_Access__c, Year_built__c, Year_built_formula__c, (SELECT Id, Rating__c FROM RF_Comments__r),
                 (SELECT Id, UnitPrice, Pricebook2.IsStandard FROM PricebookEntries), (SELECT Id, ContentDocumentId FROM ContentDocumentLinks),
@@ -115,6 +115,7 @@ public with sharing class RF_Flat_Search_Handler {
         flat.riverView = p.River_view__c;
         flat.parkingGarage = p.Parking_garage__c;
         flat.parkView = p.Park_view__c;
+        flat.numberOfViews = Integer.valueOf(p.Number_of_view__c);
         flat.nearTramBus = p.Near_tram_bus__c;
         flat.nearPubsRestaurants = p.Near_pubs_restaurants__c;
         flat.nearPark = p.Near_park__c;

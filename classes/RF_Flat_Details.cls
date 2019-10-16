@@ -117,6 +117,8 @@ public with sharing class RF_Flat_Details {
         @AuraEnabled
         public Integer numberOfRating { get; set; }
         @AuraEnabled
+        public Integer numberOfViews { get; set; }
+        @AuraEnabled
         public List<ContentDoc> contents { get; set; }
         @AuraEnabled
         public PriceBook priceBook { get; set; }
@@ -396,5 +398,17 @@ public with sharing class RF_Flat_Details {
     public static List<FlatSearchItem> getFollowFlat(){
         return RF_Flat_Search_Handler.getFollowFlat();
     }
+
+    @AuraEnabled
+    public static void increaseNumberOfViews(String recordId){
+        List<Product2> product = [SELECT Id, Number_of_view__c FROM Product2 WHERE Id = :recordId];
+        if(!product.isEmpty()){
+            product.get(0).Number_of_view__c ++;
+            Database.update(product);
+        }
+    }
+
+
+
 
 }
