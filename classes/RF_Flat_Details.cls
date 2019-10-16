@@ -209,13 +209,13 @@ public with sharing class RF_Flat_Details {
             for (Reservation r : reservationList) {
                 productsId.add(r.recordId);
             }
-            List<Product2> products = [SELECT Id, (SELECT Id, UnitPrice, Pricebook2.IsStandard FROM PricebookEntries ) FROM Product2 WHERE Id IN :productsId];
+            List<Product2> products = [SELECT Id, (SELECT Id, UnitPrice, Pricebook2.IsStandard FROM PricebookEntries WHERE Pricebook2.IsActive = true ) FROM Product2 WHERE Id IN :productsId AND IsActive = true];
             List<Account> accounts = [SELECT Id FROM Account WHERE Name = 'Customers'];
             for(Product2 p: products) {
                 for (Reservation r : reservationList) {
-                    OrderItem oi = new OrderItem();
-                    oi.Product2 = p;
                     if (r.recordId == p.Id) {
+                        OrderItem oi = new OrderItem();
+                        oi.Product2 = p;
                         oi.ServiceDate = r.reservationFrom;
                         oi.EndDate = r.reservationTo;
                         oi.Quantity = r.reservationFrom.daysBetween(r.reservationTo) + 1;
@@ -231,15 +231,18 @@ public with sharing class RF_Flat_Details {
                         }
                         for(PricebookEntry pe: p.PricebookEntries) {
                             if(r.priceBookId == pe.Id) {
+                                oi.UnitPrice = pe.UnitPrice;
+                                System.debug(oi.UnitPrice);
+                            }
+                            if(pe.Pricebook2.IsStandard){
                                 oi.PricebookEntry = pe;
                                 oi.PricebookEntryId = pe.Id;
-                                oi.UnitPrice = pe.UnitPrice;
                                 order.Pricebook2Id = pe.Pricebook2Id;
                                 order.Pricebook2 = pe.Pricebook2;
                             }
                         }
+                        orderItems.add(oi);
                     }
-                    orderItems.add(oi);
                 }
             }
             order.AccountId = accounts.get(0).Id;
@@ -254,7 +257,7 @@ public with sharing class RF_Flat_Details {
             Database.insert(contract);
             order.ContractId = contract.Id;
             Database.insert(order);
-            System.debug(orderItems.size());
+            System.debug('Order size ' + orderItems.size());
             for(OrderItem oi: orderItems){
                 oi.Order = order;
                 oi.OrderId = order.Id;

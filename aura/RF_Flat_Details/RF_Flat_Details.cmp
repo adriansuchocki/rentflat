@@ -41,11 +41,10 @@
                     <h5 class="slds-text-heading_medium">
                         {! $Label.c.LABEL_COMMENTS_RATING }: {! v.flat.rating }&nbsp;<lightning:icon iconName="custom:custom11" variant="warning" size="small" alternativeText="star" class="ratingStar"/>
                     </h5>
-                <h6 class="slds-text-heading_small">
-                    {! $Label.c.LABEL_COMMENTS_NUMBER_OF_RATING }&nbsp;{! v.flat.numberOfRating }&nbsp;{! $Label.c.LABEL_COMMENTS_NUMBER_OF_RATING_END }
-                </h6>
-
-                    </p>
+                    <h6 class="slds-text-heading_small">
+                        {! $Label.c.LABEL_COMMENTS_NUMBER_OF_RATING }&nbsp;{! v.flat.numberOfRating }&nbsp;{! $Label.c.LABEL_COMMENTS_NUMBER_OF_RATING_END }
+                    </h6>
+                </p>
             </lightning:layoutItem>
             <lightning:layoutItem size="3">
                 <aura:if isTrue="{! v.follow }">

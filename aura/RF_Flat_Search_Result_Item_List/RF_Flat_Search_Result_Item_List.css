@@ -59,6 +59,11 @@
     color: black;
 }
 
+.THIS h6 {
+    font-size: 0.75em;
+    color: black;
+}
+
 .THIS .ratingStar{
     background-color: yellow !important;
 }
