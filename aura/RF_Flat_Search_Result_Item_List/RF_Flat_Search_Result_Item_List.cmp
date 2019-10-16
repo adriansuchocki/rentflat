@@ -9,9 +9,13 @@
         <lightning:layout horizontalAlign="center">
             <lightning:layoutItem size="3" padding="around-small">
                 <aura:if isTrue="{! empty(v.flat.link) }" >
-                    <img src="{! $Resource.NoPhoto }" style="height: 200px;"/>
+                    <center>
+                        <img src="{! $Resource.NoPhoto }" style="height: 200px;"/>
+                    </center>
                     <aura:set attribute="else">
-                        <img  src="{! v.flat.link }" style="height: 200px;"/>
+                        <center>
+                            <img  src="{! v.flat.link }" style="height: 200px;"/>
+                        </center>
                     </aura:set>
                 </aura:if>
             </lightning:layoutItem>

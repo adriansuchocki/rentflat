@@ -209,7 +209,7 @@ public with sharing class RF_Flat_Details {
             for (Reservation r : reservationList) {
                 productsId.add(r.recordId);
             }
-            List<Product2> products = [SELECT Id, (SELECT Id, UnitPrice, Pricebook2.IsStandard FROM PricebookEntries) FROM Product2 WHERE Id IN :productsId];
+            List<Product2> products = [SELECT Id, (SELECT Id, UnitPrice, Pricebook2.IsStandard FROM PricebookEntries ) FROM Product2 WHERE Id IN :productsId];
             List<Account> accounts = [SELECT Id FROM Account WHERE Name = 'Customers'];
             for(Product2 p: products) {
                 for (Reservation r : reservationList) {

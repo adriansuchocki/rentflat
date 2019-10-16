@@ -6,7 +6,7 @@ public with sharing class RF_Flat_Search_Handler {
     public static String generateSearchQuery(Map<String, String> parameters, Integer page) {
         String query = 'SELECT Id, Name, Size__c, Rooms__c, Bedrooms__c, Baths__c, (SELECT Id, Rating__c FROM RF_Comments__r),' +
                 ' (SELECT Id, UnitPrice, Pricebook2.IsStandard FROM PricebookEntries), (SELECT Id, ContentDocumentId FROM ContentDocumentLinks),' +
-                ' (SELECT Id, CreatedById FROM RF_Favourites__r) FROM Product2 WHERE Id IN (SELECT Product2Id FROM PricebookEntry)';
+                ' (SELECT Id, CreatedById FROM RF_Favourites__r) FROM Product2 WHERE Id IN (SELECT Product2Id FROM PricebookEntry) AND IsActive = true';
         String whereCondition = '';
         for(String fieldName: parameters.keySet()) {
             if(!String.isEmpty(parameters.get(fieldName))) {
