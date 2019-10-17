@@ -1,0 +1,40 @@
+<!--
+ - Created by BRITENET on 17.10.2019.
+ -->
+
+<aura:component description="RF_Cases_List" implements="forceCommunity:availableForAllPageTypes" controller="RF_Flat_Details">
+    <aura:attribute name="cases" type="Object[]" />
+    <aura:registerEvent name="showSpinner" type="c:RF_Flat_Spinner_Show_Event"/>
+    <aura:registerEvent name="hideSpinner" type="c:RF_Flat_Spinner_Hide_Event"/>
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    <lightning:layout multipleRows="true" horizontalAlign="center">
+        <lightning:layoutItem size="12">
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="{! $Label.c.LABEL_CASE_TITLE }">{! $Label.c.LABEL_CASE_TITLE }</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="{! $Label.c.LABEL_CASE_CREATED_DATE }">{! $Label.c.LABEL_CASE_CREATED_DATE }</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="{! $Label.c.LABEL_CASE_SUBJECT }">{! $Label.c.LABEL_CASE_SUBJECT }</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="{! $Label.c.LABEL_CASE_DESCRIPTION }">{! $Label.c.LABEL_CASE_DESCRIPTION }</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="{! $Label.c.LABEL_CASE_STATUS }">{! $Label.c.LABEL_CASE_STATUS }</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{! v.cases}" var="row">
+                        <c:RF_Case_List_Item caseItem="{! row }" recordId="{! row.Id }"/>
+                    </aura:iteration>
+                </tbody>
+            </table>
+        </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>

@@ -1,0 +1,7 @@
+<!--
+ - Created by BRITENET on 17.10.2019.
+ -->
+
+<aura:event type="APPLICATION" description="RF_Flat_Search_Event">
+    <aura:attribute name="title" type="String"/>
+</aura:event>

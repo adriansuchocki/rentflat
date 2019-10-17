@@ -1,0 +1,29 @@
+<!--
+ - Created by BRITENET on 17.10.2019.
+ -->
+
+<aura:component description="RF_Case_List_Item">
+    <aura:attribute name="caseItem" type="Object"/>
+    <aura:attribute name="recordId" type="String"/>
+    <aura:registerEvent name="showSpinner" type="c:RF_Flat_Spinner_Show_Event"/>
+    <aura:registerEvent name="hideSpinner" type="c:RF_Flat_Spinner_Hide_Event"/>
+    <tr class="slds-hint-parent row" onclick="{! c.handleShowCase }">
+        <td data-label="{! $Label.c.LABEL_ORDER_TABLE_TITLE }">
+            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_TABLE_TITLE }">{! v.caseItem.Product__r.Name }</div>
+        </td>
+        <td data-label="{! $Label.c.LABEL_ORDER_START_DATE }">
+            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_START_DATE }">
+                <lightning:formattedDateTime value="{! v.caseItem.CreatedDate }" year="numeric" month="numeric" day="numeric"/>
+            </div>
+        </td>
+        <td data-label="{! $Label.c.LABEL_ORDER_TABLE_END_DATE }">
+            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_TABLE_END_DATE }">{! v.caseItem.Subject }</div>
+        </td>
+        <td data-label="{! $Label.c.LABEL_ORDER_TABLE_DAYS }">
+            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_TABLE_DAYS }">{! v.caseItem.Description }</div>
+        </td>
+        <td data-label="{! $Label.c.LABEL_ORDER_TABLE_UNIT_PRICE }">
+            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_TABLE_UNIT_PRICE }">{! v.caseItem.Status }</div>
+        </td>
+    </tr>
+</aura:component>

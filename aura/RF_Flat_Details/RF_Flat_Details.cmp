@@ -2,10 +2,6 @@
     <aura:attribute name="flat" type="Object"/>
     <aura:attribute name="flatReservations" type="Object[]"/>
     <aura:attribute name="follow" type="Boolean" default="false"/>
-
-    <aura:attribute name="accept" type="List" default="['.jpg', '.jpeg']"/>
-    <aura:attribute name="multiple" type="Boolean" default="true"/>
-    <aura:attribute name="disabled" type="Boolean" default="false"/>
     <aura:handler name="init" value="{! this }" action="{! c.init }"/>
     <c:RF_DivisionSearch_Spinner aura:id="spinnerResult"/>
     <div class="slds-page-header" role="banner">
@@ -57,9 +53,6 @@
 
         </lightning:layout>
     </div>
-<!--    <lightning:fileUpload label="Add attachment" multiple="{!v.multiple}"-->
-<!--                          accept="{!v.accept}" recordId="{!v.recordId}"-->
-<!--                          onuploadfinished="{!c.handleUploadFinished}" />-->
     <c:RF_Flat_Gallery photos="{! v.flat.contents }"/>
     <lightning:tabset selectedTabId="one">
         <lightning:tab label="Details" id="one">

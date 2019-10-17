@@ -1,0 +1,17 @@
+/**
+ * Created by BRITENET on 16.10.2019.
+ */
+.THIS {
+}
+
+.THIS.c-container {
+    border: 1px solid #d8dde6;
+    margin: 10px 0 20px 0;
+    background-color: #ffffff;
+    height: auto;
+    padding: 10px;
+}
+
+.THIS .accordion-text-size {
+    font-size: 1rem;
+}

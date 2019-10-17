@@ -112,6 +112,15 @@
         <trackHistory>false</trackHistory>
     </fields>
     <fields>
+        <fullName>IsPast__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( EndDate &lt;  TODAY() ,true, false)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>IsPast</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>ListPrice</fullName>
     </fields>
     <fields>
@@ -132,6 +141,11 @@
     <fields>
         <fullName>Quantity</fullName>
         <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>QuoteLineItemId</fullName>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>ServiceDate</fullName>

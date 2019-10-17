@@ -4,6 +4,8 @@
 
 <aura:component description="RF_Flat_Follow_List" implements="forceCommunity:availableForAllPageTypes" controller="RF_Flat_Details">
     <aura:attribute name="flats" type="Object[]" />
+    <aura:registerEvent name="showSpinner" type="c:RF_Flat_Spinner_Show_Event"/>
+    <aura:registerEvent name="hideSpinner" type="c:RF_Flat_Spinner_Hide_Event"/>
     <aura:handler name="init" value="{! this }" action="{! c.init }"/>
     <aura:if isTrue="{! not(empty(v.flats)) }">
         <div class="slds-page-header" role="banner">

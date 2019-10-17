@@ -1,0 +1,6 @@
+<!--
+ - Created by BRITENET on 17.10.2019.
+ -->
+
+<aura:event type="APPLICATION" description="RF_Flat_Spinner_Hide_Event">
+</aura:event>
