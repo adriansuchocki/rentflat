@@ -3,9 +3,9 @@
  */
 ({
     getOrdersHelper: function (component) {
-//        let spinnerAction = component.find("spinnerResult");
+        var spinnerShowEvent = $A.get("e.c:RF_Flat_Spinner_Show_Event");
+        spinnerShowEvent.fire();
         let action = component.get("c.getFollowFlat");
-//        spinnerAction.showHideSpinner(true);
         action.setCallback(this, function(response){
             let state = response.getState();
             let errors = response.getError();
@@ -13,12 +13,15 @@
                 console.log(response.getReturnValue());
                 component.set("v.flats", response.getReturnValue());
             }
-//            spinnerAction.showHideSpinner(false);
+            var spinnerHideEvent = $A.get("e.c:RF_Flat_Spinner_Hide_Event");
+            spinnerHideEvent.fire();
         });
         $A.enqueueAction(action);
     },
 
     removeFromFollowHelper: function (component, id) {
+        var spinnerShowEvent = $A.get("e.c:RF_Flat_Spinner_Show_Event");
+        spinnerShowEvent.fire();
         let action = component.get("c.removeFromFollow");
         action.setParams({'recordId': id});
         action.setCallback(this, function(response){
@@ -43,6 +46,8 @@
                 });
                 toastEvent.fire();
             }
+            var spinnerHideEvent = $A.get("e.c:RF_Flat_Spinner_Hide_Event");
+            spinnerHideEvent.fire();
         });
         $A.enqueueAction(action);
     }

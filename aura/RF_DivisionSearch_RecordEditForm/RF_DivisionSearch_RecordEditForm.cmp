@@ -1,4 +1,4 @@
-<aura:component implements="flexipage:availableForAllPageTypes, force:lightningQuickAction" access="global">
+<aura:component implements="flexipage:availableForAllPageTypes,force:lightningQuickAction" access="global">
     <aura:handler event="c:RF_DivisionSearch_RecordEditForm_Event" action="{! c.handleShowModal }" />
     <aura:attribute name="disabled" type="Boolean" default="false" />
     <aura:attribute name="saved" type="Boolean" default="true" />

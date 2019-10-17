@@ -1,0 +1,18 @@
+<!--
+ - Created by BRITENET on 17.10.2019.
+ -->
+
+<aura:component description="RF_Flat_Spinner" implements="forceCommunity:availableForAllPageTypes">
+    <aura:attribute name="Spinner" type="boolean" default="false"/>
+    <aura:handler event="c:RF_Flat_Spinner_Show_Event" action="{! c.showSpinnerHandler }"/>
+    <aura:handler event="c:RF_Flat_Spinner_Hide_Event" action="{! c.hideSpinnerHandler }"/>
+    <aura:if isTrue="{!v.Spinner}">
+        <div aura:id="spinnerId" class="slds-spinner_container">
+            <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                <span class="slds-assistive-text">{! $Label.c.LABEL_LOADING }</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </aura:if>
+</aura:component>

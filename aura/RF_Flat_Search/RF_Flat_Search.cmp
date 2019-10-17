@@ -11,7 +11,6 @@
     <aura:handler event="c:RF_Flat_Search_More_Result_Event" action="{! c.handleNextSearchFlat }"/>
     <aura:handler name="init" value="{! this }" action="{! c.init }"/>
 
-    <c:RF_DivisionSearch_Spinner aura:id="spinnerResult"/>
     <div class="slds-form-element slds-lookup" data-select="single">
         <div class="slds-form-element__control">
             <div class="slds-input-has-icon slds-input-has-icon--right">
@@ -23,7 +22,7 @@
                         <lightning:button name="{! $Label.c.BTN_SEARCH }" label="{! $Label.c.BTN_SEARCH }" variant="brand" onclick="{! c.handleSearchFlat }"/>
                     </lightning:layoutItem>
                     <lightning:layoutItem size="1" class="slds-m-horizontal--xxx-small button-position-end slds-is-relative">
-                        <lightning:buttonIcon id="dialogBtn" iconName="utility:cart"  alternativeText="Basket" variant="brand" onclick="{! c.handleShowCart }"/>
+                        <lightning:buttonIcon iconName="utility:cart"  alternativeText="Basket" variant="brand" onclick="{! c.handleShowCart }"/>
                         <aura:if isTrue="{! v.cart }">
                             <section aria-describedby="dialog-body-id-15" id="dialog" aria-label="My Cart" class="slds-popover slds-nubbin_top-left slds-dynamic-menu" role="dialog" style="position:absolute;left:-0.5rem;top:48px;width:30vw;">
                                 <aura:if isTrue="{! not(empty(v.cartList))}">

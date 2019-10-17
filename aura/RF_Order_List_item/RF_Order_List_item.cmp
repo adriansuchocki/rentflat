@@ -1,0 +1,65 @@
+<!--
+ - Created by BRITENET on 16.10.2019.
+ -->
+
+<aura:component description="RF_Order_List_item">
+    <aura:attribute name="order" type="Object"/>
+    <div class="c-container">
+        <lightning:layout multipleRows="true" horizontalAlign="center">
+            <lightning:layoutItem size="12">
+                <p class="accordion-text-size">{! $Label.c.LABEL_ORDER_NUMBER + ': '}  <b>{! v.order.OrderNumber }</b></p>
+            </lightning:layoutItem>
+            <lightning:layoutItem size="3">
+                {! $Label.c.LABEL_ORDER_CONTRACT }:&nbsp;{! v.order.Contract.ContractNumber }
+            </lightning:layoutItem>
+            <lightning:layoutItem size="3">
+                {! $Label.c.LABEL_ORDER_START_DATE }:&nbsp;{! v.order.EffectiveDate }
+            </lightning:layoutItem>
+            <lightning:layoutItem size="3">
+                {! $Label.c.LABEL_ORDER_END_DATE }:&nbsp;{! v.order.EndDate }
+            </lightning:layoutItem>
+            <lightning:layoutItem size="3">
+                {! $Label.c.LABEL_ORDER_TOTAL_AMOUNT }:&nbsp;<lightning:formattedNumber value="{! v.order.TotalAmount }" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/>
+            </lightning:layoutItem>
+            <lightning:layoutItem size="12">
+                <lightning:accordionSection name="{! index }" label="{! $Label.c.LABEL_ORDER_TABLE_DETAILS }">
+                    <lightning:layout multipleRows="true" horizontalAlign="center">
+                        <lightning:layoutItem size="12">
+                            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                                <thead>
+                                    <tr class="slds-line-height_reset">
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_TABLE_TITLE }">{! $Label.c.LABEL_ORDER_TABLE_TITLE }</div>
+                                        </th>
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_START_DATE }">{! $Label.c.LABEL_ORDER_START_DATE }</div>
+                                        </th>
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_TABLE_END_DATE }">{! $Label.c.LABEL_ORDER_TABLE_END_DATE }</div>
+                                        </th>
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_TABLE_DAYS}">{! $Label.c.LABEL_ORDER_TABLE_DAYS }</div>
+                                        </th>
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_TABLE_UNIT_PRICE }">{! $Label.c.LABEL_ORDER_TABLE_UNIT_PRICE }</div>
+                                        </th>
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_TABLE_AMOUNT }">{! $Label.c.LABEL_ORDER_TABLE_AMOUNT }</div>
+                                        </th>
+                                        <th class="" scope="col">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <aura:iteration items="{! v.order.OrderItems}" var="row">
+                                        <c:RF_Order_List_Item_Table_Row orderItem="{! row }"/>
+                                    </aura:iteration>
+                                </tbody>
+                            </table>
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                </lightning:accordionSection>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+</aura:component>

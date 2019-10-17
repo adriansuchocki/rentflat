@@ -3,13 +3,26 @@
  */
 ({
     init: function(component, event, helper) {
-        var flatsJson = sessionStorage.getItem("RF_Flat_Search--flatList");
-        if (!$A.util.isUndefinedOrNull(flatsJson)) {
-            var flats = JSON.parse(flatsJson);
-            console.log(flats);
-            component.set("v.resultList", flats);
-//            sessionStorage.removeItem("RF_Flat_Search--flatList");
+        var paramsJson = sessionStorage.getItem("RF_Flat_Search--flatList");
+        let title = "";
+        let page = 0;
+        if (!$A.util.isUndefinedOrNull(paramsJson)) {
+            var params = JSON.parse(paramsJson);
+            title = params.title;
         }
+        component.set("v.title", title);
+        component.set("v.page", page);
+        helper.getResultList(component, title, page);
+        sessionStorage.removeItem("RF_Flat_Search--flatList");
+    },
+
+    handleShowMoreResults: function (component, event, helper) {
+        let fieldText = component.get("v.title");
+        let page = component.get("v.page");
+        component.set("v.page", page + 1);
+        let resultList = component.get("v.resultList");
+        component.set("v.previousNumberOfRecords", resultList.length);
+        helper.getNextPageResultList(component, fieldText, page+1);
     },
 
     showCard: function(component, event, helper) {
@@ -19,11 +32,4 @@
     showList: function(component, event, helper) {
         component.set("v.layout", true);
     },
-
-    handleShowMoreResults: function(component, event, handler) {
-        let resultList = component.get("v.resultList");
-        component.set("v.previousNumberOfRecords", resultList.length);
-        let searchEvent = $A.get("e.c:RF_Flat_Search_More_Result_Event");
-        searchEvent.fire();
-    }
 })

@@ -41,7 +41,7 @@
 
     showDetails: function(component, event, helper) {
         var Elements = component.find('row');
-        for (let i = 0; i < Elements.length; i++) {
+        for (var i = 0; i < Elements.length; i++) {
             if($A.util.hasClass(Elements[i], "highlight")){
                 $A.util.toggleClass(Elements[i], "highlight");
             }

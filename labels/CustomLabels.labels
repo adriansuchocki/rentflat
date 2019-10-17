@@ -64,6 +64,48 @@
         <value>Search</value>
     </labels>
     <labels>
+        <fullName>BTN_SEND</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>BTN_SEND</shortDescription>
+        <value>Send</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_CASE_CREATED_DATE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_CASE_CREATED_DATE</shortDescription>
+        <value>Created date</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_CASE_DESCRIPTION</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_CASE_DESCRIPTION</shortDescription>
+        <value>Description</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_CASE_STATUS</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_CASE_STATUS</shortDescription>
+        <value>Status</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_CASE_SUBJECT</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_CASE_SUBJECT</shortDescription>
+        <value>Subject</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_CASE_TITLE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_CASE_TITLE</shortDescription>
+        <value>Title</value>
+    </labels>
+    <labels>
         <fullName>LABEL_COMMENTS_RATING</fullName>
         <language>en_US</language>
         <protected>true</protected>
@@ -337,6 +379,13 @@
         <value>Start date</value>
     </labels>
     <labels>
+        <fullName>LABEL_ORDER_TABLE_DETAILS</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_ORDER_TABLE_DETAILS</shortDescription>
+        <value>Details</value>
+    </labels>
+    <labels>
         <fullName>LABEL_ORDER_TABLE_TITLE</fullName>
         <language>en_US</language>
         <protected>true</protected>
@@ -362,7 +411,7 @@
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>LABEL_ORDER_TABLE_DAYS</shortDescription>
-        <value>Reserved date</value>
+        <value>Reserved days</value>
     </labels>
     <labels>
         <fullName>LABEL_ORDER_TABLE_AMOUNT</fullName>
@@ -370,6 +419,13 @@
         <protected>true</protected>
         <shortDescription>LABEL_ORDER_TABLE_AMOUNT</shortDescription>
         <value>Amount</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_ORDER_TABLE_COMPLAINT</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_ORDER_TABLE_COMPLAINT</shortDescription>
+        <value>Complaint</value>
     </labels>
     <labels>
         <fullName>LABEL_ORDER_TABLE_UNIT_PRICE</fullName>

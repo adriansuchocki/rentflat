@@ -1,0 +1,62 @@
+<!--
+ - Created by BRITENET on 16.10.2019.
+ -->
+
+<aura:component description="RF_Order_List_Item_Table_Row" controller="RF_Flat_Details">
+    <aura:attribute name="orderItem" type="Object"/>
+    <aura:attribute name="cart" type="Boolean" default="false" />
+    <aura:attribute name="subject" type="String" default="" />
+    <aura:attribute name="description" type="String" default="" />
+    <aura:registerEvent name="showSpinner" type="c:RF_Flat_Spinner_Show_Event"/>
+    <aura:registerEvent name="hideSpinner" type="c:RF_Flat_Spinner_Hide_Event"/>
+    <tr class="slds-hint-parent">
+        <td data-label="{! $Label.c.LABEL_ORDER_TABLE_TITLE }">
+            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_TABLE_TITLE }">{! v.orderItem.Product2.Name }</div>
+        </td>
+        <td data-label="{! $Label.c.LABEL_ORDER_START_DATE }">
+            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_START_DATE }">{! v.orderItem.ServiceDate }</div>
+        </td>
+        <td data-label="{! $Label.c.LABEL_ORDER_TABLE_END_DATE }">
+            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_TABLE_END_DATE }">{! v.orderItem.EndDate }</div>
+        </td>
+        <td data-label="{! $Label.c.LABEL_ORDER_TABLE_DAYS }">
+            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_TABLE_DAYS }">{! v.orderItem.Quantity }</div>
+        </td>
+        <td data-label="{! $Label.c.LABEL_ORDER_TABLE_UNIT_PRICE }">
+            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_TABLE_UNIT_PRICE }">{! v.orderItem.UnitPrice }</div>
+        </td>
+        <td data-label="{! $Label.c.LABEL_ORDER_TABLE_AMOUNT }">
+            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_TABLE_AMOUNT }">
+                <lightning:formattedNumber value="{! v.orderItem.TotalPrice }" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/>
+            </div>
+        </td>
+        <td data-label="{! $Label.c.LABEL_ORDER_TABLE_COMPLAINT }">
+            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_TABLE_COMPLAINT }">
+                <aura:if isTrue="{! v.orderItem.IsPast__c }">
+                    <aura:if isTrue="{! v.cart }">
+                        <section aria-describedby="dialog-body-id-15" id="dialog" aria-label="My Cart" class="slds-popover slds-nubbin_right-top slds-dynamic-menu" role="dialog" style="position:absolute;left:-30vw;width:30vw;">
+                            <form class="slds-form--stacked">
+                                <div class="slds-popover__body slds-p-horizontal_none" id="dialog-body-id-15" style="max-height: 70vh;">
+                                    <div class="slds-p-vertical_x-small slds-p-horizontal_small">
+                                        <lightning:input aura:id="expenseform" name="subject" label="Subject" value="{! v.subject }" required="true"/>
+                                        <lightning:textarea aura:id="expenseform" name="description" label="Description" value="{! v.description }" required="true"/>
+                                    </div>
+                                </div>
+                                <footer class="slds-popover__footer">
+                                    <ul>
+                                        <li>
+                                            <center>
+                                                <lightning:button name="{! $Label.c.BTN_SEND }" label="{! $Label.c.BTN_SEND }" variant="brand" value="{! v.orderItem.Id }" onclick="{! c.handleCreateCase }"/>
+                                            </center>
+                                        </li>
+                                    </ul>
+                                </footer>
+                            </form>
+                        </section>
+                    </aura:if>
+                    <lightning:button label="Complaint" disabled="{! v.orderItem.Complained__c }" onclick="{! c.handleShowCaseForm }"/>
+                </aura:if>
+            </div>
+        </td>
+    </tr>
+</aura:component>

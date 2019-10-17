@@ -393,7 +393,7 @@ public with sharing class RF_Flat_Details {
 
     @AuraEnabled
     public static List<Order> getUserOrders(){
-        List<Order> orders = [SELECT Id, EffectiveDate, EndDate, OrderNumber, TotalAmount, Contract.ContractNumber, (SELECT Id, Quantity, UnitPrice, ServiceDate, EndDate, TotalPrice, Product2.Name FROM OrderItems) FROM Order WHERE CreatedById = :UserInfo.getUserId() ORDER BY CreatedDate DESC];
+        List<Order> orders = [SELECT Id, EffectiveDate, EndDate, OrderNumber, TotalAmount, Contract.ContractNumber, (SELECT Id, Quantity, UnitPrice, ServiceDate, EndDate, TotalPrice, Product2.Name, IsPast__c, Complained__c FROM OrderItems) FROM Order WHERE CreatedById = :UserInfo.getUserId() ORDER BY CreatedDate DESC];
         return orders;
     }
 
@@ -411,7 +411,37 @@ public with sharing class RF_Flat_Details {
         }
     }
 
+    @AuraEnabled
+    public static String createCase(String recordId, String subject, String description){
+        Savepoint sp = Database.setSavepoint();
+        List<OrderItem> orderItems = [SELECT Id, Product2Id FROM OrderItem WHERE Id = :recordId AND CreatedById = :UserInfo.getUserId()];
+        List<Contact> contacts = [SELECT Id, AccountId FROM Contact WHERE Email = :UserInfo.getUserEmail()];
+        System.debug('Contact count ' + contacts.size());
+        Case caseItem = new Case();
+        for(OrderItem orderItem: orderItems){
+            caseItem.Product__c = orderItem.Product2Id;
+            caseItem.Status = 'New';
+            caseItem.Origin = 'Web';
+            caseItem.ContactId = contacts.get(0).Id;
+            caseItem.AccountId = contacts.get(0).AccountId;
+            caseItem.Priority = 'Medium';
+            caseItem.Subject = subject;
+            caseItem.Description = description;
+            orderItem.Complained__c = true;
+        }
+        try{
+            Database.insert(caseItem);
+            Database.update(orderItems);
+        } catch (Exception e){
+            Database.rollback(sp);
+            throw new ExternalObjectException(e.getMessage());
+        }
+        return 'Case ' + caseItem.Id + ' created successful';
+    }
 
-
-
+    @AuraEnabled
+    public static List<Case> getCases(){
+        List<Case> cases = [SELECT Id, Subject, Description, Status, Product__r.Name, CreatedDate FROM Case WHERE ContactEmail = :UserInfo.getUserEmail()];
+        return cases;
+    }
 }
