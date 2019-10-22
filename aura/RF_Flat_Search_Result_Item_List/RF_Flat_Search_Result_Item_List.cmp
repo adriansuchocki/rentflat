@@ -5,6 +5,8 @@
 <aura:component description="RF_Flat_Search_Result_Item_List" controller="RF_Flat_Details">
     <aura:attribute name="flat" type="Object" />
     <aura:attribute name="follow" type="Boolean" default="false"/>
+    <aura:registerEvent name="showSpinner" type="c:RF_Flat_Spinner_Show_Event"/>
+    <aura:registerEvent name="hideSpinner" type="c:RF_Flat_Spinner_Hide_Event"/>
     <div class="c-container-list" onclick="{! c.showFlat }">
         <lightning:layout horizontalAlign="center">
             <lightning:layoutItem size="3" padding="around-small">
@@ -42,9 +44,9 @@
                         <lightning:layoutItem size="6">
                             <div style="padding-top: 15px; padding-bottom: 15px">
                                 <aura:if isTrue="{! v.follow }">
-                                    <lightning:button label="Stop following" variant="brand" iconName="utility:preview" iconPosition="left" onclick="{! c.handleRemoveFollow }"/>
+                                    <lightning:button label="{! $Label.c.BTN_STOP_FOLLOW }" variant="brand" iconName="utility:preview" iconPosition="left" onclick="{! c.handleRemoveFollow }"/>
                                     <aura:set attribute="else">
-                                        <lightning:button label="Follow" iconName="utility:preview" iconPosition="left" onclick="{! c.handleAddFollow }"/>
+                                        <lightning:button label="{! $Label.c.BTN_FOLLOW }" iconName="utility:preview" iconPosition="left" onclick="{! c.handleAddFollow }"/>
                                     </aura:set>
                                 </aura:if>
                             </div>
@@ -64,7 +66,7 @@
                     &nbsp;
                 </div>
                 <div style="float: right;" >
-                    <h3>per day</h3>
+                    <h3>{! $Label.c.LABEL_PRODUCT_PRICE_PER_DAY }</h3>
                 </div>
             </lightning:layoutItem>
         </lightning:layout>

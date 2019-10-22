@@ -24,6 +24,8 @@
     },
 
     reserveFlatHelper: function (component) {
+        let spinnerShowEvent = $A.get("e.c:RF_Flat_Spinner_Show_Event");
+        spinnerShowEvent.fire();
         let action = component.get("c.reserveFlatFromCart");
         action.setCallback(this, function(response){
             let state = response.getState();
@@ -48,6 +50,8 @@
                 });
                 toastEvent.fire();
             }
+            let spinnerHideEvent = $A.get("e.c:RF_Flat_Spinner_Hide_Event");
+            spinnerHideEvent.fire();
         });
         $A.enqueueAction(action);
     },

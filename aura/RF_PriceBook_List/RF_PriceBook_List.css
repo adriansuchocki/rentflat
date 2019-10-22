@@ -1,0 +1,21 @@
+/**
+ * Created by BRITENET on 21.10.2019.
+ */
+.THIS {
+}
+
+.THIS.container {
+    background-color: white;
+    padding: 1rem;
+}
+
+.THIS .c-container {
+    border: 1px solid #d8dde6;
+    margin: 10px 0 20px 0;
+    background: white;
+    padding: 1rem;
+}
+
+.THIS .flexipageHeader {
+    display: none !important;
+}

@@ -2,26 +2,10 @@
  * Created by BRITENET on 08.10.2019.
  */
 ({
-    getReservedDate: function (component, recordId) {
-        let spinnerAction = component.find("spinnerResult");
-        let action = component.get("c.getReservedDate");
-        spinnerAction.showHideSpinner(true);
-        action.setParams({"productId": recordId});
-        action.setCallback(this, function(response){
-            let state = response.getState();
-            let errors = response.getError();
-            if (component.isValid() && state === $A.get("{! $Label.c.LABEL_SUCCESS_TITLE }")) {
-                component.set("v.flatReservations", response.getReturnValue());
-            }
-            spinnerAction.showHideSpinner(false);
-        });
-        $A.enqueueAction(action);
-    },
-
     getFlatDetailsHelper: function (component, recordId) {
-        let spinnerAction = component.find("spinnerResult");
+        let spinnerShowEvent = $A.get("e.c:RF_Flat_Spinner_Show_Event");
+        spinnerShowEvent.fire();
         let action = component.get("c.getFlat");
-        spinnerAction.showHideSpinner(true);
         action.setParams({"productId": recordId})
         action.setCallback(this, function(response){
             let state = response.getState();
@@ -33,12 +17,15 @@
                 component.set("v.follow", flatRecord.follow);
                 component.set("v.flat", response.getReturnValue());
             }
-            spinnerAction.showHideSpinner(false);
+            let spinnerHideEvent = $A.get("e.c:RF_Flat_Spinner_Hide_Event");
+            spinnerHideEvent.fire();
         });
         $A.enqueueAction(action);
     },
+
     addToFollowHelper: function (component, id) {
-        let spinnerAction = component.find("spinnerResult");
+        let spinnerShowEvent = $A.get("e.c:RF_Flat_Spinner_Show_Event");
+        spinnerShowEvent.fire();
         let action = component.get("c.addToFollow");
         action.setParams({'recordId': id});
         action.setCallback(this, function(response){
@@ -63,12 +50,15 @@
                 });
                 toastEvent.fire();
             }
+            let spinnerHideEvent = $A.get("e.c:RF_Flat_Spinner_Hide_Event");
+            spinnerHideEvent.fire();
         });
         $A.enqueueAction(action);
     },
 
     removeFromFollowHelper: function (component, id) {
-        let spinnerAction = component.find("spinnerResult");
+        let spinnerShowEvent = $A.get("e.c:RF_Flat_Spinner_Show_Event");
+        spinnerShowEvent.fire();
         let action = component.get("c.removeFromFollow");
         action.setParams({'recordId': id});
         action.setCallback(this, function(response){
@@ -93,6 +83,8 @@
                 });
                 toastEvent.fire();
             }
+            let spinnerHideEvent = $A.get("e.c:RF_Flat_Spinner_Hide_Event");
+            spinnerHideEvent.fire();
         });
         $A.enqueueAction(action);
     },

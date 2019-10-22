@@ -1,11 +1,10 @@
-<aura:component description="RF_Flat_Gallery" controller="RF_Flat_Details">
+<aura:component description="RF_Flat_Gallery">
     <ltng:require styles="{! $Resource.Bootstrap2 + '/bootstrap-4.3.1-dist/css/bootstrap.css' }"
                   scripts="{!join(',',
         $Resource.jQuery + '/jquery-3.4.1.js' ,
         $Resource.Bootstrap2 + '/bootstrap-4.3.1-dist/js/bootstrap.js')
       }"/>
     <aura:attribute name="photos" type="Object[]" />
-    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
     <c:RF_DivisionSearch_Spinner aura:id="spinnerResult"/>
     <div id="carousel-example-2" class="carousel slide carousel-fade z-depth-1-half" data-ride="carousel" style="background-color: lightgray;">
         <ol class="carousel-indicators">
@@ -27,11 +26,11 @@
         </div>
         <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
+            <span class="sr-only">{! $Label.c.BTN_PREV }</span>
         </a>
         <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
+            <span class="sr-only">{! $Label.c.BTN_NEXT }</span>
         </a>
     </div>
 </aura:component>

@@ -2,7 +2,7 @@
  - Created by BRITENET on 17.10.2019.
  -->
 
-<aura:component description="RF_Flat_Spinner" implements="forceCommunity:availableForAllPageTypes">
+<aura:component description="RF_Flat_Spinner" implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes">
     <aura:attribute name="Spinner" type="boolean" default="false"/>
     <aura:handler event="c:RF_Flat_Spinner_Show_Event" action="{! c.showSpinnerHandler }"/>
     <aura:handler event="c:RF_Flat_Spinner_Hide_Event" action="{! c.hideSpinnerHandler }"/>

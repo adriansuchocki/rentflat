@@ -6,6 +6,8 @@
     <aura:attribute name="flat" type="Object" />
     <aura:attribute name="index" type="Integer" />
     <aura:registerEvent name="researchCart" type="c:RF_Flat_Search_Cart"/>
+    <aura:registerEvent name="showSpinner" type="c:RF_Flat_Spinner_Show_Event"/>
+    <aura:registerEvent name="hideSpinner" type="c:RF_Flat_Spinner_Hide_Event"/>
 
     <c:RF_DivisionSearch_Spinner aura:id="spinnerResult"/>
     <div class="{! v.index != 0 ? 'iterableRow rowCart slds-feed': 'rowCart slds-feed' }" onclick="{! c.showFlat }" >

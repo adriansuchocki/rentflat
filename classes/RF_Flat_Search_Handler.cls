@@ -5,8 +5,8 @@
 public with sharing class RF_Flat_Search_Handler {
     public static String generateSearchQuery(Map<String, String> parameters, Integer page) {
         String query = 'SELECT Id, Name, Size__c, Rooms__c, Bedrooms__c, Baths__c, (SELECT Id, Rating__c FROM RF_Comments__r),' +
-                ' (SELECT Id, UnitPrice, Pricebook2.IsStandard FROM PricebookEntries), (SELECT Id, ContentDocumentId FROM ContentDocumentLinks),' +
-                ' (SELECT Id, CreatedById FROM RF_Favourites__r) FROM Product2 WHERE Id IN (SELECT Product2Id FROM PricebookEntry) AND IsActive = true';
+                ' (SELECT Id, UnitPrice, Pricebook2.IsStandard FROM PricebookEntries WHERE (Pricebook2.IsStandard = true) OR (Pricebook2.StartDate__c <= TODAY AND Pricebook2.End_Date__c >= TODAY)), (SELECT Id, ContentDocumentId FROM ContentDocumentLinks),' +
+                ' (SELECT Id, CreatedById FROM RF_Favourites__r) FROM Product2 WHERE Id IN (SELECT Product2Id FROM PricebookEntry WHERE (Pricebook2.IsStandard = true) OR (Pricebook2.StartDate__c <= TODAY AND Pricebook2.End_Date__c >= TODAY)) AND IsActive = true';
         String whereCondition = '';
         for(String fieldName: parameters.keySet()) {
             if(!String.isEmpty(parameters.get(fieldName))) {
@@ -41,16 +41,22 @@ public with sharing class RF_Flat_Search_Handler {
             flat.rooms = p.Rooms__c;
             flat.bedrooms = p.Bedrooms__c;
             flat.bathrooms = p.Baths__c;
+            flat.link = '';
             List<RF_Flat_Details.ContentDoc> contents = new List<RF_Flat_Details.ContentDoc>();
-            for(ContentDocumentLink cdl: p.ContentDocumentLinks){
-                for(ContentDistribution cd: [SELECT Id, ContentDownloadUrl, ContentVersion.ContentDocumentId FROM ContentDistribution]){
-                    if(cdl.ContentDocumentId == cd.ContentVersion.ContentDocumentId){
-                        RF_Flat_Details.ContentDoc contentDoc = new RF_Flat_Details.ContentDoc();
-                        contentDoc.link = cd.ContentDownloadUrl;
-                        contents.add(contentDoc);
-                        continue;
-                    }
-                }
+            Set<String> contentId = new Set<String>();
+            for(ContentDocumentLink cdl: p.ContentDocumentLinks) {
+                contentId.add(cdl.ContentDocumentId);
+            }
+            System.debug(contentId);
+            Set<Id> versionContentList = new Set<Id>();
+            List<ContentVersion> contentVersions = [SELECT Id FROM ContentVersion WHERE ContentDocumentId IN :contentId];
+            for(ContentVersion cv: contentVersions){
+                versionContentList.add(cv.Id);
+            }
+            List<ContentDistribution> contentDistributions = [SELECT Id, ContentDownloadUrl, ContentVersion.ContentDocumentId FROM ContentDistribution WHERE ContentVersionId IN :versionContentList LIMIT 1];
+            System.debug(contentDistributions);
+            for(ContentDistribution cd: contentDistributions){
+                flat.link = cd.ContentDownloadUrl;
             }
             List<RF_Favourite__c> favourites = p.RF_Favourites__r;
             flat.follow = false;
@@ -59,10 +65,6 @@ public with sharing class RF_Flat_Search_Handler {
                     flat.follow = true;
                     continue;
                 }
-            }
-            flat.link = '';
-            if(!contents.isEmpty()){
-                flat.link = contents.get(0).link;
             }
             if(comments.isEmpty()){
                 flat.rating = 0.00;
@@ -96,7 +98,8 @@ public with sharing class RF_Flat_Search_Handler {
                 Id, Last_floor__c, Lift__c,  Mezzanine__c, Name, Near_metro__c, Near_park__c, Near_pubs_restaurants__c, Near_tram_bus__c, Number_of_view__c, Park_view__c,
                 Parking_garage__c, ProductCode, QuantityUnitOfMeasure, River_view__c, Rooms__c, Size__c, Street_name__c, Terrace__c, WC_separated__c,
                 Wheelchair_Access__c, Year_built__c, Year_built_formula__c, (SELECT Id, Rating__c FROM RF_Comments__r),
-                (SELECT Id, UnitPrice, Pricebook2.IsStandard FROM PricebookEntries), (SELECT Id, ContentDocumentId FROM ContentDocumentLinks),
+                (SELECT Id, UnitPrice, Pricebook2.IsStandard FROM PricebookEntries WHERE (Pricebook2.IsStandard = true) OR (Pricebook2.StartDate__c <= TODAY AND Pricebook2.End_Date__c >= TODAY)),
+                (SELECT Id, ContentDocumentId FROM ContentDocumentLinks),
                 (SELECT Id, CreatedById FROM RF_Favourites__r) FROM Product2 WHERE Id = :productId];
         RF_Flat_Details.FlatSearchItem flat = new RF_Flat_Details.FlatSearchItem();
         flat.id = productId;
@@ -153,14 +156,22 @@ public with sharing class RF_Flat_Search_Handler {
         }
         flat.comments = p.RF_Comments__r;
         List<RF_Flat_Details.ContentDoc> contents = new List<RF_Flat_Details.ContentDoc>();
-        for(ContentDocumentLink cdl: p.ContentDocumentLinks){
-            for(ContentDistribution cd: [SELECT Id, ContentDownloadUrl, ContentVersion.ContentDocumentId FROM ContentDistribution]){
-                if(cdl.ContentDocumentId == cd.ContentVersion.ContentDocumentId){
-                    RF_Flat_Details.ContentDoc contentDoc = new RF_Flat_Details.ContentDoc();
-                    contentDoc.link = cd.ContentDownloadUrl;
-                    contents.add(contentDoc);
-                }
-            }
+        Set<String> contentId = new Set<String>();
+        for(ContentDocumentLink cdl: p.ContentDocumentLinks) {
+            contentId.add(cdl.ContentDocumentId);
+        }
+        System.debug(contentId);
+        Set<Id> versionContentList = new Set<Id>();
+        List<ContentVersion> contentVersions = [SELECT Id FROM ContentVersion WHERE ContentDocumentId IN :contentId];
+        for(ContentVersion cv: contentVersions){
+            versionContentList.add(cv.Id);
+        }
+        List<ContentDistribution> contentDistributions = [SELECT Id, ContentDownloadUrl, ContentVersion.ContentDocumentId FROM ContentDistribution WHERE ContentVersionId IN :versionContentList];
+        System.debug(contentDistributions);
+        for(ContentDistribution cd: contentDistributions){
+            RF_Flat_Details.ContentDoc contentDoc = new RF_Flat_Details.ContentDoc();
+            contentDoc.link = cd.ContentDownloadUrl;
+            contents.add(contentDoc);
         }
         flat.contents = contents;
         RF_Flat_Details.PriceBook priceBook = new RF_Flat_Details.PriceBook();
@@ -184,7 +195,7 @@ public with sharing class RF_Flat_Search_Handler {
         List<RF_Flat_Details.FlatSearchItem> flatList = new List<RF_Flat_Details.FlatSearchItem>();
         List<Product2> products = new List<Product2>();
         products = [SELECT Id, Name, Size__c, Rooms__c, Bedrooms__c, Baths__c, (SELECT Id, Rating__c FROM RF_Comments__r),
-                    (SELECT Id, UnitPrice, Pricebook2.IsStandard FROM PricebookEntries), (SELECT Id, ContentDocumentId FROM ContentDocumentLinks),
+                    (SELECT Id, UnitPrice, Pricebook2.IsStandard FROM PricebookEntries WHERE (Pricebook2.IsStandard = true) OR (Pricebook2.StartDate__c <= TODAY AND Pricebook2.End_Date__c >= TODAY)),
                     (SELECT Id, CreatedById FROM RF_Favourites__r) FROM Product2 WHERE Id IN (SELECT Product__c FROM RF_Favourite__c WHERE
                             CreatedById = :UserInfo.getUserId())];
         System.debug(products.size());
@@ -201,22 +212,7 @@ public with sharing class RF_Flat_Search_Handler {
             flat.rooms = p.Rooms__c;
             flat.bedrooms = p.Bedrooms__c;
             flat.bathrooms = p.Baths__c;
-            List<RF_Flat_Details.ContentDoc> contents = new List<RF_Flat_Details.ContentDoc>();
-            for(ContentDocumentLink cdl: p.ContentDocumentLinks){
-                for(ContentDistribution cd: [SELECT Id, ContentDownloadUrl, ContentVersion.ContentDocumentId FROM ContentDistribution]){
-                    if(cdl.ContentDocumentId == cd.ContentVersion.ContentDocumentId){
-                        RF_Flat_Details.ContentDoc contentDoc = new RF_Flat_Details.ContentDoc();
-                        contentDoc.link = cd.ContentDownloadUrl;
-                        contents.add(contentDoc);
-                        continue;
-                    }
-                }
-            }
             flat.follow = true;
-            flat.link = '';
-            if(!contents.isEmpty()){
-                flat.link = contents.get(0).link;
-            }
             if(comments.isEmpty()){
                 flat.rating = 0.00;
                 flat.numberOfRating = 0;

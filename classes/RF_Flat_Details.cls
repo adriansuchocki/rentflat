@@ -129,6 +129,42 @@ public with sharing class RF_Flat_Details {
 
     }
 
+    public class Product{
+        @AuraEnabled
+        public String id { get; set; }
+        @AuraEnabled
+        public String priceBookEntryId { get; set; }
+        @AuraEnabled
+        public String title { get; set; }
+        @AuraEnabled
+        public String family { get; set; }
+        @AuraEnabled
+        public String country { get; set; }
+        @AuraEnabled
+        public String city { get; set; }
+        @AuraEnabled
+        public Decimal unitPrice { get; set; }
+        @AuraEnabled
+        public Decimal newUnitPrice { get; set; }
+        @AuraEnabled
+        public Decimal newGroupUnitPrice { get; set; }
+    }
+
+    public class ProductPriceBook{
+        @AuraEnabled
+        public String priceBookName { get; set; }
+        @AuraEnabled
+        public Date startDate { get; set; }
+        @AuraEnabled
+        public Date endDate { get; set; }
+        @AuraEnabled
+        public String priceBookId { get; set; }
+        @AuraEnabled
+        public Boolean isStandard { get; set; }
+        @AuraEnabled
+        public List<Product> productNewPriceBookList { get; set; }
+    }
+
     @AuraEnabled
     public static PriceBook getPriceBookValue(String parentId){
         PriceBook priceBook = new PriceBook();
@@ -146,42 +182,6 @@ public with sharing class RF_Flat_Details {
             }
         }
         return priceBook;
-    }
-
-    @AuraEnabled
-    public static List<ContentDoc> getContentDocuments(String parentId){
-        List<ContentDoc> contentDocs = new List<RF_Flat_Details.ContentDoc>();
-        Set<Id> idList = new Set<Id>();
-        Set<Id> versionContentList = new Set<Id>();
-        List<ContentDocumentLink> contententDocumentLinks = [SELECT ContentDocumentId FROM ContentDocumentLink WHERE ContentDocumentId = :parentId order by Id desc];
-        for(ContentDocumentLink c: contententDocumentLinks) {
-            idList.add(c.ContentDocumentId);
-        }
-        List<ContentVersion> ver = [SELECT Id FROM ContentVersion Where ContentDocumentId IN :idList];
-        for(ContentVersion e: ver){
-            versionContentList.add(e.Id);
-        }
-        List<ContentDistribution> contentDistributions = [SELECT Id, ContentDownloadUrl FROM ContentDistribution  Where ContentVersionId IN :versionContentList];
-        for(ContentDistribution cd: contentDistributions){
-            ContentDoc contentDoc = new ContentDoc();
-            contentDoc.link = cd.ContentDownloadUrl;
-            contentDocs.add(contentDoc);
-        }
-        return contentDocs;
-    }
-
-    @AuraEnabled
-    public static List<Reservation> getReservedDate(String productId){
-        List<Reservation> reservedList = new List<Reservation>();
-        List<RF_Flat_Reservation__c> reservations = [SELECT Id, Reservation_from__c, Reservation_to__c FROM RF_Flat_Reservation__c WHERE Product__c = :productId AND Reservation_to__c > TODAY ORDER BY Reservation_from__c ASC];
-        System.debug(reservations.size());
-        for(RF_Flat_Reservation__c r: reservations){
-            Reservation res = new Reservation();
-            res.reservationFrom = r.Reservation_from__c;
-            res.reservationTo = r.Reservation_to__c;
-            reservedList.add(res);
-        }
-        return reservedList;
     }
 
     @AuraEnabled
@@ -262,7 +262,6 @@ public with sharing class RF_Flat_Details {
                 oi.Order = order;
                 oi.OrderId = order.Id;
             }
-//            order.OrderItems.addAll(orderItems);
             Database.insert(orderItems);
         } catch (Exception e) {
             Database.rollback(sp);
@@ -416,7 +415,6 @@ public with sharing class RF_Flat_Details {
         Savepoint sp = Database.setSavepoint();
         List<OrderItem> orderItems = [SELECT Id, Product2Id FROM OrderItem WHERE Id = :recordId AND CreatedById = :UserInfo.getUserId()];
         List<Contact> contacts = [SELECT Id, AccountId FROM Contact WHERE Email = :UserInfo.getUserEmail()];
-        System.debug('Contact count ' + contacts.size());
         Case caseItem = new Case();
         for(OrderItem orderItem: orderItems){
             caseItem.Product__c = orderItem.Product2Id;
@@ -443,5 +441,132 @@ public with sharing class RF_Flat_Details {
     public static List<Case> getCases(){
         List<Case> cases = [SELECT Id, Subject, Description, Status, Product__r.Name, CreatedDate FROM Case WHERE ContactEmail = :UserInfo.getUserEmail()];
         return cases;
+    }
+
+    @AuraEnabled
+    public static List<Product> getAllResultList(String text, List<Product> inNewPriceBook){
+        text = '%' + text + '%';
+        List<String> ids = new List<String>();
+        for(Product productBook: inNewPriceBook){
+            ids.add(productBook.id);
+        }
+        List<Product2> products = [SELECT Id, Name, Family, Country__c, City__c, (SELECT Id, UnitPrice FROM PricebookEntries WHERE IsActive = true AND Pricebook2.IsStandard = true) FROM Product2 WHERE IsActive = true AND Id NOT IN :ids AND Name like :text];
+        List<Product> ppb = new List<Product>();
+        for(Product2 p: products) {
+            Product product = new Product();
+            product.id = p.Id;
+            product.title = p.Name;
+            product.family = p.Family;
+            product.country = p.Country__c;
+            product.city = p.City__c;
+            product.unitPrice = p.PricebookEntries.get(0).UnitPrice;
+            product.newUnitPrice = 0.0;
+            product.newGroupUnitPrice = 0.0;
+            ppb.add(product);
+        }
+        return ppb;
+    }
+
+    @AuraEnabled
+    public static ProductPriceBook getPriceBookDetails(String recordId){
+        ProductPriceBook ppb = new ProductPriceBook();
+        List<Product> productList = new List<Product>();
+        if(!String.isBlank(recordId)){
+            List<Product2> products = [SELECT Id, Name, Family, Country__c, City__c, (SELECT Id, UnitPrice, Pricebook2.Name, Pricebook2.IsStandard, Pricebook2.StartDate__c, Pricebook2.End_Date__c FROM PricebookEntries WHERE IsActive = true AND  Pricebook2Id = :recordId) FROM Product2 WHERE IsActive = true AND Id IN (SELECT Product2Id FROM PricebookEntry WHERE Pricebook2Id = :recordId)];
+            for(Product2 p: products){
+                Product product = new Product();
+                product.id = p.Id;
+                product.title = p.Name;
+                product.family = p.Family;
+                product.country = p.Country__c;
+                product.city = p.City__c;
+                product.unitPrice = p.PricebookEntries.get(0).UnitPrice;
+                product.newUnitPrice = 0.0;
+                product.newGroupUnitPrice = 0.0;
+                product.priceBookEntryId = p.PricebookEntries.get(0).Id;
+                productList.add(product);
+            }
+            ppb.priceBookId = recordId;
+            ppb.isStandard = products.get(0).PricebookEntries.get(0).Pricebook2.IsStandard;
+            ppb.priceBookName = products.get(0).PricebookEntries.get(0).Pricebook2.Name;
+            ppb.startDate = products.get(0).PricebookEntries.get(0).Pricebook2.StartDate__c;
+            ppb.endDate = products.get(0).PricebookEntries.get(0).Pricebook2.End_Date__c;
+            ppb.productNewPriceBookList = productList;
+        }
+        return ppb;
+    }
+
+    @AuraEnabled
+    public static String upsertPriceBook(ProductPriceBook productPriceBook){
+        Savepoint sp = Database.setSavepoint();
+        List<Product> products = productPriceBook.productNewPriceBookList;
+        List<String> productEntryIds = new List<String>();
+        List<PricebookEntry> priceBookEntries = new List<PricebookEntry>();
+        Pricebook2 pricebook = new Pricebook2();
+        try {
+            Map<String, Product2> productMap = new Map<String, Product2>([Select Id From Product2]);
+            if (!String.isBlank(productPriceBook.priceBookId)) {
+                pricebook.Id = productPriceBook.priceBookId;
+            }
+            pricebook.Name = productPriceBook.priceBookName;
+            pricebook.StartDate__c = productPriceBook.startDate;
+            pricebook.End_Date__c = productPriceBook.endDate;
+            pricebook.IsActive = true;
+            Database.upsert(pricebook);
+            for (Product p: products) {
+                PricebookEntry pricebookEntry = new PricebookEntry();
+                if (!String.isBlank(p.priceBookEntryId)) {
+                    productEntryIds.add(p.priceBookEntryId);
+                    pricebookEntry.Id = p.priceBookEntryId;
+                } else {
+                    pricebookEntry.Pricebook2Id = pricebook.Id;
+                    pricebookEntry.Pricebook2 = pricebook;
+                    pricebookEntry.Product2Id = p.id;
+                    pricebookEntry.Product2 = productMap.get(p.id);
+                }
+                pricebookEntry.UnitPrice = p.unitPrice;
+                pricebookEntry.IsActive = true;
+                if(p.newUnitPrice > 0) {
+                    pricebookEntry.UnitPrice = p.newUnitPrice;
+                }
+                if (p.newGroupUnitPrice > 0 && (p.newGroupUnitPrice < p.newUnitPrice || p.newUnitPrice == 0)) {
+                    pricebookEntry.UnitPrice = p.newGroupUnitPrice;
+                }
+                priceBookEntries.add(pricebookEntry);
+            }
+            List<PricebookEntry> pricebookToDelete = [SELECT Id FROM PricebookEntry WHERE Id NOT IN :productEntryIds AND Pricebook2Id = :pricebook.Id];
+            Database.delete(pricebookToDelete);
+            List<Database.UpsertResult> sr = Database.upsert(priceBookEntries);
+        } catch (Exception e){
+            Database.rollback(sp);
+            throw new ExternalObjectException(e.getMessage());
+        }
+        return 'PriceBook ' + pricebook.Id + ' update successful';
+    }
+
+
+    @AuraEnabled
+    public static List<Pricebook2> getAllPriceBooks(String recordId){
+        List<Pricebook2> pricebooks = [SELECT Id, Name, StartDate__c, End_Date__c, IsStandard FROM Pricebook2 WHERE IsActive = true];
+        return pricebooks;
+    }
+
+    @AuraEnabled
+    public static String removeFromPriceBook(String recordId){
+        Savepoint sp = Database.setSavepoint();
+        try {
+            List<Pricebook2> pricebooks = [SELECT Id, (SELECT Id FROM PricebookEntries) FROM Pricebook2 WHERE Id = :recordId];
+            for(Pricebook2 p: pricebooks){
+                List<PricebookEntry> pricebookEntries = p.PricebookEntries;
+                System.debug(pricebookEntries.size());
+                Database.delete(pricebookEntries);
+            }
+            System.debug(pricebooks.size());
+            Database.delete(pricebooks);
+        } catch(Exception e) {
+            Database.rollback(sp);
+            throw new ExternalObjectException(e.getMessage());
+        }
+        return 'Pricebook removed from Pricebook list';
     }
 }

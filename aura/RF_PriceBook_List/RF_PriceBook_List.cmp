@@ -1,0 +1,78 @@
+<!--
+ - Created by BRITENET on 21.10.2019.
+ -->
+
+<aura:component description="RF_PriceBook_List" implements="flexipage:availableForAllPageTypes" controller="RF_Flat_Details">
+    <aura:attribute name="pricebooks" type="Object[]" />
+    <aura:registerEvent name="showSpinner" type="c:RF_Flat_Spinner_Show_Event"/>
+    <aura:registerEvent name="hideSpinner" type="c:RF_Flat_Spinner_Hide_Event"/>
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    <ltng:require styles="{!$Resource.NoHeader}"/>
+    <div class="container">
+        <div class="c-container">
+            <aura:if isTrue="{! not(empty(v.pricebooks)) }">
+                <div class="slds-page-header" role="banner">
+                    <lightning:layout horizontalAlign="center">
+                        <lightning:layoutItem size="11">
+                            <p class="slds-text-heading--label" ><h2 class="slds-text-heading_large">{! $Label.c.LABEL_PRICEBOOKS }</h2></p>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem size="1">
+                            <lightning:button label="New" variant="neutral" onclick="{! c.handleAddNew }"/>
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                </div>
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                    <thead>
+                    <tr class="slds-line-height_reset">
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="{! $Label.c.LABEL_PRICEBOOK_NAME }">{! $Label.c.LABEL_PRICEBOOK_NAME }</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="{! $Label.c.LABEL_PRICEBOOK_START_DATE }">{! $Label.c.LABEL_PRICEBOOK_START_DATE }</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="{! $Label.c.LABEL_PRICEBOOK_END_DATE }">{! $Label.c.LABEL_PRICEBOOK_END_DATE }</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate">&nbsp;</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate">&nbsp;</div>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <aura:iteration items="{! v.pricebooks }" var="row" indexVar="index">
+                        <tr class="slds-hint-parent">
+                            <td data-label="{! $Label.c.LABEL_PRICEBOOK_NAME }">
+                                <div class="slds-truncate" title="{! row.title }">{! row.Name }</div>
+                            </td>
+                            <td data-label="{! $Label.c.LABEL_PRICEBOOK_START_DATE }">
+                                <div class="slds-truncate" title="{! row.price.value }"><lightning:formattedDateTime value="{! row.StartDate__c }" year="2-digit" month="short" day="2-digit"/></div>
+                            </td>
+                            <td data-label="{! $Label.c.LABEL_PRICEBOOK_END_DATE }">
+                                <div class="slds-truncate" title="{! row.price.value }"><lightning:formattedDateTime value="{! row.End_Date__c }" year="2-digit" month="short" day="2-digit"/></div>
+                            </td>
+                            <td>
+                                <div class="slds-truncate">
+                                    <aura:if isTrue="{! not(row.IsStandard) }">
+                                        <lightning:button label="{! $Label.c.BTN_DELETE }" variant="neutral" iconPosition="left" value="{! index + '/' +row.Id }" onclick="{! c.handleRemovePriceBook }"/>
+                                    </aura:if>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="slds-truncate">
+                                    <lightning:button label="{! $Label.c.BTN_EDIT_PRICEBOOK }" variant="neutral" value="{! row.Id }" onclick="{! c.showPriceBook }"/>
+                                </div>
+                            </td>
+                        </tr>
+                    </aura:iteration>
+                    </tbody>
+                </table>
+                <aura:set attribute="else">
+                    <center><h2 class="slds-text-heading_large">{! $Label.c.LABEL_PRIEBOOK_NO_PRICEBOOK }</h2></center>
+                </aura:set>
+            </aura:if>
+        </div>
+    </div>
+</aura:component>

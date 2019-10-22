@@ -1,0 +1,86 @@
+<!--
+ - Created by BRITENET on 18.10.2019.
+ -->
+
+<aura:component description="RF_PriceBook_Standard_List" controller="RF_Flat_Details">
+    <aura:attribute name="productStandardPriceBookList" type="Object[]" default=""/>
+    <aura:attribute name="productPriceBook" type="Object"/>
+    <aura:attribute name="filterText" type="String" default=""/>
+    <aura:attribute name="recordId" type="String" default=""/>
+    <aura:registerEvent name="showSpinner" type="c:RF_Flat_Spinner_Show_Event"/>
+    <aura:registerEvent name="hideSpinner" type="c:RF_Flat_Spinner_Hide_Event"/>
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    <aura:method name="refreshLists" action="{! c.init }" access="PUBLIC"/>
+
+    <fieldset class="slds-box slds-theme--default slds-container--center">
+        <legend class="slds-text-heading--medium">
+            {! $Label.c.LABEL_PRODUCT_LIST }
+        </legend>
+        <lightning:layout multipleRows="true" horizontalAlign="center">
+            <lightning:layoutItem size="3" padding="around-small">
+                <lightning:input label="{! $Label.c.LABEL_PRODUCT_NAME }" value="{! v.filterText }"/>
+            </lightning:layoutItem>
+            <lightning:layoutItem size="1" padding="around-small" class="btn-bottom">
+                <lightning:button variant="brand" label="{! $Label.c.BTN_FILTER }" title="{! $Label.c.BTN_FILTER }" onclick="{! c.handleFilterResult }"/>
+            </lightning:layoutItem>
+            <lightning:layoutItem size="12">
+                <div class="slds-table--header-fixed_container" style="max-height:450px;">
+                    <div class="slds-scrollable_y" style="height:100%;">
+                        <table class="slds-table slds-table_bordered slds-table--header-fixed">
+                            <thead>
+                                <tr class="slds-text-title_caps">
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate slds-cell-fixed-header"/>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate slds-cell-fixed-header" title="{! $Label.c.LABEL_PRODUCT_NAME }">{! $Label.c.LABEL_PRODUCT_NAME }</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate slds-cell-fixed-header" title="{! $Label.c.LABEL_PRODUCT_TYPE }">{! $Label.c.LABEL_PRODUCT_TYPE }</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate slds-cell-fixed-header" title="{! $Label.c.LABEL_PRODUCT_CITY }">{! $Label.c.LABEL_PRODUCT_CITY }</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate slds-cell-fixed-header" title="{! $Label.c.LABEL_PRODUCT_COUNTRY }">{! $Label.c.LABEL_PRODUCT_COUNTRY }</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate slds-cell-fixed-header" title="{! $Label.c.LABEL_PRODUCT_PRICE }">{! $Label.c.LABEL_PRODUCT_PRICE }</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <aura:iteration items="{! v.productStandardPriceBookList }" var="product" indexVar="index">
+                                    <tr class="slds-hint-parent">
+                                        <td data-label="{! $Label.c.LABEL_ORDER_TABLE_COMPLAINT }">
+                                            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_TABLE_COMPLAINT }">
+                                                <lightning:button label="Add to new Pricebook list" value="{! index }" onclick="{! c.handleAddToNewList }"/>
+                                            </div>
+                                        </td>
+                                        <td data-label="{! $Label.c.LABEL_ORDER_TABLE_TITLE }">
+                                            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_TABLE_TITLE }">{! product.title }</div>
+                                        </td>
+                                        <td data-label="{! $Label.c.LABEL_ORDER_START_DATE }">
+                                            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_START_DATE }">{! product.family }</div>
+                                        </td>
+                                        <td data-label="{! $Label.c.LABEL_ORDER_START_DATE }">
+                                            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_START_DATE }">{! product.city }</div>
+                                        </td>
+                                        <td data-label="{! $Label.c.LABEL_ORDER_START_DATE }">
+                                            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_START_DATE }">{! product.country }</div>
+                                        </td>
+                                        <td data-label="{! $Label.c.LABEL_ORDER_START_DATE }">
+                                            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_START_DATE }">
+                                                <lightning:formattedNumber value="{! product.unitPrice }" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </aura:iteration>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </fieldset>
+</aura:component>

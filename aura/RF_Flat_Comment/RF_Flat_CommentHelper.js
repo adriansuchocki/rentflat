@@ -3,9 +3,9 @@
  */
 ({
     getFlatComments: function (component, recordId) {
-        let spinnerAction = component.find("spinnerResult");
+        let spinnerShowEvent = $A.get("e.c:RF_Flat_Spinner_Show_Event");
+        spinnerShowEvent.fire();
         let action = component.get("c.getFlatComments");
-        spinnerAction.showHideSpinner(true);
         action.setParams({'recordId': recordId});
         action.setCallback(this, function(response){
             let state = response.getState();
@@ -22,7 +22,8 @@
                 });
                 toastEvent.fire();
             }
-            spinnerAction.showHideSpinner(false);
+            let spinnerHideEvent = $A.get("e.c:RF_Flat_Spinner_Hide_Event");
+            spinnerHideEvent.fire();
         });
         $A.enqueueAction(action);
     }

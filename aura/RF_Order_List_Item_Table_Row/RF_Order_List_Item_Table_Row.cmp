@@ -38,8 +38,8 @@
                             <form class="slds-form--stacked">
                                 <div class="slds-popover__body slds-p-horizontal_none" id="dialog-body-id-15" style="max-height: 70vh;">
                                     <div class="slds-p-vertical_x-small slds-p-horizontal_small">
-                                        <lightning:input aura:id="expenseform" name="subject" label="Subject" value="{! v.subject }" required="true"/>
-                                        <lightning:textarea aura:id="expenseform" name="description" label="Description" value="{! v.description }" required="true"/>
+                                        <lightning:input aura:id="expenseform" name="{! $Label.c.LABEL_ORDER_SUBJECT }" label="{! $Label.c.LABEL_ORDER_SUBJECT }" value="{! v.subject }" required="true"/>
+                                        <lightning:textarea aura:id="expenseform" name="{! $Label.c.LABEL_ORDER_DESCRIPTION }" label="{! $Label.c.LABEL_ORDER_DESCRIPTION }" value="{! v.description }" required="true"/>
                                     </div>
                                 </div>
                                 <footer class="slds-popover__footer">

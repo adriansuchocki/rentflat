@@ -3,9 +3,9 @@
  */
 ({
     removeElementFromCartListHelper: function (component, index) {
-        let spinnerAction = component.find("spinnerResult");
+        let spinnerShowEvent = $A.get("e.c:RF_Flat_Spinner_Show_Event");
+        spinnerShowEvent.fire();
         let action = component.get("c.removeElementFromCartList");
-        spinnerAction.showHideSpinner(true);
         action.setParams({'index': index});
         action.setCallback(this, function(response){
             let state = response.getState();
@@ -15,7 +15,8 @@
                 let searchEvent = $A.get("e.c:RF_Flat_Search_Cart");
                 searchEvent.fire();
             }
-            spinnerAction.showHideSpinner(false);
+            let spinnerHideEvent = $A.get("e.c:RF_Flat_Spinner_Hide_Event");
+            spinnerHideEvent.fire();
         });
         $A.enqueueAction(action);
     },

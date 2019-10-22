@@ -3,9 +3,9 @@
  */
 ({
     addToCartHelper: function (component, recordId, title, photo, reservationFrom, reservationTo, priceBookId, priceBookValue){
-        let spinnerAction = component.find("spinnerResult");
+        let spinnerShowEvent = $A.get("e.c:RF_Flat_Spinner_Show_Event");
+        spinnerShowEvent.fire();
         let action = component.get("c.addToCart");
-        spinnerAction.showHideSpinner(true);
         let reservationList = [{"recordId": recordId, "title": title, "link": photo, "reservationFrom": reservationFrom, "reservationTo": reservationTo, "priceBookId": priceBookId, "priceBookValue": priceBookValue}];
         let JSONlist = JSON.stringify(reservationList);
         action.setParams({"reservationList": JSONlist});
@@ -30,7 +30,8 @@
                 });
                 toastEvent.fire();
             }
-            spinnerAction.showHideSpinner(false);
+            let spinnerHideEvent = $A.get("e.c:RF_Flat_Spinner_Hide_Event");
+            spinnerHideEvent.fire();
         });
         $A.enqueueAction(action);
     },
