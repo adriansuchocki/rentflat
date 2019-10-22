@@ -2,6 +2,8 @@
     <aura:attribute name="flat" type="Object"/>
     <aura:attribute name="flatReservations" type="Object[]"/>
     <aura:attribute name="follow" type="Boolean" default="false"/>
+    <aura:registerEvent name="showSpinner" type="c:RF_Flat_Spinner_Show_Event"/>
+    <aura:registerEvent name="hideSpinner" type="c:RF_Flat_Spinner_Hide_Event"/>
     <aura:handler name="init" value="{! this }" action="{! c.init }"/>
     <c:RF_DivisionSearch_Spinner aura:id="spinnerResult"/>
     <div class="slds-page-header" role="banner">

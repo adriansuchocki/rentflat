@@ -36,6 +36,13 @@
         <value>Edit</value>
     </labels>
     <labels>
+        <fullName>BTN_EDIT_PRICEBOOK</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>BTN_EDIT_PRICEBOOK</shortDescription>
+        <value>Edit Pricebook</value>
+    </labels>
+    <labels>
         <fullName>BTN_RESERVE</fullName>
         <language>en_US</language>
         <protected>true</protected>
@@ -48,6 +55,34 @@
         <protected>true</protected>
         <shortDescription>BTN_BASKET</shortDescription>
         <value>Add to Cart</value>
+    </labels>
+    <labels>
+        <fullName>BTN_FILTER</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>BTN_FILTER</shortDescription>
+        <value>Filter</value>
+    </labels>
+    <labels>
+        <fullName>BTN_FOLLOW</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>BTN_FOLLOW</shortDescription>
+        <value>Follow</value>
+    </labels>
+    <labels>
+        <fullName>BTN_NEXT</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>BTN_NEXT</shortDescription>
+        <value>Next</value>
+    </labels>
+    <labels>
+        <fullName>BTN_PREV</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>BTN_PREV</shortDescription>
+        <value>Previous</value>
     </labels>
     <labels>
         <fullName>BTN_SAVE</fullName>
@@ -69,6 +104,27 @@
         <protected>true</protected>
         <shortDescription>BTN_SEND</shortDescription>
         <value>Send</value>
+    </labels>
+    <labels>
+        <fullName>BTN_SUBMIT</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>BTN_SUBMIT</shortDescription>
+        <value>Submit</value>
+    </labels>
+    <labels>
+        <fullName>BTN_STOP_FOLLOW</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>BTN_STOP_FOLLOW</shortDescription>
+        <value>Stop following</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_CART_EMPTY</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_CART_EMPTY</shortDescription>
+        <value>Cart is empty</value>
     </labels>
     <labels>
         <fullName>LABEL_CASE_CREATED_DATE</fullName>
@@ -104,6 +160,20 @@
         <protected>true</protected>
         <shortDescription>LABEL_CASE_TITLE</shortDescription>
         <value>Title</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_COMMENT</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_COMMENT</shortDescription>
+        <value>Comment</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_COMMENTS_NO_COMMENTS</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_COMMENTS_NO_COMMENTS</shortDescription>
+        <value>No comments</value>
     </labels>
     <labels>
         <fullName>LABEL_COMMENTS_RATING</fullName>
@@ -358,6 +428,13 @@
         <value>Contract number</value>
     </labels>
     <labels>
+        <fullName>LABEL_ORDER_DESCRIPTION</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_ORDER_DESCRIPTION</shortDescription>
+        <value>Description</value>
+    </labels>
+    <labels>
         <fullName>LABEL_ORDER_END_DATE</fullName>
         <language>en_US</language>
         <protected>true</protected>
@@ -377,6 +454,13 @@
         <protected>true</protected>
         <shortDescription>LABEL_ORDER_START_DATE</shortDescription>
         <value>Start date</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_ORDER_SUBJECT</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_ORDER_SUBJECT</shortDescription>
+        <value>Subject</value>
     </labels>
     <labels>
         <fullName>LABEL_ORDER_TABLE_DETAILS</fullName>
@@ -440,6 +524,48 @@
         <protected>true</protected>
         <shortDescription>LABEL_ORDER_TOTAL_AMOUNT</shortDescription>
         <value>Total amount</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRICEBOOKS</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRICEBOOKS</shortDescription>
+        <value>Pricebook list</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRICEBOOK_END_DATE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRICEBOOK_END_DATE</shortDescription>
+        <value>End date</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRICEBOOK_NAME</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRICEBOOK_NAME</shortDescription>
+        <value>Pricebook name</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRIEBOOK_NO_PRICEBOOK</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRIEBOOK_NO_PRICEBOOK</shortDescription>
+        <value>No pricebooks to display</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRIEBOOK_PERCENTAGE_REDUCTION</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRIEBOOK_PERCENTAGE_REDUCTION</shortDescription>
+        <value>Percentage reduction</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRICEBOOK_START_DATE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRICEBOOK_START_DATE</shortDescription>
+        <value>Start date</value>
     </labels>
     <labels>
         <fullName>LABEL_PRODUCT_BATHROOMS</fullName>
@@ -547,11 +673,32 @@
         <value>Lift</value>
     </labels>
     <labels>
+        <fullName>LABEL_PRODUCT_LIST</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_LIST</shortDescription>
+        <value>List of products</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_LIST_NEW_PRICEBOOK</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_LIST_NEW_PRICEBOOK</shortDescription>
+        <value>List of products for new Pricebook</value>
+    </labels>
+    <labels>
         <fullName>LABEL_PRODUCT_MEZZANINE</fullName>
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>LABEL_PRODUCT_MEZZANINE</shortDescription>
         <value>Mezzanine</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_NAME</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_NAME</shortDescription>
+        <value>Product name</value>
     </labels>
     <labels>
         <fullName>LABEL_PRODUCT_NEAR_METRO</fullName>
@@ -596,11 +743,32 @@
         <value>Parking/garage</value>
     </labels>
     <labels>
+        <fullName>LABEL_PRODUCT_PRICE_PER_DAY</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_PRICE_PER_DAY</shortDescription>
+        <value>per day</value>
+    </labels>
+    <labels>
         <fullName>LABEL_PRODUCT_PRICE</fullName>
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>LABEL_PRODUCT_PRICE</shortDescription>
         <value>Price</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_PRICE_REDUCTION</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_PRICE_REDUCTION</shortDescription>
+        <value>Manual price reduction</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_PRICE_REDUCTION_PERCENTAGE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_PRICE_REDUCTION_PERCENTAGE</shortDescription>
+        <value>Percentage price reduction</value>
     </labels>
     <labels>
         <fullName>LABEL_PRODUCT_PROPERTY_ADDRESS</fullName>
@@ -622,6 +790,13 @@
         <protected>true</protected>
         <shortDescription>LABEL_PRODUCT_PROPERTY_AMENITES_AND_FEATURES</shortDescription>
         <value>Amenities and Features</value>
+    </labels>
+    <labels>
+        <fullName>LABEL_PRODUCT_REMOVE_FROM_LIST</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_REMOVE_FROM_LIST</shortDescription>
+        <value>Remove from list</value>
     </labels>
     <labels>
         <fullName>LABEL_PRODUCT_RIVER_VIEW</fullName>

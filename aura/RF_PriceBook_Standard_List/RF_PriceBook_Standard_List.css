@@ -1,0 +1,16 @@
+/**
+ * Created by BRITENET on 18.10.2019.
+ */
+.THIS {
+}
+
+.THIS .btn-bottom {
+    align-self: flex-end;
+}
+
+.THIS .slds-cell-fixed-header {
+    background-color: var(--lwc-tableColorBackgroundHeader,rgb(250, 250, 249));
+    position: absolute;
+    top: 10px;
+    min-height: 0;
+}

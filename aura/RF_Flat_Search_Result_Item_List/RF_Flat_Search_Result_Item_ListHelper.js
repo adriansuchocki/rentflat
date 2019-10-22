@@ -3,7 +3,8 @@
  */
 ({
     addToFollowHelper: function (component, id) {
-        let spinnerAction = component.find("spinnerResult");
+        let spinnerShowEvent = $A.get("e.c:RF_Flat_Spinner_Show_Event");
+        spinnerShowEvent.fire();
         let action = component.get("c.addToFollow");
         action.setParams({'recordId': id});
         action.setCallback(this, function(response){
@@ -28,12 +29,15 @@
                 });
                 toastEvent.fire();
             }
+            let spinnerHideEvent = $A.get("e.c:RF_Flat_Spinner_Hide_Event");
+            spinnerHideEvent.fire();
         });
         $A.enqueueAction(action);
     },
 
     removeFromFollowHelper: function (component, id) {
-        let spinnerAction = component.find("spinnerResult");
+        let spinnerShowEvent = $A.get("e.c:RF_Flat_Spinner_Show_Event");
+        spinnerShowEvent.fire();
         let action = component.get("c.removeFromFollow");
         action.setParams({'recordId': id});
         action.setCallback(this, function(response){
@@ -58,6 +62,8 @@
                 });
                 toastEvent.fire();
             }
+            let spinnerHideEvent = $A.get("e.c:RF_Flat_Spinner_Hide_Event");
+            spinnerHideEvent.fire();
         });
         $A.enqueueAction(action);
     }

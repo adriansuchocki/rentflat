@@ -7,7 +7,7 @@
     <lightning:layout multipleRows="true">
         <lightning:layoutItem size="12" class="slds-align_absolute-center" flexibility="auto" padding="around-small" >
             <aura:if isTrue="{! v.comments.length==0}">
-                <ui:outputText value="No comments" />
+                <ui:outputText value="{! $Label.c.LABEL_COMMENTS_NO_COMMENTS }" />
             </aura:if>
         </lightning:layoutItem>
         <lightning:layoutItem size="12">
@@ -19,7 +19,7 @@
                                 <header class="slds-post__header slds-media">
                                     <div class="slds-media__figure slds-box--border">
                                         <a href="javascript:void(0);" class="slds-avatar slds-avatar_circle slds-avatar_large">
-                                            <img alt="{! comment.CreatedBy.Name }" src="{! $Resource.NoPhoto }" title="{!comment.CreatedBy.Name}"  />
+                                            <img alt="{! comment.CreatedBy.Name }" src="{! $Resource.NoPhoto }" title="{! comment.CreatedBy.Name }"  />
                                         </a>
                                     </div>
                                     <div class="slds-media__body">
@@ -29,17 +29,17 @@
                                             </p>
                                         </div>
                                         <p class="slds-text-body_small">
-                                            <lightning:formattedDateTime value="{!comment.LastModifiedDate}" year="numeric" month="short" day="numeric"  hour="2-digit" minute="2-digit" second="2-digit" />
+                                            <lightning:formattedDateTime value="{! comment.LastModifiedDate }" year="numeric" month="short" day="numeric"  hour="2-digit" minute="2-digit" second="2-digit" />
                                         </p>
                                     </div>
                                 </header>
                                 <div class="slds-post__content slds-text-longform">
-                                    <p><lightning:formattedRichText value="{!comment.Comment__c}"/></p>
+                                    <p><lightning:formattedRichText value="{! comment.Comment__c }"/></p>
                                 </div>
                                 <footer class="slds-post__footer">
                                     <ul class="slds-post__footer-actions-list slds-list_horizontal">
                                         <li class="slds-col slds-item slds-m-right_medium">
-                                            <c:RF_Flat_Rating aura:id="FiveStarRating"  value="{!comment.Rating__c}" readonly="true"/>
+                                            <c:RF_Flat_Rating aura:id="FiveStarRating"  value="{! comment.Rating__c }" readonly="true"/>
                                         </li>
                                     </ul>
                                 </footer>

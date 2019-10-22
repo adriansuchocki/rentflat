@@ -1,0 +1,115 @@
+<!--
+ - Created by BRITENET on 18.10.2019.
+ -->
+
+<aura:component description="RF_PriceBook_New_List" controller="RF_Flat_Details">
+    <aura:attribute name="productStandardPriceBookList" type="Object[]"/>
+    <aura:attribute name="productPriceBook" type="Object"/>
+    <aura:attribute name="recordId" type="String" default=""/>
+    <aura:attribute name="startDate" type="Date"/>
+    <aura:attribute name="endDate" type="Date"/>
+    <aura:attribute name="percentageReduction" type="Decimal" default="0.00"/>
+    <aura:attribute name="options" type="List" default="[
+    {'label': 'Single value', 'value': 'false'},
+    {'label': 'Group', 'value': 'true'}
+    ]"/>
+    <aura:attribute name="value" type="String" default="false"/>
+    <aura:registerEvent name="showSpinner" type="c:RF_Flat_Spinner_Show_Event"/>
+    <aura:registerEvent name="hideSpinner" type="c:RF_Flat_Spinner_Hide_Event"/>
+    <aura:registerEvent name="refreshLists" type="c:RF_PriceBook_Refresh_List_Event"/>
+    <aura:if isTrue="{! not(empty(v.productPriceBook.productNewPriceBookList)) }">
+        <fieldset class="slds-box slds-theme--default slds-container--center slds-p-around_medium slds-m-top--medium">
+            <legend class="slds-text-heading--medium">
+                {! $Label.c.LABEL_PRODUCT_LIST_NEW_PRICEBOOK }
+            </legend>
+            <form>
+                <lightning:layout multipleRows="true" horizontalAlign="center">
+                    <lightning:layoutItem size="3" padding="around-small">
+                        <lightning:input aura:id="expenseform" label="{! $Label.c.LABEL_PRICEBOOK_NAME }" disabled="{! not(empty(v.productPriceBook.priceBookId)) }" required="{! empty(v.productPriceBook.priceBookId) }" value="{! v.productPriceBook.priceBookName }"/>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="2" padding="around-small">
+                        <lightning:input aura:id="expenseform" type="date" name="input5" label="{! $Label.c.LABEL_PRICEBOOK_START_DATE }" disabled="{! v.productPriceBook.isStandard }" required="{! not(v.productPriceBook.isStandard) }" value="{! v.productPriceBook.startDate }" />
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="2" padding="around-small">
+                        <lightning:input aura:id="expenseform" type="date" name="input5" label="{! $Label.c.LABEL_PRICEBOOK_END_DATE }" disabled="{! v.productPriceBook.isStandard }" required="{! not(v.productPriceBook.isStandard) }" value="{! v.productPriceBook.endDate }" />
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="2" padding="around-small">
+                        <lightning:input type="number" name="input6" label="Percentage reduction" value="{! v.percentageReduction }" formatter="percent" step="0.01" onchange="{! c.handleCalculateValue }"/>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="2" class="btn-bottom" padding="around-small">
+                        <lightning:button label="{! $Label.c.BTN_SAVE }" onclick="{! c.handleUpsertPriceBook }"/>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="12">
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-m-top--medium">
+                            <thead>
+                            <tr class="slds-line-height_reset">
+                                <th class="" scope="col">
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="{! $Label.c.LABEL_PRODUCT_NAME }">{! $Label.c.LABEL_PRODUCT_NAME }</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="{! $Label.c.LABEL_PRODUCT_TYPE }">{! $Label.c.LABEL_PRODUCT_TYPE }</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="{! $Label.c.LABEL_PRODUCT_CITY }">{! $Label.c.LABEL_PRODUCT_CITY }</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="{! $Label.c.LABEL_PRODUCT_COUNTRY }">{! $Label.c.LABEL_PRODUCT_COUNTRY }</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="{! $Label.c.LABEL_PRODUCT_PRICE }">{! $Label.c.LABEL_PRODUCT_PRICE }</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="{! $Label.c.LABEL_PRODUCT_PRICE_REDUCTION }">{! $Label.c.LABEL_PRODUCT_PRICE_REDUCTION }</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="{! $Label.c.LABEL_PRODUCT_PRICE_REDUCTION_PERCENTAGE }">{! $Label.c.LABEL_PRODUCT_PRICE_REDUCTION_PERCENTAGE }</div>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <aura:iteration items="{! v.productPriceBook.productNewPriceBookList }" var="product" indexVar="index">
+                                <tr class="slds-hint-parent">
+                                    <td data-label="{! $Label.c.LABEL_ORDER_TABLE_COMPLAINT }">
+                                        <div class="slds-truncate" title="{! $Label.c.LABEL_PRODUCT_REMOVE_FROM_LIST }">
+                                            <lightning:button label="{! $Label.c.LABEL_PRODUCT_REMOVE_FROM_LIST }" value="{! index }" onclick="{! c.handleRemoveFromNewList }"/>
+                                        </div>
+                                    </td>
+                                    <td data-label="{! $Label.c.LABEL_PRODUCT_NAME }">
+                                        <div class="slds-truncate" title="{! $Label.c.LABEL_PRODUCT_NAME }">{! product.title }</div>
+                                    </td>
+                                    <td data-label="{! $Label.c.LABEL_PRODUCT_TYPE }">
+                                        <div class="slds-truncate" title="{! $Label.c.LABEL_PRODUCT_TYPE }">{! product.family }</div>
+                                    </td>
+                                    <td data-label="{! $Label.c.LABEL_PRODUCT_CITY }">
+                                        <div class="slds-truncate" title="{! $Label.c.LABEL_PRODUCT_CITY }">{! product.city }</div>
+                                    </td>
+                                    <td data-label="{! $Label.c.LABEL_PRODUCT_COUNTRY }">
+                                        <div class="slds-truncate" title="{! $Label.c.LABEL_PRODUCT_COUNTRY }">{! product.country }</div>
+                                    </td>
+                                    <td data-label="{! $Label.c.LABEL_PRODUCT_PRICE }">
+                                        <div class="slds-truncate" title="{! $Label.c.LABEL_PRODUCT_PRICE }">
+                                            <lightning:formattedNumber value="{! product.unitPrice }" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/>
+                                        </div>
+                                    </td>
+                                    <td data-label="{! $Label.c.LABEL_PRODUCT_PRICE_REDUCTION }">
+                                        <div class="slds-truncate" title="{! $Label.c.LABEL_PRODUCT_PRICE_REDUCTION }">
+                                            <lightning:input type="number" name="input7" value="{! product.newUnitPrice }" formatter="currency" step="0.01"/>
+                                        </div>
+                                    </td>
+                                    <td data-label="{! $Label.c.LABEL_PRODUCT_PRICE_REDUCTION_PERCENTAGE }">
+                                        <div class="slds-truncate" title="{! $Label.c.LABEL_PRODUCT_PRICE_REDUCTION_PERCENTAGE }">
+                                            <lightning:formattedNumber value="{! product.newGroupUnitPrice }" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </aura:iteration>
+                            </tbody>
+                        </table>
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </form>
+        </fieldset>
+    </aura:if>
+</aura:component>

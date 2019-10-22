@@ -3,7 +3,7 @@
  */
 ({
     init: function(component, event, helper) {
-        helper.getOrdersHelper(component);
+        helper.getFollowHelper(component);
     },
 
     showFlat: function (component, event, helper) {

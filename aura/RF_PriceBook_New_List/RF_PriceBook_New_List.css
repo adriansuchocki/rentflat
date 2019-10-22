@@ -1,0 +1,13 @@
+/**
+ * Created by BRITENET on 18.10.2019.
+ */
+.THIS {
+}
+
+.THIS td>div>lightning-input>.slds-no-flex{
+    display: none !important;
+}
+
+.THIS .btn-bottom {
+    align-self: flex-end;
+}

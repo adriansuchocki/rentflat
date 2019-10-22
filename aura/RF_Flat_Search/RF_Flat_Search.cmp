@@ -7,6 +7,8 @@
     <aura:attribute name="cart" type="Boolean" default="false" />
     <aura:attribute name="page" type="Integer" default="0" />
     <aura:attribute name="cartList" type="Object[]" />
+    <aura:registerEvent name="showSpinner" type="c:RF_Flat_Spinner_Show_Event"/>
+    <aura:registerEvent name="hideSpinner" type="c:RF_Flat_Spinner_Hide_Event"/>
     <aura:handler event="c:RF_Flat_Search_Cart" action="{! c.init }"/>
     <aura:handler event="c:RF_Flat_Search_More_Result_Event" action="{! c.handleNextSearchFlat }"/>
     <aura:handler name="init" value="{! this }" action="{! c.init }"/>
@@ -45,7 +47,7 @@
                                     <aura:set attribute="else" >
                                         <div class="slds-p-around--medium">
                                             <center>
-                                                <p>Cart is empty.</p>
+                                                <p>{! $Label.c.LABEL_CART_EMPTY }</p>
                                             </center>
                                         </div>
                                     </aura:set>

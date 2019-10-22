@@ -1,0 +1,20 @@
+<!--
+ - Created by BRITENET on 18.10.2019.
+ -->
+
+<aura:component description="RF_PriceBook_View" implements="flexipage:availableForAllPageTypes,force:hasRecordId">
+    <aura:attribute name="productStandardPriceBookList" type="Object[]"/>
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="productPriceBook" type="Object"/>
+    <aura:handler name="refreshLists" event="c:RF_PriceBook_Refresh_List_Event" action="{! c.handleRefreshLists }"/>
+    <div class="container">
+        <lightning:layout multipleRows="true" horizontalAlign="center">
+            <lightning:layoutItem size="10">
+                <c:RF_PriceBook_Standard_List aura:id="product-search-form" productStandardPriceBookList="{! v.productStandardPriceBookList }" productPriceBook="{! v.productPriceBook }" recordId="{! v.recordId }"/>
+            </lightning:layoutItem>
+            <lightning:layoutItem size="10">
+                <c:RF_PriceBook_New_List productStandardPriceBookList="{! v.productStandardPriceBookList }" productPriceBook="{! v.productPriceBook }" recordId="{! v.recordId }"/>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+</aura:component>
