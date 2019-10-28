@@ -8,7 +8,7 @@
     <c:RF_DivisionSearch_Spinner aura:id="spinnerResult"/>
     <div class="slds-page-header" role="banner">
         <p>
-            <h6 class="slds-text-heading_small">{! $Label.c.LABEL_PRODUCT_NUMBER_OF_VIEW }: {! v.flat.numberOfViews }</h6>
+            <h6 class="slds-text-heading_small">{! $Label.c.LABEL_PRODUCT_NUMBER_OF_VIEW }: {! v.flat.product.Number_of_view__c }</h6>
         </p>
         <p class="slds-text-heading--label" ><h2 class="slds-text-heading_large">{! v.flat.product.Name }</h2></p>
         <p class="slds-text-heading--label" >

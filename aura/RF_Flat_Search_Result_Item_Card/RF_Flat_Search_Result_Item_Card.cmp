@@ -65,8 +65,8 @@
                 <aura:if isTrue="{! v.flat.priceBookEntryValue.UnitPrice == v.flat.standardValue }">
                                         <h2><lightning:formattedNumber value="{! v.flat.priceBookEntryValue.UnitPrice }" style="currency" currencyCode="{! $Locale.currencyCode }" currencyDisplayAs="symbol"/></h2>
                     <aura:set attribute="else">
-                        <h2><lightning:formattedNumber value="{! v.flat.standardValue }" style="currency" currencyCode="{! $Locale.currencyCode }" currencyDisplayAs="symbol"/></h2>
-                        <b style="text-decoration: line-through;"><h4><lightning:formattedNumber value="{! v.flat.priceBookEntryValue.UnitPrice }" style="currency" currencyCode="{! $Locale.currencyCode }" currencyDisplayAs="symbol"/></h4></b>
+                        <h2><lightning:formattedNumber value="{! v.flat.priceBookEntryValue.UnitPrice }" style="currency" currencyCode="{! $Locale.currencyCode }" currencyDisplayAs="symbol"/></h2>
+                        <b style="text-decoration: line-through;"><h4><lightning:formattedNumber value="{! v.flat.standardValue }" style="currency" currencyCode="{! $Locale.currencyCode }" currencyDisplayAs="symbol"/></h4></b>
                     </aura:set>
                 </aura:if>
                 <div style="background-color: white; height: 1px; width 100%; position: relative; transform: skewY(-10deg); margin-top: 5vh;">
