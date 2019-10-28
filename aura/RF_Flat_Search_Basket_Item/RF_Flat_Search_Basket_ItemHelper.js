@@ -15,6 +15,8 @@
                 let searchEvent = $A.get("e.c:RF_Flat_Search_Cart");
                 searchEvent.fire();
             }
+            let toastCmp = component.find("RFToast");
+            toastCmp.showToast(response.getReturnValue());
             let spinnerHideEvent = $A.get("e.c:RF_Flat_Spinner_Hide_Event");
             spinnerHideEvent.fire();
         });

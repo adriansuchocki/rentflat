@@ -2,7 +2,7 @@
  - Created by BRITENET on 12.10.2019.
  -->
 
-<aura:component description="RF_Flat_Search_Basket_Item" controller="RF_Flat_Details">
+<aura:component description="RF_Flat_Search_Basket_Item" controller="RF_Reservation_Controller">
     <aura:attribute name="flat" type="Object" />
     <aura:attribute name="index" type="Integer" />
     <aura:registerEvent name="researchCart" type="c:RF_Flat_Search_Cart"/>
@@ -38,4 +38,5 @@
             </lightning:layoutItem>
         </lightning:layout>
     </div>
+    <c:RF_Toast aura:id="RFToast"/>
 </aura:component>

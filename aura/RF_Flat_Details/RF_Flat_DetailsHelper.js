@@ -14,8 +14,10 @@
             if (component.isValid() && state === $A.get("{! $Label.c.LABEL_SUCCESS_TITLE }")) {
                 console.log(response.getReturnValue());
                 let flatRecord = response.getReturnValue();
-                component.set("v.follow", flatRecord.follow);
                 component.set("v.flat", response.getReturnValue());
+            } else {
+                let toastCmp = component.find("RFToast");
+                toastCmp.showToast({"statusCode": $A.get("{! $Label.c.MESSAGE_ERROR_CODE }"), "title": $A.get("{! $Label.c.MESSAGE_ERROR }"), "message": errors[0].message});
             }
             let spinnerHideEvent = $A.get("e.c:RF_Flat_Spinner_Hide_Event");
             spinnerHideEvent.fire();
@@ -32,24 +34,12 @@
             let state = response.getState();
             let errors = response.getError();
             if (component.isValid() && state === $A.get("{! $Label.c.LABEL_SUCCESS_TITLE }")) {
-                component.set("v.follow", true);
-                var toastEvent = $A.get("e.force:showToast");
-                toastEvent.setParams({
-                    "title": "Success!",
-                    "message": response.getReturnValue(),
-                    "type": "success"
-                });
-                toastEvent.fire();
-            } else {
-                var toastEvent = $A.get("e.force:showToast");
-                console.log(errors[0]);
-                toastEvent.setParams({
-                    "title": "Error!",
-                    "message": errors[0].message,
-                    "type": "error"
-                });
-                toastEvent.fire();
+                console.log(response.getReturnValue());
+                component.set("v.flat.follow", true);
             }
+            let toastCmp = component.find("RFToast");
+            toastCmp.showToast(response.getReturnValue());
+            console.log(response.getReturnValue());
             let spinnerHideEvent = $A.get("e.c:RF_Flat_Spinner_Hide_Event");
             spinnerHideEvent.fire();
         });
@@ -65,24 +55,10 @@
             let state = response.getState();
             let errors = response.getError();
             if (component.isValid() && state === $A.get("{! $Label.c.LABEL_SUCCESS_TITLE }")) {
-                component.set("v.follow", false);
-                var toastEvent = $A.get("e.force:showToast");
-                toastEvent.setParams({
-                    "title": "Success!",
-                    "message": response.getReturnValue(),
-                    "type": "success"
-                });
-                toastEvent.fire();
-            } else {
-                var toastEvent = $A.get("e.force:showToast");
-                console.log(errors[0]);
-                toastEvent.setParams({
-                    "title": "Error!",
-                    "message": errors[0].message,
-                    "type": "error"
-                });
-                toastEvent.fire();
+                component.set("v.flat.follow", false);
             }
+            let toastCmp = component.find("RFToast");
+            toastCmp.showToast(response.getReturnValue());
             let spinnerHideEvent = $A.get("e.c:RF_Flat_Spinner_Hide_Event");
             spinnerHideEvent.fire();
         });

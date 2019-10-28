@@ -2,7 +2,7 @@
  - Created by BRITENET on 17.10.2019.
  -->
 
-<aura:component description="RF_Cases_List" implements="forceCommunity:availableForAllPageTypes" controller="RF_Flat_Details">
+<aura:component description="RF_Cases_List" implements="forceCommunity:availableForAllPageTypes" controller="RF_Case_Controller">
     <aura:attribute name="cases" type="Object[]" />
     <aura:registerEvent name="showSpinner" type="c:RF_Flat_Spinner_Show_Event"/>
     <aura:registerEvent name="hideSpinner" type="c:RF_Flat_Spinner_Hide_Event"/>
@@ -37,4 +37,5 @@
             </table>
         </lightning:layoutItem>
     </lightning:layout>
+    <c:RF_Toast aura:id="RFToast"/>
 </aura:component>

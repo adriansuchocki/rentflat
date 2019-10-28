@@ -17,7 +17,7 @@
                 <div class="{! index == 0 ? 'carousel-item active': 'carousel-item' }">
                     <div class="view">
                         <center>
-                            <img class="d-block w-100" src="{! item.link }" style="height: auto; height: 450px; width: auto !important; max-width: 100%;"/>
+                            <img class="d-block w-100" src="{! item }" style="height: auto; height: 450px; width: auto !important; max-width: 100%;"/>
                             <div class="mask rgba-black-light"></div>
                         </center>
                     </div>
@@ -33,4 +33,5 @@
             <span class="sr-only">{! $Label.c.BTN_NEXT }</span>
         </a>
     </div>
+    <c:RF_Toast aura:id="RFToast"/>
 </aura:component>

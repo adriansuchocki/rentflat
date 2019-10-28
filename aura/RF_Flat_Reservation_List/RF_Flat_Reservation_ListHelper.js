@@ -11,25 +11,8 @@
         action.setParams({"reservationList": JSONlist});
         action.setCallback(this, function(response){
             let state = response.getState();
-            let errors = response.getError();
-            if (component.isValid() && state === $A.get("{! $Label.c.LABEL_SUCCESS_TITLE }")) {
-                var toastEvent = $A.get("e.force:showToast");
-                toastEvent.setParams({
-                    "title": "Success!",
-                    "message": response.getReturnValue(),
-                    "type": "success"
-                });
-                toastEvent.fire();
-            } else {
-                var toastEvent = $A.get("e.force:showToast");
-                console.log(errors[0]);
-                toastEvent.setParams({
-                    "title": "Error!",
-                    "message": errors[0].message,
-                    "type": "error"
-                });
-                toastEvent.fire();
-            }
+            let toastCmp = component.find("RFToast");
+            toastCmp.showToast(response.getReturnValue());
             let spinnerHideEvent = $A.get("e.c:RF_Flat_Spinner_Hide_Event");
             spinnerHideEvent.fire();
         });
@@ -37,34 +20,15 @@
     },
 
     reserveFlatHelper: function (component, recordId, title, photo, reservationFrom, reservationTo, priceBookId, priceBookValue) {
-        let spinnerAction = component.find("spinnerResult");
         let action = component.get("c.reserveFlat");
-        spinnerAction.showHideSpinner(true);
         let reservationList = [{"recordId": recordId, "title": title, "link": photo, "reservationFrom": reservationFrom, "reservationTo": reservationTo, "priceBookId": priceBookId, "priceBookValue": priceBookValue}];
         let JSONlist = JSON.stringify(reservationList);
-        action.setParams({"reservationList": JSONlist});
+        action.setParams({"reservations": JSONlist});
         action.setCallback(this, function(response){
             let state = response.getState();
             let errors = response.getError();
-            if (component.isValid() && state === $A.get("{! $Label.c.LABEL_SUCCESS_TITLE }")) {
-                var toastEvent = $A.get("e.force:showToast");
-                toastEvent.setParams({
-                    "title": "Success!",
-                    "message": response.getReturnValue(),
-                    "type": "success"
-                });
-                toastEvent.fire();
-            } else {
-                var toastEvent = $A.get("e.force:showToast");
-                console.log(errors[0]);
-                toastEvent.setParams({
-                    "title": "Error!",
-                    "message": errors[0].message,
-                    "type": "error"
-                });
-                toastEvent.fire();
-            }
-            spinnerAction.showHideSpinner(false);
+            let toastCmp = component.find("RFToast");
+            toastCmp.showToast(response.getReturnValue());
         });
         $A.enqueueAction(action);
     }

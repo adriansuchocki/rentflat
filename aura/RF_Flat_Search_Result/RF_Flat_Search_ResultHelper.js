@@ -12,7 +12,11 @@
             let errors = response.getError();
             if (component.isValid() && state === $A.get("{! $Label.c.LABEL_SUCCESS_TITLE }")) {
                 var flats = response.getReturnValue();
+                console.log(response.getReturnValue());
                 component.set("v.resultList", flats);
+            } else {
+                let toastCmp = component.find("RFToast");
+                toastCmp.showToast({"statusCode": $A.get("{! $Label.c.MESSAGE_ERROR_CODE }"), "title": $A.get("{! $Label.c.MESSAGE_ERROR }"), "message": errors[0].message});
             }
             var spinnerHideEvent = $A.get("e.c:RF_Flat_Spinner_Hide_Event");
             spinnerHideEvent.fire();
@@ -33,6 +37,9 @@
                 let resultList = response.getReturnValue();
                 let result = currentList.concat(resultList);
                 component.set("v.resultList", result);
+            } else {
+                let toastCmp = component.find("RFToast");
+                toastCmp.showToast({"statusCode": $A.get("{! $Label.c.MESSAGE_ERROR_CODE }"), "title": $A.get("{! $Label.c.MESSAGE_ERROR }"), "message": errors[0].message});
             }
             var spinnerHideEvent = $A.get("e.c:RF_Flat_Spinner_Hide_Event");
             spinnerHideEvent.fire();

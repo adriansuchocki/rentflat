@@ -2,7 +2,7 @@
  - Created by BRITENET on 14.10.2019.
  -->
 
-<aura:component description="RF_Flat_Search_Result_Item_Card" controller="RF_Flat_Details">
+<aura:component description="RF_Flat_Search_Result_Item_Card" controller="RF_Flat_Controller">
     <aura:attribute name="flat" type="Object" />
     <aura:attribute name="follow" type="Boolean" default="false"/>
     <aura:registerEvent name="showSpinner" type="c:RF_Flat_Spinner_Show_Event"/>
@@ -11,16 +11,16 @@
         <lightning:layout multipleRows="true" horizontalAlign="center" verticalAlign="center">
             <lightning:layoutItem size="12" padding="around-small">
                 <center>
-                    <aura:if isTrue="{! empty(v.flat.link) }" >
+                    <aura:if isTrue="{! empty(v.flat.photos) }" >
                         <img src="{! $Resource.NoPhoto }" style="height: 200px;"/>
                         <aura:set attribute="else">
-                            <img  src="{! v.flat.link }" style="height: 200px;"/>
+                            <img  src="{! v.flat.photos[0] }" style="height: 200px;"/>
                         </aura:set>
                     </aura:if>
                 </center>
             </lightning:layoutItem>
             <lightning:layoutItem size="12" padding="around-small">
-                <p class="slds-text-heading--label" ><h1 class="slds-text-heading_medium">{! v.flat.title }</h1></p>
+                <p class="slds-text-heading--label" ><h1 class="slds-text-heading_medium">{! v.flat.product.Name }</h1></p>
             </lightning:layoutItem>
             <lightning:layoutItem size="12" padding="horizontal-small">
                 <lightning:layout horizontalAlign="center" multipleRows="true">
@@ -35,16 +35,16 @@
             <lightning:layoutItem size="12" padding="around-small">
                 <lightning:layout horizontalAlign="center" multipleRows="true">
                     <lightning:layoutItem size="6">
-                        <p class="slds-text-heading--label" ><h5 class="slds-text-heading_medium">{! $Label.c.LABEL_PRODUCT_SIZE }: {! v.flat.size }</h5></p>
+                        <p class="slds-text-heading--label" ><h5 class="slds-text-heading_medium">{! $Label.c.LABEL_PRODUCT_SIZE }: {! v.flat.product.Size__c }</h5></p>
                     </lightning:layoutItem>
                     <lightning:layoutItem size="6">
-                        <p class="slds-text-heading--label" ><h5 class="slds-text-heading_medium">{! $Label.c.LABEL_PRODUCT_ROOMS }: {! v.flat.rooms }</h5></p>
+                        <p class="slds-text-heading--label" ><h5 class="slds-text-heading_medium">{! $Label.c.LABEL_PRODUCT_ROOMS }: {! v.flat.product.Rooms__c }</h5></p>
                     </lightning:layoutItem>
                     <lightning:layoutItem size="6">
-                        <p class="slds-text-heading--label" ><h5 class="slds-text-heading_medium">{! $Label.c.LABEL_PRODUCT_BEDROOMS }: {! v.flat.bedrooms }</h5></p>
+                        <p class="slds-text-heading--label" ><h5 class="slds-text-heading_medium">{! $Label.c.LABEL_PRODUCT_BEDROOMS }: {! v.flat.product.Bedrooms__c }</h5></p>
                     </lightning:layoutItem>
                     <lightning:layoutItem size="6">
-                        <p class="slds-text-heading--label" ><h5 class="slds-text-heading_medium">{! $Label.c.LABEL_PRODUCT_BATHROOMS }: {! v.flat.bathrooms }</h5></p>
+                        <p class="slds-text-heading--label" ><h5 class="slds-text-heading_medium">{! $Label.c.LABEL_PRODUCT_BATHROOMS }: {! v.flat.product.Baths__c }</h5></p>
                     </lightning:layoutItem>
                 </lightning:layout>
             </lightning:layoutItem>
@@ -62,11 +62,11 @@
             <lightning:layoutItem size="12" padding="around-small">
             </lightning:layoutItem>
             <lightning:layoutItem size="12" padding="around-small" class="custom-box">
-                <aura:if isTrue="{! v.flat.price.value == v.flat.price.standardValue }">
-                                        <h2><lightning:formattedNumber value="{! v.flat.price.value }" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/></h2>
+                <aura:if isTrue="{! v.flat.priceBookEntryValue.UnitPrice == v.flat.standardValue }">
+                                        <h2><lightning:formattedNumber value="{! v.flat.priceBookEntryValue.UnitPrice }" style="currency" currencyCode="{! $Locale.currencyCode }" currencyDisplayAs="symbol"/></h2>
                     <aura:set attribute="else">
-                        <h2><lightning:formattedNumber value="{! v.flat.price.value }" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/></h2>
-                        <b style="text-decoration: line-through;"><h4><lightning:formattedNumber value="{! v.flat.price.standardValue }" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/></h4></b>
+                        <h2><lightning:formattedNumber value="{! v.flat.standardValue }" style="currency" currencyCode="{! $Locale.currencyCode }" currencyDisplayAs="symbol"/></h2>
+                        <b style="text-decoration: line-through;"><h4><lightning:formattedNumber value="{! v.flat.priceBookEntryValue.UnitPrice }" style="currency" currencyCode="{! $Locale.currencyCode }" currencyDisplayAs="symbol"/></h4></b>
                     </aura:set>
                 </aura:if>
                 <div style="background-color: white; height: 1px; width 100%; position: relative; transform: skewY(-10deg); margin-top: 5vh;">
@@ -78,4 +78,5 @@
             </lightning:layoutItem>
         </lightning:layout>
     </div>
+    <c:RF_Toast aura:id="RFToast"/>
 </aura:component>

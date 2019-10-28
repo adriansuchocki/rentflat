@@ -1,35 +1,35 @@
-<aura:component implements="forceCommunity:availableForAllPageTypes,force:hasRecordId" description="RF_Flat_Details" controller="RF_Flat_Details">
+<aura:component implements="forceCommunity:availableForAllPageTypes,force:hasRecordId" description="RF_Flat_Details" controller="RF_Flat_Controller">
     <aura:attribute name="flat" type="Object"/>
-    <aura:attribute name="flatReservations" type="Object[]"/>
     <aura:attribute name="follow" type="Boolean" default="false"/>
     <aura:registerEvent name="showSpinner" type="c:RF_Flat_Spinner_Show_Event"/>
     <aura:registerEvent name="hideSpinner" type="c:RF_Flat_Spinner_Hide_Event"/>
     <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    <aura:handler name="refreshFlatDetails" event="c:RF_Flat_Refresh_Event" action="{! c.handleRefreshFlatDetails }"/>
     <c:RF_DivisionSearch_Spinner aura:id="spinnerResult"/>
     <div class="slds-page-header" role="banner">
         <p>
-            <h6 class="slds-text-heading_small">Number of views: {! v.flat.numberOfViews }</h6>
+            <h6 class="slds-text-heading_small">{! $Label.c.LABEL_PRODUCT_NUMBER_OF_VIEW }: {! v.flat.numberOfViews }</h6>
         </p>
-        <p class="slds-text-heading--label" ><h2 class="slds-text-heading_large">{! v.flat.title }</h2></p>
+        <p class="slds-text-heading--label" ><h2 class="slds-text-heading_large">{! v.flat.product.Name }</h2></p>
         <p class="slds-text-heading--label" >
             <h4 class="slds-text-heading_small">
-                <aura:if isTrue="{! v.flat.priceBook.value == v.flat.priceBook.standardValue }">
-                    {! $Label.c.LABEL_PRODUCT_PRICE }: <b><lightning:formattedNumber value="{! v.flat.priceBook.standardValue }" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/></b>
+                <aura:if isTrue="{! v.flat.priceBookEntryValue.UnitPrice == v.flat.standardValue }">
+                    {! $Label.c.LABEL_PRODUCT_PRICE }: <b><lightning:formattedNumber value="{! v.flat.standardValue }" style="currency" currencyCode="{! $Locale.currencyCode }" currencyDisplayAs="symbol"/></b>
                     <aura:set attribute="else">
-                        {! $Label.c.LABEL_PRODUCT_PRICE }: <b style="text-decoration: line-through;"><lightning:formattedNumber value="{! v.flat.priceBook.standardValue }" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/></b>&nbsp;&nbsp;<b><lightning:formattedNumber value="{! v.flat.priceBook.value }" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/></b>
+                        {! $Label.c.LABEL_PRODUCT_PRICE }: <b style="text-decoration: line-through;"><lightning:formattedNumber value="{! v.flat.standardValue }" style="currency" currencyCode="{! $Locale.currencyCode }" currencyDisplayAs="symbol"/></b>&nbsp;&nbsp;<b><lightning:formattedNumber value="{! v.flat.priceBookEntryValue.UnitPrice }" style="currency" currencyCode="{! $Locale.currencyCode }" currencyDisplayAs="symbol"/></b>
                     </aura:set>
                 </aura:if>
-                <aura:if isTrue="{! not(empty(v.flat.size)) }">
-                    , {! $Label.c.LABEL_PRODUCT_SIZE }&nbsp;{! v.flat.size } m<sup>2</sup>
+                <aura:if isTrue="{! not(empty(v.flat.product.Size__c)) }">
+                    , {! $Label.c.LABEL_PRODUCT_SIZE }&nbsp;{! v.flat.product.Size__c } m<sup>2</sup>
                 </aura:if>
-                <aura:if isTrue="{! not(empty(v.flat.rooms)) }">
-                    , {! v.flat.rooms }&nbsp;{! $Label.c.LABEL_PRODUCT_ROOMS }
+                <aura:if isTrue="{! not(empty(v.flat.product.Rooms__c)) }">
+                    , {! v.flat.product.Rooms__c }&nbsp;{! $Label.c.LABEL_PRODUCT_ROOMS }
                 </aura:if>
-                <aura:if isTrue="{! not(empty(v.flat.bedrooms)) }">
-                    , {! v.flat.bedrooms }&nbsp;{! $Label.c.LABEL_PRODUCT_BEDROOMS }
+                <aura:if isTrue="{! not(empty(v.flat.product.Bedrooms__c)) }">
+                    , {! v.flat.product.Bedrooms__c }&nbsp;{! $Label.c.LABEL_PRODUCT_BEDROOMS }
                 </aura:if>
-                <aura:if isTrue="{! not(empty(v.flat.bathrooms)) }">
-                    , {! v.flat.bathrooms }&nbsp;{! $Label.c.LABEL_PRODUCT_BATHROOMS }
+                <aura:if isTrue="{! not(empty(v.flat.product.Baths__c)) }">
+                    , {! v.flat.product.Baths__c }&nbsp;{! $Label.c.LABEL_PRODUCT_BATHROOMS }
                 </aura:if>
             </h4>
         </p>
@@ -45,17 +45,17 @@
                 </p>
             </lightning:layoutItem>
             <lightning:layoutItem size="3">
-                <aura:if isTrue="{! v.follow }">
-                    <lightning:button label="Stop following" variant="brand" iconName="utility:preview" iconPosition="left" onclick="{! c.handleRemoveFollow }"/>
+                <aura:if isTrue="{! v.flat.follow }">
+                    <lightning:button label="{! $Label.c.BTN_STOP_FOLLOW }" variant="brand" iconName="utility:preview" iconPosition="left" onclick="{! c.handleRemoveFollow }"/>
                     <aura:set attribute="else">
-                        <lightning:button label="Follow" iconName="utility:preview" iconPosition="left" onclick="{! c.handleAddFollow }"/>
+                        <lightning:button label="{! $Label.c.BTN_FOLLOW }" iconName="utility:preview" iconPosition="left" onclick="{! c.handleAddFollow }"/>
                     </aura:set>
                 </aura:if>
             </lightning:layoutItem>
 
         </lightning:layout>
     </div>
-    <c:RF_Flat_Gallery photos="{! v.flat.contents }"/>
+    <c:RF_Flat_Gallery photos="{! v.flat.photos }"/>
     <lightning:tabset selectedTabId="one">
         <lightning:tab label="Details" id="one">
             <div class="c-container">
@@ -65,7 +65,7 @@
                 <div class="slds-p-around_medium">
                     <lightning:layout multipleRows="true">
                         <lightning:layoutItem>
-                            <ui:outputRichText class="slds-text-longform" value="{! v.flat.description }"/>
+                            <ui:outputRichText class="slds-text-longform" value="{! v.flat.product.Description__c }"/>
                         </lightning:layoutItem>
                     </lightning:layout>
                 </div>
@@ -77,13 +77,13 @@
                 <div class="slds-p-around_medium">
                     <lightning:layout multipleRows="true" horizontalAlign="center">
                         <lightning:layoutItem size="4">
-                        {! $Label.c.LABEL_PRODUCT_STREET }: {! v.flat.streetName }
+                        {! $Label.c.LABEL_PRODUCT_STREET }: {! v.flat.product.Street_name__c }
                         </lightning:layoutItem>
                         <lightning:layoutItem size="4">
-                        {! $Label.c.LABEL_PRODUCT_CITY }: {! v.flat.city }
+                        {! $Label.c.LABEL_PRODUCT_CITY }: {! v.flat.product.City__c }
                         </lightning:layoutItem>
                         <lightning:layoutItem size="4">
-                        {! $Label.c.LABEL_PRODUCT_COUNTRY }: {! v.flat.country }
+                        {! $Label.c.LABEL_PRODUCT_COUNTRY }: {! v.flat.product.Country__c }
                         </lightning:layoutItem>
                     </lightning:layout>
                 </div>
@@ -95,28 +95,28 @@
                 <div class="slds-p-around_medium">
                     <lightning:layout multipleRows="true">
                         <lightning:layoutItem size="4">
-                        {! $Label.c.LABEL_PRODUCT_TYPE }: {! v.flat.family }
+                        {! $Label.c.LABEL_PRODUCT_TYPE }: {! v.flat.product.Family }
                         </lightning:layoutItem>
                         <lightning:layoutItem size="4">
-                        {! $Label.c.LABEL_PRODUCT_SIZE }: {! v.flat.size } m<sup>2</sup>
+                        {! $Label.c.LABEL_PRODUCT_SIZE }: {! v.flat.product.Size__c } m<sup>2</sup>
                         </lightning:layoutItem>
                         <lightning:layoutItem size="4">
-                        {! $Label.c.LABEL_PRODUCT_ROOMS }: {! v.flat.rooms }
+                        {! $Label.c.LABEL_PRODUCT_ROOMS }: {! v.flat.product.Rooms__c }
                         </lightning:layoutItem>
                         <lightning:layoutItem size="4">
-                        {! $Label.c.LABEL_PRODUCT_BEDROOMS }: {! v.flat.bedrooms }
+                        {! $Label.c.LABEL_PRODUCT_BEDROOMS }: {! v.flat.product.Bedrooms__c }
                         </lightning:layoutItem>
                         <lightning:layoutItem size="4">
-                        {! $Label.c.LABEL_PRODUCT_BATHROOMS }: {! v.flat.bathrooms }
+                        {! $Label.c.LABEL_PRODUCT_BATHROOMS }: {! v.flat.product.Baths__c }
                         </lightning:layoutItem>
                         <lightning:layoutItem size="4">
-                        {! $Label.c.LABEL_PRODUCT_YEAR_BUILT }: {! v.flat.yearBuilding }
+                        {! $Label.c.LABEL_PRODUCT_YEAR_BUILT }: {! v.flat.product.Year_built_formula__c }
                         </lightning:layoutItem>
                         <lightning:layoutItem size="4">
-                        {! $Label.c.LABEL_PRODUCT_GARAGE }: {! v.flat.parkingGarage }
+                        {! $Label.c.LABEL_PRODUCT_GARAGE }: {! v.flat.product.Parking_garage__c }
                         </lightning:layoutItem>
                         <lightning:layoutItem size="4">
-                        {! $Label.c.LABEL_PRODUCT_FLOORS_NO }: {! v.flat.floorNo }
+                        {! $Label.c.LABEL_PRODUCT_FLOORS_NO }: {! v.flat.product.Floor_no__c }
                         </lightning:layoutItem>
                     </lightning:layout>
                 </div>
@@ -127,87 +127,87 @@
                 </div>
                 <div class="slds-p-around_medium">
                     <lightning:layout multipleRows="true">
-                        <aura:if isTrue="{! v.flat.balcony }">
+                        <aura:if isTrue="{! v.flat.product.Balcony__c }">
                             <lightning:layoutItem size="3">
                                 <lightning:icon iconName="utility:check" size="small" alternativeText="check" />&nbsp;{! $Label.c.LABEL_PRODUCT_BALCOLNY }
                             </lightning:layoutItem>
                         </aura:if>
-                        <aura:if isTrue="{! v.flat.cameraSecurityFenced }">
+                        <aura:if isTrue="{! v.flat.product.Cameras_security_fenced__c }">
                             <lightning:layoutItem size="3">
                                 <lightning:icon iconName="utility:check" size="small" alternativeText="check" />&nbsp;{! $Label.c.LABEL_PRODUCT_CAMERA_SECURITY_FENCED }
                             </lightning:layoutItem>
                         </aura:if>
-                        <aura:if isTrue="{! v.flat.garden }">
+                        <aura:if isTrue="{! v.flat.product.Garden__c }">
                             <lightning:layoutItem size="3">
                                 <lightning:icon iconName="utility:check" size="small" alternativeText="check" />&nbsp;{! $Label.c.LABEL_PRODUCT_GARDEN }
                             </lightning:layoutItem>
                         </aura:if>
-                        <aura:if isTrue="{! v.flat.groundFloor }">
+                        <aura:if isTrue="{! v.flat.product.Ground_floor__c }">
                             <lightning:layoutItem size="3">
                                 <lightning:icon iconName="utility:check" size="small" alternativeText="check" />&nbsp;{! $Label.c.LABEL_PRODUCT_GROUND_FLOOR }
                             </lightning:layoutItem>
                         </aura:if>
-                        <aura:if isTrue="{! v.flat.gymInBuilding }">
+                        <aura:if isTrue="{! v.flat.product.Gym_in_the_building__c }">
                             <lightning:layoutItem size="3">
                                 <lightning:icon iconName="utility:check" size="small" alternativeText="check" />&nbsp;{! $Label.c.LABEL_PRODUCT_GYM }
                             </lightning:layoutItem>
                         </aura:if>
-                        <aura:if isTrue="{! v.flat.lastFloor }">
+                        <aura:if isTrue="{! v.flat.product.Last_floor__c }">
                             <lightning:layoutItem size="3">
                                 <lightning:icon iconName="utility:check" size="small" alternativeText="check" />&nbsp;{! $Label.c.LABEL_PRODUCT_LAST_FLOOR }
                             </lightning:layoutItem>
                         </aura:if>
-                        <aura:if isTrue="{! v.flat.lift }">
+                        <aura:if isTrue="{! v.flat.product.Lift__c }">
                             <lightning:layoutItem size="3">
                                 <lightning:icon iconName="utility:check" size="small" alternativeText="check" />&nbsp;{! $Label.c.LABEL_PRODUCT_LIFT }
                             </lightning:layoutItem>
                         </aura:if>
-                        <aura:if isTrue="{! v.flat.mezzanine }">
+                        <aura:if isTrue="{! v.flat.product.Mezzanine__c }">
                             <lightning:layoutItem size="3">
                                 <lightning:icon iconName="utility:check" size="small" alternativeText="check" />&nbsp;{! $Label.c.LABEL_PRODUCT_MEZZANINE }
                             </lightning:layoutItem>
                         </aura:if>
-                        <aura:if isTrue="{! v.flat.nearMetro }">
+                        <aura:if isTrue="{! v.flat.product.Near_metro__c }">
                             <lightning:layoutItem size="3">
                                 <lightning:icon iconName="utility:check" size="small" alternativeText="check" />&nbsp;{! $Label.c.LABEL_PRODUCT_NEAR_METRO }
                             </lightning:layoutItem>
                         </aura:if>
-                        <aura:if isTrue="{! v.flat.nearPark }">
+                        <aura:if isTrue="{! v.flat.product.Near_park__c }">
                             <lightning:layoutItem size="3">
                                 <lightning:icon iconName="utility:check" size="small" alternativeText="check" />&nbsp;{! $Label.c.LABEL_PRODUCT_NEAR_PARK }
                             </lightning:layoutItem>
                         </aura:if>
-                        <aura:if isTrue="{! v.flat.nearPubsRestaurants }">
+                        <aura:if isTrue="{! v.flat.product.Near_pubs_restaurants__c }">
                             <lightning:layoutItem size="3">
                                 <lightning:icon iconName="utility:check" size="small" alternativeText="check" />&nbsp;{! $Label.c.LABEL_PRODUCT_NEAR_PUBS }
                             </lightning:layoutItem>
                         </aura:if>
-                        <aura:if isTrue="{! v.flat.nearTramBus }">
+                        <aura:if isTrue="{! v.flat.product.Near_tram_bus__c }">
                             <lightning:layoutItem size="3">
                                 <lightning:icon iconName="utility:check" size="small" alternativeText="check" />&nbsp;{! $Label.c.LABEL_PRODUCT_NEAR_TRAM }
                             </lightning:layoutItem>
                         </aura:if>
-                        <aura:if isTrue="{! v.flat.parkView }">
+                        <aura:if isTrue="{! v.flat.product.Park_view__c }">
                             <lightning:layoutItem size="3">
                                 <lightning:icon iconName="utility:check" size="small" alternativeText="check" />&nbsp;{! $Label.c.LABEL_PRODUCT_PARK_VIEW }
                             </lightning:layoutItem>
                         </aura:if>
-                        <aura:if isTrue="{! v.flat.riverView }">
+                        <aura:if isTrue="{! v.flat.product.River_view__c }">
                             <lightning:layoutItem size="3">
                                 <lightning:icon iconName="utility:check" size="small" alternativeText="check" />&nbsp;{! $Label.c.LABEL_PRODUCT_RIVER_VIEW }
                             </lightning:layoutItem>
                         </aura:if>
-                        <aura:if isTrue="{! v.flat.terrace }">
+                        <aura:if isTrue="{! v.flat.product.Terrace__c }">
                             <lightning:layoutItem size="3">
                                 <lightning:icon iconName="utility:check" size="small" alternativeText="check" />&nbsp;{! $Label.c.LABEL_PRODUCT_TERRACE }
                             </lightning:layoutItem>
                         </aura:if>
-                        <aura:if isTrue="{! v.flat.wcSeparated }">
+                        <aura:if isTrue="{! v.flat.product.WC_separated__c }">
                             <lightning:layoutItem size="3">
                                 <lightning:icon iconName="utility:check" size="small" alternativeText="check" />&nbsp;{! $Label.c.LABEL_PRODUCT_WC }
                             </lightning:layoutItem>
                         </aura:if>
-                        <aura:if isTrue="{! v.flat.wheelchairAccess }">
+                        <aura:if isTrue="{! v.flat.product.Wheelchair_Access__c }">
                             <lightning:layoutItem size="3">
                                 <lightning:icon iconName="utility:check" size="small" alternativeText="check" />&nbsp;{! $Label.c.LABEL_PRODUCT_WHEELCHAIR_ACCESS }
                             </lightning:layoutItem>
@@ -220,7 +220,8 @@
             <c:RF_Flat_Comment recordId="{! v.recordId }"/>
         </lightning:tab>
         <lightning:tab label="Reservation" id="three">
-            <c:RF_Flat_Reservation_List recordId="{! v.flat.id }" title="{! v.flat.title }" photo="{! v.flat.contents }" priceBookId="{! v.flat.priceBook.id }" priceBookValue="{! v.flat.priceBook.value }"/>
+            <c:RF_Flat_Reservation_List recordId="{! v.flat.product.Id }" title="{! v.flat.product.Name }" photo="{! v.flat.photos }" priceBookId="{! v.flat.priceBookEntryValue.Id }" priceBookValue="{! v.flat.priceBookEntryValue.UnitPrice }"/>
         </lightning:tab>
     </lightning:tabset>
+    <c:RF_Toast aura:id="RFToast"/>
 </aura:component>

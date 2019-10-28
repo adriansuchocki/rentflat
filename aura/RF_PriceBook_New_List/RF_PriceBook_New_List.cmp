@@ -2,7 +2,7 @@
  - Created by BRITENET on 18.10.2019.
  -->
 
-<aura:component description="RF_PriceBook_New_List" controller="RF_Flat_Details">
+<aura:component description="RF_PriceBook_New_List" controller="RF_Discount_Manager_Controller">
     <aura:attribute name="productStandardPriceBookList" type="Object[]"/>
     <aura:attribute name="productPriceBook" type="Object"/>
     <aura:attribute name="recordId" type="String" default=""/>
@@ -17,7 +17,7 @@
     <aura:registerEvent name="showSpinner" type="c:RF_Flat_Spinner_Show_Event"/>
     <aura:registerEvent name="hideSpinner" type="c:RF_Flat_Spinner_Hide_Event"/>
     <aura:registerEvent name="refreshLists" type="c:RF_PriceBook_Refresh_List_Event"/>
-    <aura:if isTrue="{! not(empty(v.productPriceBook.productNewPriceBookList)) }">
+    <aura:if isTrue="{! not(empty(v.productPriceBook.priceBookItems)) }">
         <fieldset class="slds-box slds-theme--default slds-container--center slds-p-around_medium slds-m-top--medium">
             <legend class="slds-text-heading--medium">
                 {! $Label.c.LABEL_PRODUCT_LIST_NEW_PRICEBOOK }
@@ -25,13 +25,13 @@
             <form>
                 <lightning:layout multipleRows="true" horizontalAlign="center">
                     <lightning:layoutItem size="3" padding="around-small">
-                        <lightning:input aura:id="expenseform" label="{! $Label.c.LABEL_PRICEBOOK_NAME }" disabled="{! not(empty(v.productPriceBook.priceBookId)) }" required="{! empty(v.productPriceBook.priceBookId) }" value="{! v.productPriceBook.priceBookName }"/>
+                        <lightning:input aura:id="expenseform" label="{! $Label.c.LABEL_PRICEBOOK_NAME }" disabled="{! not(empty(v.productPriceBook.priceBook.Id)) }" required="{! empty(v.productPriceBook.priceBook.Id) }" value="{! v.productPriceBook.priceBook.Name }"/>
                     </lightning:layoutItem>
                     <lightning:layoutItem size="2" padding="around-small">
-                        <lightning:input aura:id="expenseform" type="date" name="input5" label="{! $Label.c.LABEL_PRICEBOOK_START_DATE }" disabled="{! v.productPriceBook.isStandard }" required="{! not(v.productPriceBook.isStandard) }" value="{! v.productPriceBook.startDate }" />
+                        <lightning:input aura:id="expenseform" type="date" name="input5" label="{! $Label.c.LABEL_PRICEBOOK_START_DATE }" disabled="{! v.productPriceBook.priceBook.IsStandard }" required="{! not(v.productPriceBook.priceBook.IsStandard) }" value="{! v.productPriceBook.priceBook.StartDate__c }" />
                     </lightning:layoutItem>
                     <lightning:layoutItem size="2" padding="around-small">
-                        <lightning:input aura:id="expenseform" type="date" name="input5" label="{! $Label.c.LABEL_PRICEBOOK_END_DATE }" disabled="{! v.productPriceBook.isStandard }" required="{! not(v.productPriceBook.isStandard) }" value="{! v.productPriceBook.endDate }" />
+                        <lightning:input aura:id="expenseform" type="date" name="input5" label="{! $Label.c.LABEL_PRICEBOOK_END_DATE }" disabled="{! v.productPriceBook.priceBook.IsStandard }" required="{! not(v.productPriceBook.priceBook.IsStandard) }" value="{! v.productPriceBook.priceBook.End_Date__c }" />
                     </lightning:layoutItem>
                     <lightning:layoutItem size="2" padding="around-small">
                         <lightning:input type="number" name="input6" label="Percentage reduction" value="{! v.percentageReduction }" formatter="percent" step="0.01" onchange="{! c.handleCalculateValue }"/>
@@ -69,7 +69,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <aura:iteration items="{! v.productPriceBook.productNewPriceBookList }" var="product" indexVar="index">
+                            <aura:iteration items="{! v.productPriceBook.priceBookItems }" var="item" indexVar="index">
                                 <tr class="slds-hint-parent">
                                     <td data-label="{! $Label.c.LABEL_ORDER_TABLE_COMPLAINT }">
                                         <div class="slds-truncate" title="{! $Label.c.LABEL_PRODUCT_REMOVE_FROM_LIST }">
@@ -77,30 +77,30 @@
                                         </div>
                                     </td>
                                     <td data-label="{! $Label.c.LABEL_PRODUCT_NAME }">
-                                        <div class="slds-truncate" title="{! $Label.c.LABEL_PRODUCT_NAME }">{! product.title }</div>
+                                        <div class="slds-truncate" title="{! $Label.c.LABEL_PRODUCT_NAME }">{! item.flat.product.Name }</div>
                                     </td>
                                     <td data-label="{! $Label.c.LABEL_PRODUCT_TYPE }">
-                                        <div class="slds-truncate" title="{! $Label.c.LABEL_PRODUCT_TYPE }">{! product.family }</div>
+                                        <div class="slds-truncate" title="{! $Label.c.LABEL_PRODUCT_TYPE }">{! item.flat.product.Family }</div>
                                     </td>
                                     <td data-label="{! $Label.c.LABEL_PRODUCT_CITY }">
-                                        <div class="slds-truncate" title="{! $Label.c.LABEL_PRODUCT_CITY }">{! product.city }</div>
+                                        <div class="slds-truncate" title="{! $Label.c.LABEL_PRODUCT_CITY }">{! item.flat.product.City__c }</div>
                                     </td>
                                     <td data-label="{! $Label.c.LABEL_PRODUCT_COUNTRY }">
-                                        <div class="slds-truncate" title="{! $Label.c.LABEL_PRODUCT_COUNTRY }">{! product.country }</div>
+                                        <div class="slds-truncate" title="{! $Label.c.LABEL_PRODUCT_COUNTRY }">{! item.flat.product.Country__c }</div>
                                     </td>
                                     <td data-label="{! $Label.c.LABEL_PRODUCT_PRICE }">
                                         <div class="slds-truncate" title="{! $Label.c.LABEL_PRODUCT_PRICE }">
-                                            <lightning:formattedNumber value="{! product.unitPrice }" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/>
+                                            <lightning:formattedNumber value="{! item.unitPrice }" style="currency" currencyCode="{! $Locale.currencyCode }" currencyDisplayAs="symbol"/>
                                         </div>
                                     </td>
                                     <td data-label="{! $Label.c.LABEL_PRODUCT_PRICE_REDUCTION }">
                                         <div class="slds-truncate" title="{! $Label.c.LABEL_PRODUCT_PRICE_REDUCTION }">
-                                            <lightning:input type="number" name="input7" value="{! product.newUnitPrice }" formatter="currency" step="0.01"/>
+                                            <lightning:input type="number" name="input7" value="{! item.newUnitPrice }" formatter="currency" step="0.01"/>
                                         </div>
                                     </td>
                                     <td data-label="{! $Label.c.LABEL_PRODUCT_PRICE_REDUCTION_PERCENTAGE }">
                                         <div class="slds-truncate" title="{! $Label.c.LABEL_PRODUCT_PRICE_REDUCTION_PERCENTAGE }">
-                                            <lightning:formattedNumber value="{! product.newGroupUnitPrice }" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/>
+                                            <lightning:formattedNumber value="{! item.newGroupUnitPrice }" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/>
                                         </div>
                                     </td>
                                 </tr>
@@ -112,4 +112,5 @@
             </form>
         </fieldset>
     </aura:if>
+    <c:RF_Toast aura:id="RFToast"/>
 </aura:component>

@@ -2,11 +2,12 @@
  - Created by BRITENET on 11.10.2019.
  -->
 
-<aura:component description="RF_Flat_Comment_Form" controller="RF_Flat_Details">
+<aura:component description="RF_Flat_Comment_Form" controller="RF_Comments_Controller">
     <aura:attribute name="recordId" type="String" access="public"/>
     <aura:attribute name="comment" type="String" access="public"/>
     <aura:attribute name="rating" type="String" access="public" default="0"/>
     <aura:registerEvent name="refreshComments" type="c:RF_Flat_Comment_Event"/>
+    <aura:registerEvent name="refreshFlatDetails" type="c:RF_Flat_Refresh_Event"/>
 
     <c:MDB_Spinner aura:id="spinnerResult"/>
     <lightning:layout multipleRows="true">
@@ -21,4 +22,5 @@
             <lightning:button iconName="utility:save" label="Submit" onclick="{! c.onSave }"/>
         </lightning:layoutItem>
     </lightning:layout>
+    <c:RF_Toast aura:id="RFToast"/>
 </aura:component>

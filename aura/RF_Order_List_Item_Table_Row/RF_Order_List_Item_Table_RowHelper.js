@@ -11,25 +11,11 @@
             let state = response.getState();
             let errors = response.getError();
             if (component.isValid() && state === $A.get("{! $Label.c.LABEL_SUCCESS_TITLE }")) {
-                var toastEvent = $A.get("e.force:showToast");
-                toastEvent.setParams({
-                    "title": "Success!",
-                    "message": response.getReturnValue(),
-                    "type": "success"
-                });
-                toastEvent.fire();
                 component.set("v.orderItem.Complained__c", true);
                 component.set("v.cart", false);
-            } else {
-                var toastEvent = $A.get("e.force:showToast");
-                console.log(errors[0]);
-                toastEvent.setParams({
-                    "title": "Error!",
-                    "message": errors[0].message,
-                    "type": "error"
-                });
-                toastEvent.fire();
             }
+            let toastCmp = component.find("RFToast");
+            toastCmp.showToast(response.getReturnValue());
             var spinnerHideEvent = $A.get("e.c:RF_Flat_Spinner_Hide_Event");
             spinnerHideEvent.fire();
         });

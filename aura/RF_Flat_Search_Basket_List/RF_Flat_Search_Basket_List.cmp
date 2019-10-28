@@ -1,0 +1,43 @@
+<!--
+ - Created by BRITENET on 23.10.2019.
+ -->
+
+<aura:component description="RF_Flat_Search_Basket_List" controller="RF_Reservation_Controller">
+    <aura:attribute name="cart" type="Boolean" default="false" />
+    <aura:attribute name="cartList" type="Object[]" />
+    <aura:registerEvent name="showSpinner" type="c:RF_Flat_Spinner_Show_Event"/>
+    <aura:registerEvent name="hideSpinner" type="c:RF_Flat_Spinner_Hide_Event"/>
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    <aura:handler event="c:RF_Flat_Search_Cart" action="{! c.init }"/>
+    <lightning:buttonIcon iconName="utility:cart"  alternativeText="Basket" variant="brand" onclick="{! c.handleShowCart }"/>
+    <aura:if isTrue="{! v.cart }">
+        <section aria-describedby="dialog-body-id-15" id="dialog" aria-label="My Cart" class="slds-popover slds-nubbin_top-left slds-dynamic-menu" role="dialog" style="position:absolute;left:-0.5rem;top:48px;width:30vw;">
+            <aura:if isTrue="{! not(empty(v.cartList))}">
+                <div class="slds-popover__body slds-p-horizontal_none" id="dialog-body-id-15" style="max-height: 70vh; overflow-y: scroll;">
+                    <div class="slds-p-vertical_x-small slds-p-horizontal_small">
+                        <aura:iteration items="{! v.cartList }" var="item" indexVar="index">
+                            <c:RF_Flat_Search_Basket_Item flat="{! item }" index="{! index }"/>
+                        </aura:iteration>
+                    </div>
+                </div>
+                <footer class="slds-popover__footer">
+                    <ul>
+                        <li>
+                            <center>
+                                <lightning:button name="{! $Label.c.BTN_RESERVE }" label="{! $Label.c.BTN_RESERVE }" variant="brand" onclick="{! c.handleReserveFlat }"/>
+                            </center>
+                        </li>
+                    </ul>
+                </footer>
+                <aura:set attribute="else" >
+                    <div class="slds-p-around--medium">
+                        <center>
+                            <p>{! $Label.c.LABEL_CART_EMPTY }</p>
+                        </center>
+                    </div>
+                </aura:set>
+            </aura:if>
+        </section>
+    </aura:if>
+    <c:RF_Toast aura:id="RFToast"/>
+</aura:component>

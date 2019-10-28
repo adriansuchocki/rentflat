@@ -2,7 +2,7 @@
  - Created by BRITENET on 18.10.2019.
  -->
 
-<aura:component description="RF_PriceBook_Standard_List" controller="RF_Flat_Details">
+<aura:component description="RF_PriceBook_Standard_List" controller="RF_Discount_Manager_Controller">
     <aura:attribute name="productStandardPriceBookList" type="Object[]" default=""/>
     <aura:attribute name="productPriceBook" type="Object"/>
     <aura:attribute name="filterText" type="String" default=""/>
@@ -50,28 +50,28 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <aura:iteration items="{! v.productStandardPriceBookList }" var="product" indexVar="index">
+                                <aura:iteration items="{! v.productStandardPriceBookList }" var="item" indexVar="index">
                                     <tr class="slds-hint-parent">
                                         <td data-label="{! $Label.c.LABEL_ORDER_TABLE_COMPLAINT }">
                                             <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_TABLE_COMPLAINT }">
-                                                <lightning:button label="Add to new Pricebook list" value="{! index }" onclick="{! c.handleAddToNewList }"/>
+                                                <lightning:button label="{! $Label.c.BTN_ADD_TO_PRICEBOOK_LIST }" value="{! index }" onclick="{! c.handleAddToNewList }"/>
                                             </div>
                                         </td>
                                         <td data-label="{! $Label.c.LABEL_ORDER_TABLE_TITLE }">
-                                            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_TABLE_TITLE }">{! product.title }</div>
+                                            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_TABLE_TITLE }">{! item.flat.product.Name }</div>
                                         </td>
                                         <td data-label="{! $Label.c.LABEL_ORDER_START_DATE }">
-                                            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_START_DATE }">{! product.family }</div>
+                                            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_START_DATE }">{! item.flat.product.Family }</div>
                                         </td>
                                         <td data-label="{! $Label.c.LABEL_ORDER_START_DATE }">
-                                            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_START_DATE }">{! product.city }</div>
+                                            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_START_DATE }">{! item.flat.product.City__c }</div>
                                         </td>
                                         <td data-label="{! $Label.c.LABEL_ORDER_START_DATE }">
-                                            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_START_DATE }">{! product.country }</div>
+                                            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_START_DATE }">{! item.flat.product.Country__c }</div>
                                         </td>
                                         <td data-label="{! $Label.c.LABEL_ORDER_START_DATE }">
                                             <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_START_DATE }">
-                                                <lightning:formattedNumber value="{! product.unitPrice }" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/>
+                                                <lightning:formattedNumber value="{! item.unitPrice }" style="currency" currencyCode="{! $Locale.currencyCode }" currencyDisplayAs="symbol"/>
                                             </div>
                                         </td>
                                     </tr>
@@ -83,4 +83,5 @@
             </lightning:layoutItem>
         </lightning:layout>
     </fieldset>
+    <c:RF_Toast aura:id="RFToast"/>
 </aura:component>

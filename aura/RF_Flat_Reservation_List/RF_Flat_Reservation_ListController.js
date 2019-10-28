@@ -18,17 +18,15 @@
         let recordId = component.get("v.recordId");
         let title = component.get("v.title");
         let photos = component.get("v.photo");
+        console.log(photos);
         let photo = "";
         if(photos.length != 0) {
-            photo = photos[0].link;
+            photo = photos[0];
         }
         let reservationFrom = component.get("v.reservationFrom");
         let reservationTo = component.get("v.reservationTo");
         let priceBookId = component.get("v.priceBookId");
         let priceBookValue = component.get("v.priceBookValue");
-        if(photos.length != 0) {
-            photo = photos[0].link;
-        }
         helper.addToCartHelper(component, recordId, title, photo, reservationFrom, reservationTo, priceBookId, priceBookValue);
         let searchEvent = $A.get("e.c:RF_Flat_Search_Cart");
         searchEvent.fire();
@@ -46,9 +44,6 @@
         let reservationTo = component.get("v.reservationTo");
         let priceBookId = component.get("v.priceBookId");
         let priceBookValue = component.get("v.priceBookValue");
-        if(photos.length != 0) {
-            photo = photos[0].link;
-        }
         helper.reserveFlatHelper(component, recordId, title, photo, reservationFrom, reservationTo, priceBookId, priceBookValue);
     }
 })

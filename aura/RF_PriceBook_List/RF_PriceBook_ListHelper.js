@@ -22,6 +22,7 @@
     removeFromPriceBookHelper: function (component, id) {
         var spinnerShowEvent = $A.get("e.c:RF_Flat_Spinner_Show_Event");
         spinnerShowEvent.fire();
+        console.log(id);
         let action = component.get("c.removeFromPriceBook");
         action.setParams({'recordId': id});
         action.setCallback(this, function(response){
@@ -29,23 +30,9 @@
             let errors = response.getError();
             if (component.isValid() && state === $A.get("{! $Label.c.LABEL_SUCCESS_TITLE }")) {
                 component.set("v.follow", false);
-                var toastEvent = $A.get("e.force:showToast");
-                toastEvent.setParams({
-                    "title": "Success!",
-                    "message": response.getReturnValue(),
-                    "type": "success"
-                });
-                toastEvent.fire();
-            } else {
-                var toastEvent = $A.get("e.force:showToast");
-                console.log(errors[0]);
-                toastEvent.setParams({
-                    "title": "Error!",
-                    "message": errors[0].message,
-                    "type": "error"
-                });
-                toastEvent.fire();
             }
+            let toastCmp = component.find("RFToast");
+            toastCmp.showToast(response.getReturnValue());
             var spinnerHideEvent = $A.get("e.c:RF_Flat_Spinner_Hide_Event");
             spinnerHideEvent.fire();
         });

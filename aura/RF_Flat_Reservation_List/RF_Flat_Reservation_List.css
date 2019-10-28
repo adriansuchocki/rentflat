@@ -4,3 +4,7 @@
 .THIS .button-position-end{
     align-self: flex-end;
 }
+
+.THIS h2{
+    font-size: 1rem;
+}

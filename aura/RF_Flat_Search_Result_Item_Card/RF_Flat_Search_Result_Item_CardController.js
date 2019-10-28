@@ -3,7 +3,7 @@
  */
 ({
     showFlat: function (component, event, helper) {
-        let id = component.get('v.flat.id');
+        let id = component.get('v.flat.product.Id');
         var navEvt = $A.get('e.force:navigateToURL');
         let link = '/product/' +  id;
         navEvt.setParams({url: link});
@@ -12,13 +12,13 @@
 
     handleAddFollow: function (component, event, helper) {
         event.stopImmediatePropagation();
-        let id = component.get('v.flat.id');
+        let id = component.get('v.flat.product.Id');
         helper.addToFollowHelper(component, id);
     },
 
     handleRemoveFollow: function (component, event, helper) {
         event.stopImmediatePropagation();
-        let id = component.get('v.flat.id');
+        let id = component.get('v.flat.product.Id');
         helper.removeFromFollowHelper(component, id);
     }
 })

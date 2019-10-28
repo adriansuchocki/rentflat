@@ -1,0 +1,6 @@
+<!--
+ - Created by BRITENET on 25.10.2019.
+ -->
+
+<aura:event type="COMPONENT" description="RF_Flat_Refresh_Event">
+</aura:event>

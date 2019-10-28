@@ -8,6 +8,13 @@
         <value>Address</value>
     </labels>
     <labels>
+        <fullName>BTN_ADD_TO_PRICEBOOK_LIST</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>BTN_ADD_TO_PRICEBOOK_LIST</shortDescription>
+        <value>Add to Pricebook list</value>
+    </labels>
+    <labels>
         <fullName>BTN_CANCEL</fullName>
         <language>en_US</language>
         <protected>true</protected>
@@ -104,6 +111,20 @@
         <protected>true</protected>
         <shortDescription>BTN_SEND</shortDescription>
         <value>Send</value>
+    </labels>
+    <labels>
+        <fullName>BTN_SHOW_FLAT</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>BTN_SHOW_FLAT</shortDescription>
+        <value>Show flat</value>
+    </labels>
+    <labels>
+        <fullName>BTN_SHOW_MORE_RESULT</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>BTN_SHOW_MORE_RESULT</shortDescription>
+        <value>Show more results</value>
     </labels>
     <labels>
         <fullName>BTN_SUBMIT</fullName>
@@ -729,6 +750,13 @@
         <value>Near tram/bus</value>
     </labels>
     <labels>
+        <fullName>LABEL_PRODUCT_NUMBER_OF_VIEW</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LABEL_PRODUCT_NUMBER_OF_VIEW</shortDescription>
+        <value>Number of views</value>
+    </labels>
+    <labels>
         <fullName>LABEL_PRODUCT_PARK_VIEW</fullName>
         <language>en_US</language>
         <protected>true</protected>
@@ -1233,6 +1261,13 @@
         <value>Are you sure?</value>
     </labels>
     <labels>
+        <fullName>MESSAGE_SUCCESS_ADD_TO_FOLLOW</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>MESSAGE_SUCCESS_ADD_TO_FOLLOW</shortDescription>
+        <value>Flat added to follow</value>
+    </labels>
+    <labels>
         <fullName>MESSAGE_ERROR_CREATE_ACCOUNT</fullName>
         <language>en_US</language>
         <protected>true</protected>
@@ -1247,11 +1282,109 @@
         <value>The Account created successful.</value>
     </labels>
     <labels>
+        <fullName>MESSAGE_SUCCESS_CREATE_CASE_FIRST</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>MESSAGE_SUCCESS_CREATE_CASE_FIRST</shortDescription>
+        <value>Case </value>
+    </labels>
+    <labels>
+        <fullName>MESSAGE_SUCCESS_CREATE_SECOND</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>MESSAGE_SUCCESS_CREATE_SECOND</shortDescription>
+        <value> created successful</value>
+    </labels>
+    <labels>
+        <fullName>MESSAGE_SUCCESS_CREATE_PRICEBOOK_FIRST</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>MESSAGE_SUCCESS_CREATE_PRICEBOOK_FIRST</shortDescription>
+        <value>Pricebook </value>
+    </labels>
+    <labels>
         <fullName>MESSAGE_SUCCESS_DELETE_ACCOUNT</fullName>
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>MESSAGE_SUCCESS_DELETE_ACCOUNT</shortDescription>
-        <value>Account deleted successful.</value>
+        <value>Account deleted successful</value>
+    </labels>
+    <labels>
+        <fullName>MESSAGE_SUCCESS_DELETE_PRICEBOOK</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>MESSAGE_SUCCESS_DELETE_PRICEBOOK</shortDescription>
+        <value>Pricebook removed from Pricebook list</value>
+    </labels>
+    <labels>
+        <fullName>MESSAGE_ERROR</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>MESSAGE_ERROR</shortDescription>
+        <value>Error</value>
+    </labels>
+    <labels>
+        <fullName>MESSAGE_ERROR_CODE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>MESSAGE_ERROR_CODE</shortDescription>
+        <value>500</value>
+    </labels>
+    <labels>
+        <fullName>MESSAGE_ERROR_MESSAGE_LIST</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>MESSAGE_ERROR_MESSAGE_LIST</shortDescription>
+        <value>Error while processing</value>
+    </labels>
+    <labels>
+        <fullName>MESSAGE_SUCCESS</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>MESSAGE_SUCCESS</shortDescription>
+        <value>Success</value>
+    </labels>
+    <labels>
+        <fullName>MESSAGE_SUCCESS_ADD_COMMENT</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>MESSAGE_SUCCESS_ADD_COMMENT</shortDescription>
+        <value>Comment added successful</value>
+    </labels>
+    <labels>
+        <fullName>MESSAGE_SUCCESS_ADD_TO_CART</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>MESSAGE_SUCCESS_ADD_TO_CART</shortDescription>
+        <value>Flat added to the Cart</value>
+    </labels>
+    <labels>
+        <fullName>MESSAGE_SUCCESS_CODE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>MESSAGE_SUCCESS_CODE</shortDescription>
+        <value>200</value>
+    </labels>
+    <labels>
+        <fullName>MESSAGE_SUCCESS_RESERVED_FLAT</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>MESSAGE_SUCCESS_RESERVED_FLAT</shortDescription>
+        <value>Flats reserved successful</value>
+    </labels>
+    <labels>
+        <fullName>MESSAGE_SUCCESS_REMOVE_FROM_FOLLOW</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>MESSAGE_SUCCESS_REMOVE_FROM_FOLLOW</shortDescription>
+        <value>Flat removed from follow</value>
+    </labels>
+    <labels>
+        <fullName>MESSAGE_SUCCESS_REMOVE_FROM_CART</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>MESSAGE_SUCCESS_REMOVE_FROM_CART</shortDescription>
+        <value>Flat removed successful</value>
     </labels>
     <labels>
         <fullName>MESSAGE_SUCCESS_SAVE</fullName>

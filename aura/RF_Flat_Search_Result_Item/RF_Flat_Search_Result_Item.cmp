@@ -19,4 +19,5 @@
             </aura:if>
         </aura:iteration>
     </lightning:layout>
+    <c:RF_Toast aura:id="RFToast"/>
 </aura:component>

@@ -2,7 +2,7 @@
  - Created by BRITENET on 11.10.2019.
  -->
 
-<aura:component description="RF_Flat_Comment" controller="RF_Flat_Details">
+<aura:component description="RF_Flat_Comment" controller="RF_Comments_Controller">
     <aura:attribute name="recordId" type="String"/>
     <aura:attribute name="comments" type="RF_Comments__c[]"/>
     <aura:registerEvent name="showSpinner" type="c:RF_Flat_Spinner_Show_Event"/>
@@ -20,4 +20,5 @@
             </lightning:layoutItem>
         </lightning:layout>
     </div>
+    <c:RF_Toast aura:id="RFToast"/>
 </aura:component>

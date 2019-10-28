@@ -62,4 +62,5 @@
             </lightning:layoutItem>
         </lightning:layout>
     </div>
+    <c:RF_Toast aura:id="RFToast"/>
 </aura:component>

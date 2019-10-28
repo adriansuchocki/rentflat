@@ -2,7 +2,7 @@
  - Created by BRITENET on 10.10.2019.
  -->
 
-<aura:component description="RF_Flat_Search_Result" controller="RF_Flat_Details" implements="forceCommunity:availableForAllPageTypes">
+<aura:component description="RF_Flat_Search_Result" controller="RF_Flat_Controller" implements="forceCommunity:availableForAllPageTypes">
     <aura:attribute name="title" type="String"/>
     <aura:attribute name="page" type="String"/>
     <aura:attribute name="resultList" type="Object[]"/>
@@ -33,8 +33,9 @@
         <c:RF_Flat_Search_Result_Item flats="{! v.resultList }" layout="{! v.layout }"/>
         <aura:if isTrue="{! and(v.resultList.length != v.previousNumberOfRecords,  v.resultList.length%20 == 0) }">
             <center>
-                <lightning:button label="Show more results" iconName="utility:jump_to_bottom" iconPosition="left" onclick="{! c.handleShowMoreResults }" />
+                <lightning:button label="{! $Label.c.BTN_SHOW_MORE_RESULT }" iconName="utility:jump_to_bottom" iconPosition="left" onclick="{! c.handleShowMoreResults }" />
             </center>
         </aura:if>
     </div>
+    <c:RF_Toast aura:id="RFToast"/>
 </aura:component>

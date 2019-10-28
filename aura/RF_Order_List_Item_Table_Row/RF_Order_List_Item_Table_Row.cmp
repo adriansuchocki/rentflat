@@ -2,7 +2,7 @@
  - Created by BRITENET on 16.10.2019.
  -->
 
-<aura:component description="RF_Order_List_Item_Table_Row" controller="RF_Flat_Details">
+<aura:component description="RF_Order_List_Item_Table_Row" controller="RF_Case_Controller">
     <aura:attribute name="orderItem" type="Object"/>
     <aura:attribute name="cart" type="Boolean" default="false" />
     <aura:attribute name="subject" type="String" default="" />
@@ -23,7 +23,9 @@
             <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_TABLE_DAYS }">{! v.orderItem.Quantity }</div>
         </td>
         <td data-label="{! $Label.c.LABEL_ORDER_TABLE_UNIT_PRICE }">
-            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_TABLE_UNIT_PRICE }">{! v.orderItem.UnitPrice }</div>
+            <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_TABLE_UNIT_PRICE }">
+                <lightning:formattedNumber value="{! v.orderItem.UnitPrice }" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/>
+            </div>
         </td>
         <td data-label="{! $Label.c.LABEL_ORDER_TABLE_AMOUNT }">
             <div class="slds-truncate" title="{! $Label.c.LABEL_ORDER_TABLE_AMOUNT }">
@@ -59,4 +61,5 @@
             </div>
         </td>
     </tr>
+    <c:RF_Toast aura:id="RFToast"/>
 </aura:component>

@@ -2,7 +2,7 @@
  - Created by BRITENET on 10.10.2019.
  -->
 
-<aura:component description="RF_Flat_Reservation_List" controller="RF_Flat_Details">
+<aura:component description="RF_Flat_Reservation_List" controller="RF_Reservation_Controller">
     <aura:attribute name="recordId" type="String"/>
     <aura:attribute name="title" type="String"/>
     <aura:attribute name="photo" type="Object[]"/>
@@ -16,7 +16,6 @@
     <aura:registerEvent name="hideSpinner" type="c:RF_Flat_Spinner_Hide_Event"/>
     <aura:handler name="init" value="{! this }" action="{! c.init }"/>
 
-    <c:RF_DivisionSearch_Spinner aura:id="spinnerResult"/>
     <lightning:layout horizontalAlign="center">
         <lightning:layoutItem size="2">
         </lightning:layoutItem>
@@ -39,4 +38,5 @@
         <lightning:layoutItem size="1">
         </lightning:layoutItem>
     </lightning:layout>
+    <c:RF_Toast aura:id="RFToast"/>
 </aura:component>

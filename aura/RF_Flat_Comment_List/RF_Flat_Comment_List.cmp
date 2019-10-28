@@ -50,4 +50,5 @@
             </aura:iteration>
         </lightning:layoutItem>
     </lightning:layout>
+    <c:RF_Toast aura:id="RFToast"/>
 </aura:component>

@@ -2,7 +2,7 @@
  - Created by BRITENET on 15.10.2019.
  -->
 
-<aura:component description="RF_Flat_Follow_List" implements="forceCommunity:availableForAllPageTypes" controller="RF_Flat_Details">
+<aura:component description="RF_Flat_Follow_List" implements="forceCommunity:availableForAllPageTypes" controller="RF_Follow_Controller">
     <aura:attribute name="flats" type="Object[]" />
     <aura:registerEvent name="showSpinner" type="c:RF_Flat_Spinner_Show_Event"/>
     <aura:registerEvent name="hideSpinner" type="c:RF_Flat_Spinner_Hide_Event"/>
@@ -29,19 +29,19 @@
             <aura:iteration items="{! v.flats }" var="row" indexVar="index">
                 <tr class="slds-hint-parent">
                     <td data-label="{! $Label.c.LABEL_ORDER_TABLE_TITLE }">
-                        <div class="slds-truncate" title="{! row.title }">{! row.title }</div>
+                        <div class="slds-truncate" title="{! row.title }">{! row.product.Name }</div>
                     </td>
                     <td data-label="{! $Label.c.LABEL_ORDER_TABLE_UNIT_PRICE }">
-                        <div class="slds-truncate" title="{! row.price.value }"><lightning:formattedNumber value="{! row.price.value }" style="currency" currencyCode="USD" currencyDisplayAs="symbol"/></div>
+                        <div class="slds-truncate" title="{! row.price.value }"><lightning:formattedNumber value="{! row.priceBookEntryValue.UnitPrice }" style="currency" currencyCode="{! $Locale.currencyCode }" currencyDisplayAs="symbol"/></div>
                     </td>
                     <td>
                         <div class="slds-truncate">
-                            <lightning:button label="Stop following" variant="brand" iconName="utility:preview" iconPosition="left" value="{! index + '/' +row.id }" onclick="{! c.handleRemoveFollow }"/>
+                            <lightning:button label="{! $Label.c.BTN_STOP_FOLLOW }" variant="brand" iconName="utility:preview" iconPosition="left" value="{! index + '/' + row.product.Id }" onclick="{! c.handleRemoveFollow }"/>
                         </div>
                     </td>
                     <td>
                         <div class="slds-truncate">
-                            <lightning:button label="Show flat" variant="neutral" iconPosition="left" value="{! row.id }" onclick="{! c.showFlat }"/>
+                            <lightning:button label="{! $Label.c.BTN_SHOW_FLAT }" variant="neutral" iconPosition="left" value="{! row.product.Id }" onclick="{! c.showFlat }"/>
                         </div>
                     </td>
                 </tr>
@@ -52,4 +52,5 @@
             <center><h2 class="slds-text-heading_large">{! $Label.c.LABEL_FOLLOW_NO_FLATS }</h2></center>
         </aura:set>
     </aura:if>
+    <c:RF_Toast aura:id="RFToast"/>
 </aura:component>
